@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-module.exports = ({ outputFile, sourceMap }) => ({
+module.exports = ({ outputFile, sourceMap, minify }) => ({
   entry: {
     index: path.resolve(__dirname, '../src/pages/index/main.js'),
   },
@@ -92,7 +92,7 @@ module.exports = ({ outputFile, sourceMap }) => ({
       template: path.resolve(__dirname, '../src/pages/index/index.ejs'),
       filename: './index.html',
       chunks: ['index'],
-      minify: true,
+      minify: minify,
     }),
     new CopyWebpackPlugin({
       patterns: [
