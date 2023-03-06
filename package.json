@@ -1,0 +1,62 @@
+{
+  "name": "mysite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "clean": "npx rimraf ./dist",
+    "dev": "npm run clean && npx webpack --config ./build/webpack.dev.js",
+    "build": "npm run clean && npx webpack --config ./build/webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtsushiTokuoka/mysite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 1 versions",
+    "> 1%",
+    "not dead",
+    "not IE 11"
+  ],
+  "bugs": {
+    "url": "https://github.com/AtsushiTokuoka/mysite/issues"
+  },
+  "homepage": "https://github.com/AtsushiTokuoka/mysite#readme",
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.38",
+    "autoprefixer": "^10.4.8",
+    "browser-sync": "^2.27.10",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "dotenv-webpack": "^8.0.1",
+    "ejs-loader": "^0.5.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss": "^8.4.14",
+    "postcss-loader": "^7.0.1",
+    "raw-loader": "^4.0.2",
+    "rimraf": "^3.0.2",
+    "sass": "^1.54.1",
+    "sass-loader": "^13.0.2",
+    "sass-resources-loader": "^2.2.5",
+    "style-loader": "^3.3.1",
+    "template-ejs-loader": "^0.9.4",
+    "vue-loader": "^16.8.3",
+    "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.6.1",
+    "webpack-cli": "^4.10.0",
+    "webpack-manifest-plugin": "^5.0.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "destyle.css": "^4.0.0",
+    "vue": "^3.2.39",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2"
+  }
+}
