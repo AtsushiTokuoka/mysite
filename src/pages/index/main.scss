@@ -1,0 +1,61 @@
+.Header {
+  background-color: $color-primary;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+  &__logo {
+    font-size: 36px;
+    line-height: 1;
+    a {
+      display: block;
+      color: $color-secondary;
+    }
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  &__navItem {
+    line-height: 1;
+    &:not(:first-child) {
+      margin-left: 40px;
+    }
+    a {
+      display: block;
+      color: $color-secondary;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.FirstView {
+  height: 600px;
+  background: url(https://picsum.photos/1200/675) no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: $color-secondary;
+  }
+  &__title {
+    font-size: 64px;
+  }
+  &__lead {
+    font-size: 32px;
+  }
+}
+
+.Button {
+
+}

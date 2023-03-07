@@ -2,8 +2,27 @@
 <% const description = 'TOP PAGE Description' %>
 <%- include('../template/header.ejs', { title: title, description: description}) %>
 
-<div class="Container MarginAuto">
-  <h1>TOP PAGE</h1>
+<header class="Header">
+  <div class="Container MarginAuto">
+    <div class="Header__inner">
+      <h1 class="Header__logo"><a href="/">HEADER</a></h1>
+      <ul class="Header__nav">
+        <li class="Header__navItem"><a href="#">nav01</a></li>
+        <li class="Header__navItem"><a href="#">nav02</a></li>
+        <li class="Header__navItem"><a href="#">nav03</a></li>
+        <li class="Header__navItem"><a href="#">nav04</a></li>
+        <li class="Header__navItem"><a href="#">nav05</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="FirstView">
+  <div class="FirstView__content">
+    <p class="FirstView__title">First View</p>
+    <p class="FirstView__lead">Lorem ipsum dolor sit amet consectetur</p>
+    <a href="#" class="Button">Button</a>
+  </div>
 </div>
 
 <%- include('../template/footer.ejs') %>

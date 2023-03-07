@@ -25,6 +25,7 @@ img {
 
 // layout
 .Container {
+  max-width: 100%;
   @include mq(desktop) {
     width: 1400px;
   }
