@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "destyle.css": "^4.0.0",
+    "jquery": "^3.6.3",
     "vue": "^3.2.39",
     "vue-router": "^4.1.5",
     "vuex": "^4.0.2"

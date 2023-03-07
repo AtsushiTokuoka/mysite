@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>deploy test</h1>
-</body>
-</html>
+<% const title = 'TOP PAGE' %>
+<% const description = 'TOP PAGE Description' %>
+<%- include('../template/header.ejs', { title: title, description: description}) %>
+
+<div class="Container MarginAuto">
+  <h1>TOP PAGE</h1>
+</div>
+
+<%- include('../template/footer.ejs') %>

@@ -1,1 +1,44 @@
+
+// reset
 @use '../../node_modules/destyle.css/destyle.css';
+
+// 汎用的に使用する
+@import './variables';
+@import './mixins';
+@import './general';
+
+// base
+body {
+  background-color: $baseBgColor;
+  color: $baseTextColor;
+  font-size: $baseFontSize;
+  font-family: $baseFontFamily;
+  line-height: $baseLineHeight;
+}
+a {
+  color: $baseLinkColor;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// layout
+.Container {
+  @include mq(desktop) {
+    width: 1400px;
+  }
+  @include mq(laptop) {
+    width: 1200px;
+  }
+  @include mq(tab) {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @include mq(sp) {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

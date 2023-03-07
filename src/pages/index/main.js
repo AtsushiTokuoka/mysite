@@ -1,2 +1,6 @@
 import './main.scss';
-console.log('hoge');
+import $ from 'jquery';
+
+$(function() {
+  console.log($('.title').text());
+});
