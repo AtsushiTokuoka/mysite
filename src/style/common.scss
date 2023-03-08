@@ -2,7 +2,7 @@
 // reset
 @use '../../node_modules/destyle.css/destyle.css';
 
-// 汎用的に使用する
+// import setting & methods
 @import './variables';
 @import './mixins';
 @import './general';
@@ -17,6 +17,7 @@ body {
 }
 a {
   color: $baseLinkColor;
+  word-wrap: break-word;
 }
 img {
   max-width: 100%;

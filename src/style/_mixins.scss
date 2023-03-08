@@ -1,13 +1,12 @@
 
 // media query
-$breakpoints: (
-  'sp': 'screen and (max-width: #{$sp})',
-  'tab': 'screen and (min-width: #{$sp + 1}) and (max-width: #{$tab})',
-  'laptop': 'screen and (min-width: #{$tab + 1}) and (max-width: #{$laptop})',
-  'desktop': 'screen and (min-width: #{$desktop})',
-) !default;
 @mixin mq($breakpoint) {
   @media #{map-get($breakpoints, $breakpoint)} {
     @content;
   }
+}
+
+// z-index
+@function zindex($name) {
+  @return index($z-index, $name);
 }

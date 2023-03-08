@@ -2,7 +2,7 @@
 <% const description = 'TOP PAGE Description' %>
 <%- include('../template/header.ejs', { title: title, description: description}) %>
 
-<header class="Header">
+<header class="Header Header--fixed">
   <div class="Container MarginAuto">
     <div class="Header__inner">
       <h1 class="Header__logo"><a href="/">HEADER</a></h1>
@@ -17,11 +17,11 @@
   </div>
 </header>
 
-<div class="FirstView">
+<div class="FirstView FirstView--hero">
   <div class="FirstView__content">
     <p class="FirstView__title">First View</p>
     <p class="FirstView__lead">Lorem ipsum dolor sit amet consectetur</p>
-    <a href="#" class="Button">Button</a>
+    <a href="#" class="Button Button--opacity FirstView__button">Button</a>
   </div>
 </div>
 
