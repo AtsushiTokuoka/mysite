@@ -2,45 +2,11 @@
 // reset
 @use '../../node_modules/destyle.css/destyle.css';
 
-// import setting & methods
+// import setting & utility
 @import './variables';
 @import './mixins';
-@import './general';
+@import './utility';
 
-// base
-body {
-  background-color: $baseBgColor;
-  color: $baseTextColor;
-  font-size: $baseFontSize;
-  font-family: $baseFontFamily;
-  line-height: $baseLineHeight;
-}
-a {
-  color: $baseLinkColor;
-  word-wrap: break-word;
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-// layout
-.Container {
-  max-width: 100%;
-  @include mq(desktop) {
-    width: 1400px;
-  }
-  @include mq(laptop) {
-    width: 1200px;
-  }
-  @include mq(tab) {
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  @include mq(sp) {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
+// base layout
+@import './base';
+@import './layout';

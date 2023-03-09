@@ -7,6 +7,7 @@ $desktop: 1920px;
 $breakpoints: (
   'sp': 'screen and (max-width: #{$sp})',
   'tab': 'screen and (min-width: #{$sp + 1}) and (max-width: #{$tab})',
+  'pc': 'screen and (min-width: #{$tab + 1})',
   'laptop': 'screen and (min-width: #{$tab + 1}) and (max-width: #{$laptop})',
   'desktop': 'screen and (min-width: #{$desktop})',
 ) !default;

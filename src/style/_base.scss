@@ -1,0 +1,17 @@
+
+// base
+body {
+  background-color: $baseBgColor;
+  color: $baseTextColor;
+  font-size: $baseFontSize;
+  font-family: $baseFontFamily;
+  line-height: $baseLineHeight;
+}
+a {
+  color: $baseLinkColor;
+  word-wrap: break-word;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
