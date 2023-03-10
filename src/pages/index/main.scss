@@ -1,5 +1,5 @@
 .Header {
-  background-color: $color-primary;
+  background-color: $color-black;
   padding-top: 20px;
   padding-bottom: 20px;
   &--fixed {
@@ -21,7 +21,7 @@
     }
     a {
       display: block;
-      color: $color-secondary;
+      color: $color-white;
     }
   }
   &__nav {
@@ -39,7 +39,7 @@
     }
     a {
       display: block;
-      color: $color-secondary;
+      color: $color-white;
       &:hover {
         text-decoration: underline;
       }
@@ -64,10 +64,10 @@
     transform: translate(-50%,-50%);
     width: 100%;
     text-align: center;
-    color: $color-secondary;
+    color: $color-white;
   }
   &__title,&__lead {
-    text-shadow: $color-primary 2px 0 10px;
+    text-shadow: $color-black 2px 0 10px;
   }
   &__title {
     font-size: 64px;
@@ -90,8 +90,8 @@
 .Button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: $color-primary;
-  color: $color-secondary;
+  background-color: $color-black;
+  color: $color-white;
   font-weight: bold;
   cursor: pointer;
   border-radius: 3px;
@@ -103,21 +103,86 @@
   }
 }
 
-.Headline-underline {
-  font-size: 48px;
-  font-weight: bold;
-  &__text {
-    position: relative;
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background-color: $color-primary;
+.Spacer {
+  &-20 {
+    > * {
+      margin-bottom: 20px;
     }
+  }
+}
+.Headline-underline {
+  span {
+    font-weight: bold;
+    border-bottom: 2px solid $color-black;
+  }
+}
+.Headline-underline-dot {
+  span {
+    font-weight: bold;
+    border-bottom: 2px dotted $color-black;
+  }
+}
+.Headline-underline-double {
+  span {
+    font-weight: bold;
+    border-bottom: 2px double $color-black;
+  }
+}
+.Headline-border {
+  span {
+    font-weight: bold;
+    border-top: 2px solid $color-black;
+    border-bottom: 2px solid $color-black;
+  }
+}
+.Headline-bgcolor {
+  span {
+    color: $color-white;
+    background-color: $color-black;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+  }
+}
+.Headline-bg-underline {
+  span {
+    background-color: $color-black;
+    color: $color-white;
+    border-bottom: 2px solid $color-white;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+  }
+}
+.Headline-borderleft {
+  span {
+    padding-left: 10px;
+    border-left: 3px solid $color-black;
+  }
+}
+.Headline-bdleft-bg {
+  span {
+    background-color: $color-black;
+    color: $color-white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 3px solid $color-white;
+  }
+}
+.Headline-shadow {
+  span {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: $color-white;
+    box-shadow: 3px 3px 3px rgba($color-black, 0.2);
+  }
+}
+.Headline-borderleft-shadow {
+  span {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 3px solid rgba($color-black, 0.2);
+    border-left: 5px solid $color-black;
   }
 }
 
@@ -153,12 +218,12 @@
 }
 
 .Card {
-  background-color: $color-secondary;
+  background-color: $color-white;
   border-radius: 10px;
   padding: 10px;
   &:hover {
     opacity: 0.8;
-    box-shadow: 2px 2px 2px 1px rgba($color-primary, 0.2);
+    box-shadow: 2px 2px 2px 1px rgba($color-black, 0.2);
   }
   a {
     color: $baseTextColor;
