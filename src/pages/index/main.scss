@@ -185,6 +185,114 @@
     border-left: 5px solid $color-black;
   }
 }
+.Headline-tag {
+  span {
+    display: inline-block;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 5px 20px 5px 40px;
+    border-radius: 20px 0 0 20px;
+    position: relative;
+    &::before {
+      content: '●';
+      font-size: 20px;
+      color: $color-white;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+.Headline-speech {
+  span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: $color-black;
+    color: $color-white;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      top: 100%;
+      left: 10px;
+      border: 10px solid transparent;
+      border-top: 10px solid $color-black;
+    }
+  }
+}
+.Headline-stich {
+  &__inner {
+    padding: 5px 10px;
+    display: inline-block;
+    background-color: $color-black;
+    color: $color-white;
+    span {
+      display: inline-block;
+      border: 1px dashed $color-white;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+.Headline-dogear {
+  span {
+    display: inline-block;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 5px 10px;
+    position: relative;
+    &::after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      border-width: 0 0 10px 10px;
+      border-style: solid;
+      border-color: $baseBgColor $baseBgColor $color-white;
+      box-shadow: 3px 3px 1px rgba($color-black, 0.8);
+    }
+  }
+}
+.Headline-ribbon {
+  span {
+    display: inline-block;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 5px 10px;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      top: 100%;
+      left: 0;
+      border: none;
+      border-bottom: 15px solid transparent;
+      border-right: 20px solid rgba($color-black,0.7);
+    }
+  }
+}
+.Headline-marker {
+  span {
+    display: inline-block;
+    background: linear-gradient(transparent 70%, $color-black 70%);
+  }
+}
+.Headline-changeline {
+  span {
+    display: inline-block;
+    border-bottom: 3px solid $color-black;
+    position: relative;
+    &::after {
+      position: absolute;
+      content: '';
+      display: block;
+      border-bottom: 3px solid rgba($color-black, 0.3);
+      bottom: -3px;
+      width: 30%;
+    }
+  }
+}
 
 .CardWrapper {
   $CardWrapper-space: 1%;

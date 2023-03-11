@@ -25,6 +25,24 @@
   display: flex;
   flex-wrap: wrap;
   &--center {
-    justify-content: space-evenly;
+    justify-content: center;
+  }
+  &--between {
+    justify-content: space-between;
+  }
+  @include mq(pc) {
+    &--col23p-pc > * {
+      width: 23%;
+    }
+  }
+  @include mq(tab) {
+    &--col50p-tab > * {
+      width: 50%;
+    }
+  }
+  @include mq(sp) {
+    &--col100p-sp > * {
+      width: 100%;
+    }
   }
 }
