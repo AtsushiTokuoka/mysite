@@ -1,0 +1,47 @@
+@use '../_style/variables' as *;
+
+// reset
+@use '../../../node_modules/destyle.css/destyle.min.css';
+
+/*------------------------
+  _utility.scss
+-------------------------*/
+// margin
+.MarginAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// spacer
+$spacer: 10;
+$spacer_interval: 10;
+$spacer_max: 100;
+$spacer_directions: (
+  't': 'top',
+  'r': 'right',
+  'b': 'bottom',
+  'l': 'left',
+);
+@while $spacer <= $spacer_max {
+  @each $key, $val in $spacer_directions {
+    .M#{$key}#{$spacer} {
+      margin-#{$val}: $spacer + px;
+    }
+    .P#{$key}#{$spacer} {
+      padding-#{$val}: $spacer + px;
+    }
+  }
+  @each $bp-key, $bp-val in $breakpoints {
+    @media #{$bp-val} {
+      @each $key, $val in $spacer_directions {
+        .M#{$key}#{$spacer}-#{$bp-key} {
+          margin-#{$val}: $spacer + px;
+        }
+        .P#{$key}#{$spacer}-#{$bp-key} {
+          padding-#{$val}: $spacer + px;
+        }
+      }
+    }
+  }
+  $spacer: $spacer + $spacer_interval;
+}

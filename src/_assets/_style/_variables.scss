@@ -1,0 +1,26 @@
+// breakpoints
+$sp: 767px;
+$tab: 1280px - 1;
+$laptop: 1920px - 1;
+$desktop: 1920px;
+$breakpoints: (
+  'sp': 'screen and (max-width: #{$sp})',
+  'tab': 'screen and (min-width: #{$sp + 1}) and (max-width: #{$tab})',
+  'mobile': 'screen and (max-width: #{$tab})',
+  'pc': 'screen and (min-width: #{$tab + 1})',
+  'laptop': 'screen and (min-width: #{$tab + 1}) and (max-width: #{$laptop})',
+  'desktop': 'screen and (min-width: #{$desktop})',
+);
+
+// http://colormind.io/bootstrap/
+$colorBaseLight: #EFF5F1;
+$colorBaseDark: #273547;
+$colorLight: #919C72;
+$colorDark: #80706F;
+$colorMain: #4DB6AC;
+
+// font
+$baseFontSize: 16px;
+$baseFontWeight: 400;
+$baseFontFamily: 'nsjp', sans-serif;
+$baseLineHeight: 1.5;

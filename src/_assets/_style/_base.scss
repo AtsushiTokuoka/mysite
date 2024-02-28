@@ -1,0 +1,42 @@
+@use './variables' as *;
+
+@font-face {
+  font-family: "nsjp";
+  src: url("/assets/fonts/subset/NotoSansJP-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "nsjp";
+  src: url("/assets/fonts/subset/NotoSansJP-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+body {
+  background-color: $colorBaseDark;
+  color: $colorBaseLight;
+  font-size: $baseFontSize;
+  font-family: $baseFontFamily;
+  font-weight: $baseFontWeight;
+  line-height: $baseLineHeight;
+}
+a {
+  color: $colorMain;
+  word-wrap: break-word;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+li {
+  list-style: none;
+}
+[v-cloak] {
+  display: none;
+}
