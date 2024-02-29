@@ -24,6 +24,5 @@ export default defineComponent({
     &__inner {
       @extend .Container;
     }
-    
   }
 </style>

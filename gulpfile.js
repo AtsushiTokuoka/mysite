@@ -83,7 +83,12 @@ gulp.task('js-bundle', function() {
               loader: 'postcss-loader',
               options: {
                 postcssOptions: {
-                  plugins: [['autoprefixer']]
+                  plugins: [
+                    require('postcss-purgecss')({
+                      content: ['./src/**/*.vue'],
+                    }),
+                    ['autoprefixer']
+                  ]
                 }
               }
             },
