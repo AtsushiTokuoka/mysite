@@ -47,5 +47,6 @@
     background-color: $colorBaseDark;
     display: inline-block;
     border-radius: 10px;
+    appearance: none;
   }
 </style>

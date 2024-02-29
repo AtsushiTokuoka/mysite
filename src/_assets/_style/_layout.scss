@@ -1,31 +1,6 @@
 @use './variables' as *;
 @use './mixins' as *;
 
-// container
-$Container-gap-tab: 20;
-$Container-gap-sp: 10;
-.Container {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  @include mq(desktop) {
-    max-width: 1600px;
-  }
-  @include mq(laptop) {
-    max-width: 1400px;
-  }
-  @include mq(tab) {
-    width: 100%;
-    padding-left: $Container-gap-tab + px;
-    padding-right: $Container-gap-tab + px;
-  }
-  @include mq(sp) {
-    width: 100%;
-    padding-left: $Container-gap-sp + px;
-    padding-right: $Container-gap-sp + px;
-  }
-}
-
 // Column
 .Column {
   $Column-gap: 10;

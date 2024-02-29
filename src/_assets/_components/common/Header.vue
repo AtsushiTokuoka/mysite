@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <div class="Container">
+  <header class="Header">
+    <div class="Header__inner">
       <h1>{{ message }}</h1>
     </div>
   </header>
@@ -19,5 +19,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+  @use '../../_style/_utility.scss' as *;
+  .Header {
+    &__inner {
+      @extend .Container;
+    }
+    
+  }
 </style>

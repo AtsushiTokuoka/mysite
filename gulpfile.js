@@ -1,6 +1,9 @@
 const path = require('path');
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const gulpPurgecss = require('gulp-purgecss');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
@@ -9,19 +12,24 @@ const { VueLoaderPlugin } = require('vue-loader');
 const assetsPath = './src/_assets';
 const outputPath = './dist/assets';
 
-gulp.task('scss', function(done) {
+gulp.task('scss', function() {
   return gulp.src(`${assetsPath}/**/*.scss`)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest(outputPath));
-  done();
-});
-gulp.task('font', function(done) {
-  return gulp.src(`${assetsPath}/fonts/**/*`)
-    .pipe(gulp.dest(`${outputPath}/fonts`));
-  done();
+    .pipe(postcss([autoprefixer()]))
+    .pipe(gulpPurgecss({
+      content: ['./src/**/*.njk'],
+    }))
+    .pipe(gulp.dest(outputPath))
 });
 
-gulp.task('js-bundle', function(done) {
+gulp.task('filecopy', function() {
+  gulp.src('node_modules/destyle.css/destyle.min.css')
+    .pipe(gulp.dest(`${outputPath}/global`));
+  return gulp.src(`${assetsPath}/fonts/**/*`)
+    .pipe(gulp.dest(`${outputPath}/fonts`));
+});
+
+gulp.task('js-bundle', function() {
   return gulp.src([`${assetsPath}/**/*.js`,`!${assetsPath}/**/_*/**/*.js`])
   .pipe(named( (file) => {
     const relativePath = path.relative(
@@ -46,7 +54,6 @@ gulp.task('js-bundle', function(done) {
                 [
                   '@babel/preset-env',
                   {
-                    targets: '> 0.25%, not dead',
                     useBuiltIns: 'usage',
                     corejs: 3
                   }
@@ -72,6 +79,14 @@ gulp.task('js-bundle', function(done) {
           use: [
             'vue-style-loader',
             'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  plugins: [['autoprefixer']]
+                }
+              }
+            },
             {
               loader: 'sass-loader',
               options: {
@@ -119,14 +134,12 @@ gulp.task('js-bundle', function(done) {
     },
   }))
   .pipe(gulp.dest(outputPath));
-
-  done();
 });
 
 gulp.task('watch', function() {
-  gulp.series('font')();
+  gulp.series('filecopy')();
   gulp.watch(`${assetsPath}/**/*.scss`, gulp.series('scss'));
   gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
 });
 
-exports.build = gulp.parallel('font', 'scss', 'js-bundle');
+exports.build = gulp.parallel('filecopy', 'scss', 'js-bundle');

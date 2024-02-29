@@ -1,11 +1,6 @@
-@use '../_style/variables' as *;
+@use './mixins' as *;
+@use './variables' as *;
 
-// reset
-@use '../../../node_modules/destyle.css/destyle.min.css';
-
-/*------------------------
-  _utility.scss
--------------------------*/
 // margin
 .MarginAuto {
   margin-left: auto;
@@ -44,4 +39,26 @@ $spacer_directions: (
     }
   }
   $spacer: $spacer + $spacer_interval;
+}
+
+// container
+$Container-gap-tab: 20;
+$Container-gap-sp: 10;
+.Container {
+  @include mq(desktop) {
+    max-width: 1600px;
+  }
+  @include mq(laptop) {
+    max-width: 1400px;
+  }
+  @include mq(tab) {
+    max-width: 100%;
+    padding-left: $Container-gap-tab + px;
+    padding-right: $Container-gap-tab + px;
+  }
+  @include mq(sp) {
+    max-width: 100%;
+    padding-left: $Container-gap-sp + px;
+    padding-right: $Container-gap-sp + px;
+  }
 }
