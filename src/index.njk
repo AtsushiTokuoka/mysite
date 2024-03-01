@@ -1,14 +1,27 @@
 ---
 layout: base.njk
+noIndex: false
 meta:
   title: Home
   description: Home description
 vendors:
-
+  - jquery@3.7.1
 style: /assets/pages/index/style.css
 script: /assets/pages/index/index.js
 ---
-<Test></Test>
-<div>
-  <img src="https://picsum.photos/300" alt="">
+<div class="Index">
+  <div class="Index__left">
+    <Test></Test>
+  </div>
+  <div class="Index__mid">
+    <p>mid</p>
+  </div>
+  <div class="Index__right">
+    <img src="https://picsum.photos/300" alt="" />
+  </div>
+  <div class="Hoge">
+    <div class="Hoge__left">left</div>
+    <div class="Hoge__mid">mid</div>
+    <div class="Hoge__right">right</div>
+  </div>
 </div>

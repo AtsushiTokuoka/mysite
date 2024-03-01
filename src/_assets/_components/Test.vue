@@ -41,7 +41,6 @@
 
 <style lang="scss" scoped>
   @use '../_style/_variables.scss' as *;
-  @use '../_style/_mixins.scss' as *;
   p {
     color: $colorMain;
     background-color: $colorBaseDark;

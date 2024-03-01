@@ -25,8 +25,8 @@ gulp.task('scss', function() {
 gulp.task('filecopy', function() {
   gulp.src('node_modules/destyle.css/destyle.min.css')
     .pipe(gulp.dest(`${outputPath}/global`));
-  return gulp.src(`${assetsPath}/fonts/**/*`)
-    .pipe(gulp.dest(`${outputPath}/fonts`));
+    return gulp.src(`${assetsPath}/fonts/**/*`)
+      .pipe(gulp.dest(`${outputPath}/fonts`));
 });
 
 gulp.task('js-bundle', function() {

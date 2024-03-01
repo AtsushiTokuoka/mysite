@@ -19,10 +19,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  @use '../../_style/_utility.scss' as *;
+  @use '../../_style/_layout.scss' as *;
   .Header {
     &__inner {
-      @extend .Container;
+      @include Container() {}
     }
   }
 </style>

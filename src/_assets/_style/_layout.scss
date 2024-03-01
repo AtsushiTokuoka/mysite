@@ -1,33 +1,49 @@
-@use './variables' as *;
-@use './mixins' as *;
+@use "./variables" as *;
+
+// media query
+@mixin mq($breakpoint) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// container
+@mixin Container() {
+  $Container-gap-tab: 20;
+  $Container-gap-sp: 10;
+
+  margin-left: auto;
+  margin-right: auto;
+  @include mq(desktop) {
+    max-width: 1600px;
+  }
+  @include mq(laptop) {
+    max-width: 1400px;
+  }
+  @include mq(tab) {
+    max-width: 100%;
+    padding-left: $Container-gap-tab + px;
+    padding-right: $Container-gap-tab + px;
+  }
+  @include mq(sp) {
+    max-width: 100%;
+    padding-left: $Container-gap-sp + px;
+    padding-right: $Container-gap-sp + px;
+  }
+
+  @content;
+}
 
 // Column
-.Column {
-  $Column-gap: 10;
-  $Column-col-width: 10;
-  $Column-col-width-interval: 10;
-  $Column-col-width-max: 100;
-
+@mixin Columns($gap: 0) {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -$Column-gap + px;
-  margin-right: -$Column-gap + px;
-
-  @while $Column-col-width <= $Column-col-width-max {
-    &__col#{$Column-col-width} {
-      width: $Column-col-width * 1%;
-      padding-left: $Column-gap + px;
-      padding-right: $Column-gap + px;
-    }
-    @each $bp-key, $bp-val in $breakpoints {
-      @media #{$bp-val} {
-        &__col#{$Column-col-width}-#{$bp-key} {
-          width: $Column-col-width * 1%;
-          padding-left: $Column-gap + px;
-          padding-right: $Column-gap + px;
-        }
-      }
-    }
-    $Column-col-width: $Column-col-width + $Column-col-width-interval
-  }
+  gap: $gap * 1%;
+  @content;
+}
+@mixin Col($width, $padding: 0) {
+  width: $width * 1%;
+  padding-left: $padding + px;
+  padding-right: $padding + px;
+  @content;
 }

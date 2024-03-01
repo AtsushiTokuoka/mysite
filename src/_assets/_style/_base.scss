@@ -1,4 +1,5 @@
-@use './variables' as *;
+@use "./variables" as *;
+@use "./utility" as *;
 
 @font-face {
   font-family: "nsjp";
@@ -15,10 +16,14 @@
   font-display: swap;
 }
 
+html {
+  font-size: $baseFontSize + px;
+}
+
 body {
   background-color: $colorBaseDark;
   color: $colorBaseLight;
-  font-size: $baseFontSize;
+  @include Font(16);
   font-family: $baseFontFamily;
   font-weight: $baseFontWeight;
   line-height: $baseLineHeight;
@@ -31,7 +36,7 @@ a {
   }
 }
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 li {

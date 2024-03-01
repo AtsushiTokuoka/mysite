@@ -1,8 +1,0 @@
-@use 'variables' as *;
-
-// media query
-@mixin mq($breakpoint) {
-  @media #{map-get($breakpoints, $breakpoint)} {
-    @content;
-  }
-}

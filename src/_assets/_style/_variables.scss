@@ -12,6 +12,7 @@ $breakpoints: (
   'desktop': 'screen and (min-width: #{$desktop})',
 );
 
+// color
 // http://colormind.io/bootstrap/
 $colorBaseLight: #EFF5F1;
 $colorBaseDark: #273547;
@@ -20,7 +21,7 @@ $colorDark: #80706F;
 $colorMain: #4DB6AC;
 
 // font
-$baseFontSize: 16px;
+$baseFontSize: 16;
 $baseFontWeight: 400;
 $baseFontFamily: 'nsjp', sans-serif;
 $baseLineHeight: 1.5;
