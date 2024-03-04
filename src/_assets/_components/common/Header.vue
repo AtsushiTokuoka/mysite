@@ -7,14 +7,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ref, defineComponent } from 'vue';
 export default defineComponent({
-  name: 'Footer',
-  data() {
-    return {
-      message: 'Header.vue',
-    }
-  }
+  name: 'Header',
+  setup() {
+    const message = ref('Header.vue');
+    return { message };
+  },
 })
 </script>
 

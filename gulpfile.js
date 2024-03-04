@@ -78,7 +78,8 @@ gulp.task('js-bundle', function() {
           test: /\.ts$/,
           loader: "ts-loader",
           options: {
-            appendTsSuffixTo: [/\.vue$/]
+            appendTsSuffixTo: [/\.vue$/],
+            ignoreDiagnostics: [7006]
           },
           exclude: /node_modules/,
         },
@@ -121,13 +122,16 @@ gulp.task('js-bundle', function() {
       extensions: ['.ts', '.js', '.vue', '.json'],
       alias: {
         '@': path.resolve(__dirname, 'src/_assets'),
+        // vue: '@vue/runtime-dom',
         'vue$': process.env.MODE === 'production' ? 'vue/dist/vue.esm-browser.prod.js' : 'vue/dist/vue.esm-browser.js'
       }
     },
     plugins: [
       new VueLoaderPlugin(),
       new webpack.DefinePlugin({
-        __VUE_PROD_DEVTOOLS__: JSON.stringify(process.env.MODE === 'development')
+        __VUE_PROD_DEVTOOLS__: JSON.stringify(process.env.MODE === 'development'),
+        // __VUE_OPTIONS_API__: true,
+        // __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
       })
     ],
     optimization: {
@@ -140,7 +144,7 @@ gulp.task('js-bundle', function() {
             enforce: true,
           },
           vue: {
-            test: /[\\/]node_modules[\\/](vue)[\\/]/,
+            test: /[\\/]node_modules[\\/](@vue)[\\/]/,
             name: 'vendors/vue@3.4.20.js',
             chunks: 'all',
             enforce: true,
