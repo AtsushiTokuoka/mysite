@@ -1,15 +1,15 @@
 <template>
-  <header class="Header">
-    <div class="Header__inner">
-      <h1>{{ message }}</h1>
+  <header>
+    <div class="Container">
+      <p>{{ message }}</p>
     </div>
   </header>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'Header',
+  name: 'Footer',
   data() {
     return {
       message: 'Header.vue',

@@ -30,7 +30,7 @@ gulp.task('filecopy', function() {
 });
 
 gulp.task('js-bundle', function() {
-  return gulp.src([`${assetsPath}/**/*.js`,`!${assetsPath}/**/_*/**/*.js`])
+  return gulp.src([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`!${assetsPath}/**/_*/**/*.js`])
   .pipe(named( (file) => {
     const relativePath = path.relative(
       path.join(file.cwd, assetsPath), file.path
@@ -38,9 +38,16 @@ gulp.task('js-bundle', function() {
     return relativePath;
   }))
   .pipe(webpackStream({
+    cache: false,
     mode: process.env.MODE,
     output: {
-      filename: '[name]',
+      filename: (pathData) => {
+        const name = pathData.chunk.name;
+        if (name.endsWith('.ts')) {
+          return name.replace(/\.ts$/, '.js');
+        }
+        return name;
+      },
     },
     module: {
       rules: [
@@ -66,6 +73,14 @@ gulp.task('js-bundle', function() {
           test: /\.vue$/,
           exclude: /node_modules/,
           loader: 'vue-loader',
+        },
+        {
+          test: /\.ts$/,
+          loader: "ts-loader",
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          },
+          exclude: /node_modules/,
         },
         {
           test: /\.css$/, 
@@ -103,7 +118,9 @@ gulp.task('js-bundle', function() {
       ],
     },
     resolve: {
+      extensions: ['.ts', '.js', '.vue', '.json'],
       alias: {
+        '@': path.resolve(__dirname, 'src/_assets'),
         'vue$': process.env.MODE === 'production' ? 'vue/dist/vue.esm-browser.prod.js' : 'vue/dist/vue.esm-browser.js'
       }
     },
@@ -144,7 +161,7 @@ gulp.task('js-bundle', function() {
 gulp.task('watch', function() {
   gulp.series('filecopy')();
   gulp.watch(`${assetsPath}/**/*.scss`, gulp.series('scss'));
-  gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
+  gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
 });
 
 exports.build = gulp.parallel('filecopy', 'scss', 'js-bundle');
