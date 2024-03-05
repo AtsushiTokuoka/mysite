@@ -79,7 +79,7 @@ gulp.task('js-bundle', function() {
           loader: "ts-loader",
           options: {
             appendTsSuffixTo: [/\.vue$/],
-            ignoreDiagnostics: [7006]
+            ignoreDiagnostics: [7006] // Suppress "Parameter 'x' implicitly has an 'any' type" error
           },
           exclude: /node_modules/,
         },
@@ -111,7 +111,12 @@ gulp.task('js-bundle', function() {
             {
               loader: 'sass-loader',
               options: {
-                implementation: require('sass')
+                implementation: require('sass'),
+                additionalData: `
+                  @use '@/_style/_variables.scss' as *;
+                  @use '@/_style/_utility.scss' as *;
+                  @use '@/_style/_layout.scss' as *;
+                `
               }
             },
           ],
@@ -122,7 +127,6 @@ gulp.task('js-bundle', function() {
       extensions: ['.ts', '.js', '.vue', '.json'],
       alias: {
         '@': path.resolve(__dirname, 'src/_assets'),
-        // vue: '@vue/runtime-dom',
         'vue$': process.env.MODE === 'production' ? 'vue/dist/vue.esm-browser.prod.js' : 'vue/dist/vue.esm-browser.js'
       }
     },
@@ -130,8 +134,6 @@ gulp.task('js-bundle', function() {
       new VueLoaderPlugin(),
       new webpack.DefinePlugin({
         __VUE_PROD_DEVTOOLS__: JSON.stringify(process.env.MODE === 'development'),
-        // __VUE_OPTIONS_API__: true,
-        // __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
       })
     ],
     optimization: {

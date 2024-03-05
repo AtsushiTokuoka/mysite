@@ -21,6 +21,7 @@
     {# ライブラリ　使用するライブラリは各ページで指定する #}
     <script src="/assets/vendors/vue@3.4.20.js" defer></script>
     <script src="/assets/vendors/vuex@4.1.0.js" defer></script>
+    <script src="/assets/vendors/jquery@3.7.1.js" defer></script>
 
     {% for vendor in vendors %}
     <script src="/assets/vendors/{{ vendor }}.js" defer></script>
@@ -31,8 +32,9 @@
     <script src="{{ script }}?{{ lastBuildDate }}" defer></script>
   </head>
   <body>
-    <header id="header" class="Mb50"></header>
-    <div id="contents" class="Mb50">
+    <div id="menu-icon"></div>
+    <header id="header"></header>
+    <div id="contents">
       <main>
         {{ content | safe }}
       </main>

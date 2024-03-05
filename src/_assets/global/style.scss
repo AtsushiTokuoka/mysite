@@ -1,2 +1,15 @@
 @use "../_style/utility" as *;
 @use "../_style/base";
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#menu-icon {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+}

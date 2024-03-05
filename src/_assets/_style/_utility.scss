@@ -67,7 +67,7 @@ $spacer_directions: (
   $spacer: $spacer + $spacer_interval;
 }
 
-// font
-@mixin Font($px) {
-  font-size: calc($px / $baseFontSize) + rem;
+// font-sizeをremに変換して返す
+@function FontSize($px) {
+  @return calc($px / $baseFontSize) + rem;
 }

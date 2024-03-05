@@ -1,10 +1,16 @@
 <template>
-  <header>
-    <div class="Container">
-      <p>{{ message }}</p>
+  <header class="Header">
+    <div class="Header__inner">
+      <h1 class="Header__logo">{{ message }}</h1>
     </div>
   </header>
 </template>
+
+<docs>
+  ```vue
+  <Header />
+  ```
+</docs>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
@@ -18,10 +24,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  @use '../../_style/_layout.scss' as *;
   .Header {
+    background-color: $colorBaseLight;
+    color: $colorBaseDark;
+    padding: 10px 0;
     &__inner {
-      @include Container() {}
+      @include Container() {
+        text-align: center;
+      }
+    }
+    &__logo {
+      display: inline-block;
+      line-height: 1;
+      font-size: FontSize(32);
     }
   }
 </style>

@@ -23,4 +23,18 @@
 		],
 		"description": "console.log"
 	},
+	"document.querySelector": {
+		"prefix": "qs",
+		"body": [
+			"document.querySelector($1);",
+		],
+		"description": "document.querySelector"
+	},
+	"document.querySelectorAll": {
+		"prefix": "qsa",
+		"body": [
+			"document.querySelectorAll($1);",
+		],
+		"description": "document.querySelectorAll"
+	},
 }
