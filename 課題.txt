@@ -1,7 +1,0 @@
-flexboxのgapプロパティ
-pictureタグ　メディアクエリによる画像の出し分け
-form系はデフォルトではfont系のデザインが当たらない
-
-
-API KEY
-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
