@@ -34,7 +34,7 @@
 }
 
 // spacer
-$spacer: 10;
+$spacer: 0;
 $spacer_interval: 1;
 $spacer_max: 100;
 $spacer_directions: (
@@ -70,4 +70,26 @@ $spacer_directions: (
 // font-sizeをremに変換して返す
 @function FontSize($px) {
   @return calc($px / $baseFontSize) + rem;
+}
+
+// position
+.PosRel {
+  position: relative;
+}
+.PosAbs {
+  position: absolute;
+}
+.PosFix {
+  position: fixed;
+}
+
+// z-index
+$zindex: 1;
+$zindex_interval: 1;
+$zindex_max: 10;
+@while $zindex <= $zindex_max {
+  .Zi#{$zindex} {
+    z-index: $zindex;
+  }
+  $zindex: $zindex + $zindex_interval;
 }

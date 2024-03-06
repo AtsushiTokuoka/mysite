@@ -1,14 +1,18 @@
 ---
-layout: base.njk
-noIndex: false
-meta:
+layout: base.njk      # ベーステンプレート
+noIndex: false        # noIndex
+meta:                 # メタ情報
   title: Home
   description: Home description
-vendors:
+vendors:              # 使用ライブラリ
 
-style: /assets/pages/index/style.css
-script: /assets/pages/index/index.js
+style: /assets/pages/index/style.css  # ページ固有のスタイル
+script: /assets/pages/index/index.js  # ページ固有のスクリプト
 ---
 <div class="Index">
-
+  <primary-btn type="link" url="/" class="Mb10 Mt20">Link</primary-btn>
+  <primary-btn type="button" color="dark" class="Mb10">Button</primary-btn>
+  <form action="">
+    <primary-btn type="submit" color="light">Submit</primary-btn>
+  </form>
 </div>

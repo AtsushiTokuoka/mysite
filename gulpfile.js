@@ -30,7 +30,12 @@ gulp.task('filecopy', function() {
 });
 
 gulp.task('js-bundle', function() {
-  return gulp.src([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`!${assetsPath}/**/_*/**/*.js`])
+  return gulp.src([
+    `${assetsPath}/**/*.js`,
+    `${assetsPath}/**/*.ts`,
+    `!${assetsPath}/**/_*/**/*.js`,
+    `!${assetsPath}/**/_*/**/*.ts`,
+  ])
   .pipe(named( (file) => {
     const relativePath = path.relative(
       path.join(file.cwd, assetsPath), file.path

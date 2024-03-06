@@ -24,7 +24,6 @@
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@types/jquery": "^3.5.29",
-    "@types/vue": "^2.0.0",
     "@vue/compiler-sfc": "^3.2.26",
     "autoprefixer": "^10.4.17",
     "babel-loader": "^9.1.3",

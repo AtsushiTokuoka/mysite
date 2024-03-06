@@ -1,6 +1,6 @@
 <template>
   <button class="Hamberger" 
-    :class="{ active: isOpen }" @click="toggleOpen"
+    :class="{ open: isOpen }" @click="toggleOpen"
   >
     <div class="Hamberger__bars">
       <span class="Hamberger__bar"></span>
@@ -65,13 +65,15 @@ export default defineComponent({
       }
       font-size: FontSize(12);
     }
-    &.active {
+    &.open {
       #{$self}__memo {
+        color: $colorBaseDark;
         &::before {
           content: 'CLOSE';
         }
       }
       #{$self}__bar {
+        background-color: $colorBaseDark;
         &:nth-child(1) {
           transform: rotate(45deg) translate(6px,7px);
         }

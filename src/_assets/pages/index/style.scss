@@ -1,0 +1,6 @@
+@use '../../_style/layout' as *;
+.Index {
+  @include Container() {
+    
+  }
+}

@@ -16,6 +16,23 @@
 	// 	"description": "Log output to console"
 	// }
 
+	"SFC template": {
+		"prefix": "sfc",
+		"body": [
+			"<template>",
+			"  $0",
+			"</template>",
+			"",
+			"<script lang=\"ts\">",
+			" $1",
+			"</script>",
+			"",
+			"<style lang=\"scss\" scoped>",
+			"  $2",
+			"</style>"
+		],
+		"description": "SFC template"
+	},
 	"Media Query Sp": {
 		"prefix": "mqsp",
 		"body": [
