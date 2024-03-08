@@ -1,9 +1,9 @@
 <template>
   <teleport to="#modal">
-    <div class="Modal" @click="close">
+    <div class="Modal" @[touchOrClick]="close">
       <div class="Modal__content">
-        <div class="Modal__slot" @click.stop>
-          <Close class="Modal__close" @click="close" />
+        <div class="Modal__slot" @[touchOrClick]="stop">
+          <Close class="Modal__close" @[touchOrClick]="close" />
           <slot></slot>
         </div>
       </div>
@@ -12,17 +12,41 @@
 </template>
 
 <script>
-  import { defineComponent } from 'vue';
+  import { defineComponent, computed, onMounted, ref } from 'vue';
+  import { useStore } from 'vuex';
   import Close from '@/_components/icons/Close.vue';
   export default defineComponent({
     name: 'Modal',
     emits: ['close'],
     setup(props, { emit }) {
-      const close = () => {
+
+      const hoge = ref('click');
+
+      // vuexよりtouchOrClickを取得
+      const store = useStore();
+      const touchOrClick = computed(() => store.getters.touchOrClick);
+
+      // closeイベントをemit
+      const close = (e) => {
+        console.log(e.type);
         emit('close');
       };
+      
+      // closeイベントを発火させない
+      const stop = (e) => {
+        e.stopPropagation();
+      }
+
+      // 画面スクロールを停止
+      onMounted(() => {
+        document.body.style.overflow = 'hidden';
+      });
+
       return {
+        touchOrClick,
         close,
+        stop,
+        hoge
       };
     },
     components: {

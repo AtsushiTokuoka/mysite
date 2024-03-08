@@ -25,12 +25,16 @@
     name: 'Hamburger',
     setup() {
       const store = useStore();
+
+      const touchOrClick = computed(() => store.getters.touchOrClick);
+
       const isOpen = computed(() => store.state.menuOpen);
       const toggleMenu = () => store.commit('toggleMenuOpen');
 
       return {
         isOpen,
         toggleMenu,
+        touchOrClick
       };
     },
   });
