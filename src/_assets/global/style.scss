@@ -28,3 +28,8 @@ body {
   transform: translateX(100%);
   z-index: 1;
 }
+
+#modal {
+  position: fixed;
+  z-index: 3;
+}

@@ -1,6 +1,6 @@
 <template>
   <button class="Hamberger" 
-    :class="{ open: isOpen }" @click="toggleOpen"
+    :class="{ open: isOpen }" @click="toggleMenu"
   >
     <div class="Hamberger__bars">
       <span class="Hamberger__bar"></span>
@@ -18,23 +18,22 @@
 </docs>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+  import { defineComponent, computed } from 'vue';
+  import { useStore } from 'vuex';
 
-export default defineComponent({
-  name: 'Hamburger',
-  setup() {
-    const isOpen = ref(false);
+  export default defineComponent({
+    name: 'Hamburger',
+    setup() {
+      const store = useStore();
+      const isOpen = computed(() => store.state.menuOpen);
+      const toggleMenu = () => store.commit('toggleMenuOpen');
 
-    const toggleOpen = () => {
-      isOpen.value = !isOpen.value;
-    };
-
-    return {
-      isOpen,
-      toggleOpen,
-    };
-  },
-});
+      return {
+        isOpen,
+        toggleMenu,
+      };
+    },
+  });
 </script>
 
 <style scoped lang="scss">

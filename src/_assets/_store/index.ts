@@ -3,20 +3,20 @@ import { createStore } from 'vuex'
 export default createStore({
   state() {
     return {
-      count: 0
+      menuOpen: false,
     }
   },
   mutations: {
-    increment(state) {
-      state.count++
-    }
+    toggleMenuOpen(state) {
+      state.menuOpen = !state.menuOpen
+    },
   },
   actions: {
-    increment(context) {
-      context.commit('increment')
-    }
+    toggleMenuOpen(context) {
+      context.commit('toggleMenuOpen')
+    },
   },
   getters: {
-    getCount: state => state.count
+
   }
 })

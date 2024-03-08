@@ -114,6 +114,15 @@
 		],
 		"description": "Col"
 	},
+	"Modal": {
+		"prefix": "modal",
+		"body": [
+			"@include Modal(300,300,10) {",
+			"  $1",
+			"}"
+		],
+		"description": "Modal"
+	},
 	"FontSize": {
 		"prefix": "font",
 		"body": [

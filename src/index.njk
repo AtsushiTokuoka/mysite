@@ -10,9 +10,20 @@ style: /assets/pages/index/style.css  # ページ固有のスタイル
 script: /assets/pages/index/index.js  # ページ固有のスクリプト
 ---
 <div class="Index">
-  <primary-btn type="link" url="/" class="Mb10 Mt20">Link</primary-btn>
-  <primary-btn type="button" color="dark" class="Mb10">Button</primary-btn>
-  <form action="">
-    <primary-btn type="submit" color="light">Submit</primary-btn>
+  <Btn type="link" url="/" class="Mb10 Mt20">Link</Btn>
+  <Btn type="button" color="dark" class="Mb10">Button</Btn>
+  <form action="" class="Mb10">
+    <Btn type="submit" color="light">Submit</Btn>
   </form>
+  
+  <Btn type="button" @click="openModal(1)" class="Mb10">Modal01</Btn>
+  <Btn type="button" @click="openModal(2)" class="Mb10">Modal02</Btn>
+  <Modal v-if="modalOpen" @close="closeModal">
+    <div v-if="modalId === 1" class="Index__modal01">
+      Modal Content01
+    </div>
+    <div v-if="modalId === 2" class="Index__modal02">
+      Modal Content02
+    </div>
+  </Modal>
 </div>

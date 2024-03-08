@@ -1,11 +1,11 @@
 <template>
-  <button v-if="type === 'button'" :class="['PrimaryBtn', color]" @click="onClick">
+  <button v-if="type === 'button'" :class="['Btn', color]">
     <slot></slot>
   </button>
-  <a v-else-if="type === 'link'" :class="['PrimaryBtn', color]" :href="url">
+  <a v-else-if="type === 'link'" :class="['Btn', color]" :href="url">
     <slot></slot>
   </a>
-  <button v-else-if="type === 'submit'"  :class="['PrimaryBtn', color]" type="submit">
+  <button v-else-if="type === 'submit'"  :class="['Btn', color]" type="submit">
     <slot></slot>
   </button>
 </template>
@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'PrimaryBtn',
+  name: 'Btn',
   props: {
     type: {
       type: String,
@@ -31,16 +31,11 @@ export default defineComponent({
       validator: (value: string) => ['main', 'dark', 'light'].includes(value),
     }
   },
-  methods: {
-    onClick() {
-      this.$emit('click');
-    },
-  },
 });
 </script>
 
 <style lang="scss" scoped>
-  $self: '.PrimaryBtn';
+  $self: '.Btn';
   #{$self} {
     display: block;
     width: 100%;
