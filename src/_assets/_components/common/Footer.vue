@@ -16,11 +16,11 @@
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Footer',
-  data() {
+  setup() {
     return {
       message: 'Footer.vue',
-    }
-  }
+    };
+  },
 })
 </script>
 

@@ -1,7 +1,5 @@
 <template>
-  <button class="Hamberger" 
-    :class="{ open: isOpen }" @click="toggleMenu"
-  >
+  <button class="Hamberger" :class="{ open: isOpen }" @[touchOrClick]="toggleMenu">
     <div class="Hamberger__bars">
       <span class="Hamberger__bar"></span>
       <span class="Hamberger__bar"></span>
@@ -24,17 +22,22 @@
   export default defineComponent({
     name: 'Hamburger',
     setup() {
+
       const store = useStore();
 
+      // vuexよりtouchOrClickを取得
       const touchOrClick = computed(() => store.getters.touchOrClick);
-
+      
+      // vuexよりmenuOpenを取得
       const isOpen = computed(() => store.state.menuOpen);
+      
+      // vuexのmenuOpenをtoggle
       const toggleMenu = () => store.commit('toggleMenuOpen');
-
+      
       return {
-        isOpen,
+        isOpen, 
+        touchOrClick, 
         toggleMenu,
-        touchOrClick
       };
     },
   });

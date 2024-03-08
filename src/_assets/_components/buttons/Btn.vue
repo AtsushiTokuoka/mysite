@@ -31,6 +31,13 @@ export default defineComponent({
       validator: (value: string) => ['main', 'dark', 'light'].includes(value),
     }
   },
+  setup(props) {
+    return {
+      type: props.type,
+      color: props.color,
+      url: props.url,
+    };
+  },
 });
 </script>
 

@@ -17,7 +17,7 @@ import { ref, defineComponent } from 'vue';
 export default defineComponent({
   name: 'Header',
   setup() {
-    const message = ref('Header.vue');
+    const message = 'Header.vue';
     return { message };
   },
 })

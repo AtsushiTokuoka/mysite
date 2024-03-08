@@ -5,20 +5,6 @@ body {
   height: 100vh;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-#menu-icon {
-  position: fixed;
-  bottom: 60px;
-  right: 20px;
-  z-index: 2;
-}
-
 #drawer-menu {
   position: fixed;
   top: 0;
@@ -26,7 +12,36 @@ body {
   right: 0;
   bottom: 0;
   transform: translateX(100%);
+  z-index: 2;
+}
+
+#menu-icon {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  z-index: 3;
+}
+
+#header {
+
+}
+
+#contents {
+  height: 200vh;
+}
+
+#pagetop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   z-index: 1;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #modal {

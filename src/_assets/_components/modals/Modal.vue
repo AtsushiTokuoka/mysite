@@ -2,7 +2,7 @@
   <teleport to="#modal">
     <div class="Modal" @[touchOrClick]="close">
       <div class="Modal__content">
-        <div class="Modal__slot" @[touchOrClick]="stop">
+        <div class="Modal__slot" @[touchOrClick].stop>
           <Close class="Modal__close" @[touchOrClick]="close" />
           <slot></slot>
         </div>
@@ -19,34 +19,30 @@
     name: 'Modal',
     emits: ['close'],
     setup(props, { emit }) {
-
-      const hoge = ref('click');
+      
+      const store = useStore();
 
       // vuexよりtouchOrClickを取得
-      const store = useStore();
       const touchOrClick = computed(() => store.getters.touchOrClick);
 
       // closeイベントをemit
-      const close = (e) => {
-        console.log(e.type);
+      const close = () => {
+        scrollStop(false);
         emit('close');
       };
-      
-      // closeイベントを発火させない
-      const stop = (e) => {
-        e.stopPropagation();
+
+      // 画面スクロールを制御
+      const scrollStop = (bool) => {
+        document.body.style.overflow = bool? 'hidden' : '';
       }
 
-      // 画面スクロールを停止
       onMounted(() => {
-        document.body.style.overflow = 'hidden';
+        scrollStop(true)
       });
 
       return {
         touchOrClick,
         close,
-        stop,
-        hoge
       };
     },
     components: {
