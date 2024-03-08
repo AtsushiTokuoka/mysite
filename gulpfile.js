@@ -151,8 +151,8 @@ gulp.task('js-bundle', function() {
             enforce: true,
           },
           vue: {
-            test: /[\\/]node_modules[\\/](@vue)[\\/]/,
-            name: 'vendors/vue@3.4.20.js',
+            test: /[\\/]node_modules[\\/](vue)[\\/]/,
+            name: 'vendors/vue@3.2.26.js',
             chunks: 'all',
             enforce: true,
           },
