@@ -43,7 +43,8 @@ gulp.task('js-bundle', function() {
     return relativePath;
   }))
   .pipe(webpackStream({
-    cache: false,
+    cache: process.env.MODE === 'production' ? false : true,
+    watch: process.env.MODE === 'production' ? false : true,
     mode: process.env.MODE,
     output: {
       filename: (pathData) => {
@@ -118,9 +119,9 @@ gulp.task('js-bundle', function() {
               options: {
                 implementation: require('sass'),
                 additionalData: `
-                  @use '@/_style/_variables.scss' as *;
-                  @use '@/_style/_utility.scss' as *;
-                  @use '@/_style/_layout.scss' as *;
+                  @use '@/_styles/_variables.scss' as *;
+                  @use '@/_styles/_utility.scss' as *;
+                  @use '@/_styles/_layout.scss' as *;
                 `
               }
             },

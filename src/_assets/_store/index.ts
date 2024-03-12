@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import isMobileDevice from '@/_function/isMobileDevice';
+import isMobileDevice from '@/_functions/isMobileDevice';
 
 export default createStore({
   state() {

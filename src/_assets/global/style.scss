@@ -1,5 +1,5 @@
-@use "../_style/utility" as *;
-@use "../_style/base";
+@use "../_styles/utility" as *;
+@use "../_styles/base";
 
 body {
   height: 100vh;
@@ -32,8 +32,8 @@ body {
 
 #pagetop {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 4px;
+  right: 23px;
   z-index: 1;
 }
 

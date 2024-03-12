@@ -1,5 +1,5 @@
-@use '../../_style/variables' as *;
-@use '../../_style/layout' as *;
+@use '../../_styles/variables' as *;
+@use '../../_styles/layout' as *;
 .Index {
   @include Container() {
     

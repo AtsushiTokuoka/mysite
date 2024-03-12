@@ -13,7 +13,7 @@
 </docs>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Header',
   setup() {
@@ -36,7 +36,6 @@ export default defineComponent({
     &__logo {
       display: inline-block;
       line-height: 1;
-      font-size: FontSize(32);
     }
   }
 </style>

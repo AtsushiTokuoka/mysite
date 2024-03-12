@@ -28,12 +28,11 @@ export default defineComponent({
   .Footer {
     background-color: $colorBaseLight;
     color: $colorBaseDark;
-    padding: 10px 0;
+    padding: 18px 0;
     &__inner {
       @include Container() {
         text-align: center;
         line-height: 1;
-        font-size: FontSize(32);
       }
     }
   }

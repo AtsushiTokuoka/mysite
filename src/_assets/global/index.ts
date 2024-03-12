@@ -9,7 +9,6 @@ import PageTop from "@/_components/icons/PageTop.vue";
 
 import DrawerMenu from "@/_components/menues/DrawerMenu.vue";
 
-
 createApp(Header).use(store).mount('#header');
 createApp(Footer).use(store).mount('#footer');
 createApp(Hamburger).use(store).mount('#menu-icon');
