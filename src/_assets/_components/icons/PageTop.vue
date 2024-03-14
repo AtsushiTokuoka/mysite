@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
-// import smoothScroll from '@/_functions/smoothScroll';
+import smoothScroll from '@/_functions/smoothScroll';
 export default defineComponent({
   name: 'PageTop',
   setup() {
@@ -30,7 +30,7 @@ export default defineComponent({
 
     
     const onClick = () => {
-      // smoothScroll('body', 500);
+      smoothScroll('body');
     }
     
     return {

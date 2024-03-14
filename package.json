@@ -58,7 +58,6 @@
   "dependencies": {
     "destyle.css": "^4.0.1",
     "jquery": "^3.7.1",
-    "swiper": "^11.0.6",
     "vue": "^3.2.26",
     "vuex": "^4.1.0"
   }

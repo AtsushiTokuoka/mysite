@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ meta.description }}" />
     <title>{{ meta.title }} | mysite</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
 
     {% if noIndex %}
     <meta name="robots" content="noindex" />
@@ -13,17 +14,13 @@
     {# ライブラリ　使用するライブラリは各ページで指定する #}
     <script src="/assets/vendors/vue@3.2.26.js" defer></script>
     <script src="/assets/vendors/vuex@4.1.0.js" defer></script>
-
     {% for vendor in vendors %}
     <script src="/assets/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
     {# サイト全体で適用する #}
     <link rel="stylesheet" href="/assets/global/destyle.min.css" />
-    <link
-      rel="stylesheet"
-      href="/assets/global/style.css?{{ lastBuildDate }}"
-    />
+    <link rel="stylesheet" href="/assets/global/style.css?{{ lastBuildDate }}"/>
     <script src="/assets/global/index.js?{{ lastBuildDate }}" defer></script>
     
     {#ページ固有で適用する　使用するファイルのパスを各ページで指定する#}

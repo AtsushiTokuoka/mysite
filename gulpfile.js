@@ -22,11 +22,11 @@ gulp.task('scss', function() {
     .pipe(gulp.dest(outputPath))
 });
 
-gulp.task('filecopy', function() {
+gulp.task('public-asset', function() {
   gulp.src('node_modules/destyle.css/destyle.min.css')
     .pipe(gulp.dest(`${outputPath}/global`));
-    return gulp.src(`${assetsPath}/fonts/**/*`)
-      .pipe(gulp.dest(`${outputPath}/fonts`));
+    return gulp.src(`public/**/*`)
+      .pipe(gulp.dest(`${outputPath}`));
 });
 
 gulp.task('js-bundle', function() {
@@ -171,9 +171,9 @@ gulp.task('js-bundle', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.series('filecopy')();
+  gulp.series('public-asset')();
   gulp.watch(`${assetsPath}/**/*.scss`, gulp.series('scss'));
   gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
 });
 
-exports.build = gulp.parallel('filecopy', 'scss', 'js-bundle');
+exports.build = gulp.parallel('public-asset', 'scss', 'js-bundle');
