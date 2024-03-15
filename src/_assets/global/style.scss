@@ -1,10 +1,6 @@
 @use "../_styles/utility" as *;
 @use "../_styles/base";
 
-body {
-  height: 100vh;
-}
-
 #drawer-menu {
   position: fixed;
   top: 0;
@@ -30,7 +26,10 @@ body {
 }
 
 #contents {
-  height: 200vh;
+  & > * {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 #pagetop {

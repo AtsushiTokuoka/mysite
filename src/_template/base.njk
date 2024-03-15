@@ -32,7 +32,12 @@
     <div id="menu-icon"></div>
     <header id="header"></header>
     <div id="contents">
-      <main v-bind:style="{'padding-top': headerHeight + 'px'}">
+      <main 
+        v-bind:style="{
+          'margin-top': headerHeight + 'px',
+          'min-height': contentsMinHeight + 'px'
+        }"
+      >
         {{ content | safe }}
       </main>
     </div>

@@ -9,12 +9,6 @@ style: /assets/pages/index/style.css  # ページ固有のスタイル
 script: /assets/pages/index/index.js  # ページ固有のスクリプト
 ---
 <div class="Index">
-  <Btn type="link" url="/" class="Mb10">Link</Btn>
-  <Btn type="button" color="dark" class="Mb10">Button</Btn>
-  <form action="" class="Mb10">
-    <Btn type="submit" color="light">Submit</Btn>
-  </form>
-  
   <Btn type="button" @click="openModal(1)" class="Mb10">Modal01</Btn>
   <Btn type="button" @click="openModal(2)" class="Mb10">Modal02</Btn>
   <Modal v-if="modalOpen" @close="closeModal">
@@ -25,5 +19,4 @@ script: /assets/pages/index/index.js  # ページ固有のスクリプト
       Modal Content02
     </div>
   </Modal>
-  <a href="" class="Btn">ボタン</a>
 </div>

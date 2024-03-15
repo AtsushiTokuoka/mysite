@@ -7,6 +7,7 @@ export default createStore({
       isMobile: isMobileDevice(),
       menuOpen: false,
       headerHeight: 0,
+      footerHeight: 0
     }
   },
   getters: {
@@ -18,6 +19,9 @@ export default createStore({
     },
     setHeaderHeight(state, payload) {
       state.headerHeight = payload.height
+    },
+    setFooterHeight(state, payload) {
+      state.footerHeight = payload.height
     }
   },
   actions: {
@@ -26,6 +30,9 @@ export default createStore({
     },
     setHeaderHeight(context, payload) {
       context.commit('setHeaderHeight', payload)
+    },
+    setFooterHeight(context, payload) {
+      context.commit('setFooterHeight', payload)
     }
   }
 })
