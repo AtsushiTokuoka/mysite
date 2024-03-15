@@ -13,7 +13,10 @@ const assetsPath = './src/_assets';
 const outputPath = './dist/assets';
 
 gulp.task('scss', function() {
-  return gulp.src(`${assetsPath}/**/*.scss`)
+  return gulp.src([
+    `${assetsPath}/**/*.scss`,
+    `!${assetsPath}/**/_*/**/*.scss`
+  ])
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(postcss([autoprefixer()]))
     .pipe(gulpPurgecss({
@@ -35,6 +38,8 @@ gulp.task('js-bundle', function() {
     `${assetsPath}/**/*.ts`,
     `!${assetsPath}/**/_*/**/*.js`,
     `!${assetsPath}/**/_*/**/*.ts`,
+    `!${assetsPath}/global/**/*.js`,
+    `!${assetsPath}/global/**/*.ts`,
   ])
   .pipe(named( (file) => {
     const relativePath = path.relative(
@@ -171,7 +176,7 @@ gulp.task('js-bundle', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.series('public-asset')();
+  gulp.parallel('public-asset', 'scss', 'js-bundle')();
   gulp.watch(`${assetsPath}/**/*.scss`, gulp.series('scss'));
   gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
 });

@@ -11,28 +11,28 @@
     <meta name="robots" content="noindex" />
     {% endif %} 
 
-    {# ライブラリ　使用するライブラリは各ページで指定する #}
+    {# vendors #}
     <script src="/assets/vendors/vue@3.2.26.js" defer></script>
     <script src="/assets/vendors/vuex@4.1.0.js" defer></script>
     {% for vendor in vendors %}
     <script src="/assets/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
-    {# サイト全体で適用する #}
+    {# global style #}
     <link rel="stylesheet" href="/assets/global/destyle.min.css" />
     <link rel="stylesheet" href="/assets/global/style.css?{{ lastBuildDate }}"/>
-    <script src="/assets/global/index.js?{{ lastBuildDate }}" defer></script>
     
-    {#ページ固有で適用する　使用するファイルのパスを各ページで指定する#}
+    {#page style & script#}
     <link rel="stylesheet" href="{{ style }}?{{ lastBuildDate }}" />
     <script src="{{ script }}?{{ lastBuildDate }}" defer></script>
+    
   </head>
   <body>
     <div id="drawer-menu"></div>
     <div id="menu-icon"></div>
     <header id="header"></header>
     <div id="contents">
-      <main>
+      <main v-bind:style="{'padding-top': headerHeight + 'px'}">
         {{ content | safe }}
       </main>
     </div>

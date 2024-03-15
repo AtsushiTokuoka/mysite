@@ -1,5 +1,5 @@
 <template>
-  <header class="Header">
+  <header class="Header" ref="Header">
     <div class="Header__inner">
       <h1 class="Header__logo">{{ message }}</h1>
     </div>
@@ -13,12 +13,28 @@
 </docs>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref , onMounted } from 'vue';
+import { useStore } from 'vuex';
 export default defineComponent({
   name: 'Header',
   setup() {
+    
     const message = 'Header.vue';
-    return { message };
+    const store = useStore();
+
+    const Header = ref<HTMLElement | null>(null);
+    const setHeaderHeight = () => {
+      store.dispatch('setHeaderHeight', { height: Header.value?.offsetHeight });
+    };
+
+    onMounted(() => {
+      setHeaderHeight();
+    });
+    return { 
+      message,
+      Header,
+      setHeaderHeight,
+    };
   },
 })
 </script>

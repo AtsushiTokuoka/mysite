@@ -1,5 +1,5 @@
 <template>
-  <button class="Hamberger" :class="{ open: isOpen }" @[touchOrClick]="toggleMenu">
+  <button class="Hamberger" :class="{ open: isOpen }" @[touchOrClick]="toggleMenuOpen">
     <div class="Hamberger__bars">
       <span class="Hamberger__bar"></span>
       <span class="Hamberger__bar"></span>
@@ -32,12 +32,12 @@
       const isOpen = computed(() => store.state.menuOpen);
       
       // vuexのmenuOpenをtoggle
-      const toggleMenu = () => store.commit('toggleMenuOpen');
+      const toggleMenuOpen = () => store.dispatch('toggleMenuOpen');
       
       return {
         isOpen, 
         touchOrClick, 
-        toggleMenu,
+        toggleMenuOpen,
       };
     },
   });

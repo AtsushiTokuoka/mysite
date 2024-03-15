@@ -42,38 +42,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  $self: '.Btn';
-  #{$self} {
-    display: block;
-    width: 100%;
-    padding: 10px 20px;
-    text-align: center;
-    font-weight: bold;
-    font-size: FontSize(20);
-    border-radius: 5px;
-    background-color: $colorMain;
-    color: $colorBaseLight;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    &:hover {
-      background-color: $colorBaseLight;
-      color: $colorMain;
-    }
-    &.dark {
-      background-color: $colorDark;
-      color: $colorBaseLight;
-      &:hover {
-        background-color: $colorBaseLight;
-        color: $colorDark;
-      }
-    }
-    &.light {
-      background-color: $colorLight;
-      color: $colorBaseLight;
-      &:hover {
-        background-color: $colorBaseLight;
-        color: $colorLight;
-      }
-    }
-  }
+  @use "./Btn.scss";
 </style>

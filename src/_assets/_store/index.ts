@@ -6,6 +6,7 @@ export default createStore({
     return {
       isMobile: isMobileDevice(),
       menuOpen: false,
+      headerHeight: 0,
     }
   },
   getters: {
@@ -15,10 +16,16 @@ export default createStore({
     toggleMenuOpen(state) {
       state.menuOpen = !state.menuOpen
     },
+    setHeaderHeight(state, payload) {
+      state.headerHeight = payload.height
+    }
   },
   actions: {
     toggleMenuOpen(context) {
       context.commit('toggleMenuOpen')
     },
+    setHeaderHeight(context, payload) {
+      context.commit('setHeaderHeight', payload)
+    }
   }
 })

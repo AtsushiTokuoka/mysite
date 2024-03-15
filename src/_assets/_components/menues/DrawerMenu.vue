@@ -2,7 +2,6 @@
   <div :class="['DrawerMenu',{ open: isOpen }]">
     <div class="DrawerMenu__inner">
       <p>DrawerMenu</p>
-      <Btn type="link" url="/" class="Mb10 Mt20">Link</Btn>
     </div>
   </div>
 </template>
@@ -10,13 +9,9 @@
 <script lang="ts">
 import { defineComponent, computed, } from 'vue';
 import { useStore } from 'vuex';
-import Btn from '@/_components/buttons/Btn.vue';
 
 export default defineComponent({
   name: 'DrawerMenu',
-  components: {
-    Btn,
-  },
   setup() {
     const store = useStore();
     const isOpen = computed(() => store.state.menuOpen);
