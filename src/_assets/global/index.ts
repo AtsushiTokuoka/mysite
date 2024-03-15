@@ -40,6 +40,25 @@ function setupContentsVueApp () {
   }
 }
 
+function changeHeaderPositionOnScroll() {
+  const header = document.querySelector('#header') as HTMLElement;
+  const headerHeight = header.offsetHeight;
+  let lastScrollPosition = 0;
+
+  window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY;
+    if(scrollPosition < lastScrollPosition) {
+      header.style.top = '0';
+    } else if (scrollPosition > headerHeight) {
+      header.style.top = `-${headerHeight}px`;
+    } else {
+      header.style.top = '0';
+    }
+    lastScrollPosition = scrollPosition;
+  });
+}
+window.addEventListener('load', changeHeaderPositionOnScroll);
+
 export {
   setupContentsVueApp
 }

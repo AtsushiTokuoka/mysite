@@ -2,6 +2,7 @@
 @use '../../_styles/layout' as *;
 
 .Index {
+  height: 200vh;
   @include Container() {
     
   }
