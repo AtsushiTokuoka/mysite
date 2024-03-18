@@ -8,12 +8,17 @@ import Hamburger from "@/_components/icons/Hamburger.vue";
 import PageTop from "@/_components/icons/PageTop.vue";
 import DrawerMenu from "@/_components/menues/DrawerMenu.vue";
 
-vueAppFactory(Header, '#header');
-vueAppFactory(Footer, '#footer');
-vueAppFactory(Hamburger, '#menu-icon');
-vueAppFactory(PageTop, '#pagetop');
-vueAppFactory(DrawerMenu, '#drawer-menu');
+// 共通コンポーネントのインスタンスを生成
+window.addEventListener('DOMContentLoaded', initCommonVueApps);
+function initCommonVueApps() {
+  vueAppFactory(Header, '#header');
+  vueAppFactory(Footer, '#footer');
+  vueAppFactory(Hamburger, '#menu-icon');
+  vueAppFactory(PageTop, '#pagetop');
+  vueAppFactory(DrawerMenu, '#drawer-menu');
+}
 
+// コンテンツエリアのvueインスタンスの共通設定
 function setupContentsVueApp () {
   
   const store = useStore();
@@ -40,10 +45,22 @@ function setupContentsVueApp () {
   }
 }
 
+// 画面スクロール時のヘッダーの挙動
+window.addEventListener('load', changeHeaderPositionOnScroll);
 function changeHeaderPositionOnScroll() {
   const header = document.querySelector('#header') as HTMLElement;
-  const headerHeight = header.offsetHeight;
+  let headerHeight = header.offsetHeight;
   let lastScrollPosition = 0;
+
+  // ヘッダーのリサイズを監視
+  const observer = new ResizeObserver(entries => {
+    for (const entry of entries) {
+      if (entry.target === header) {
+        headerHeight = header.offsetHeight;        
+      }
+    }
+  });
+  observer.observe(header);
 
   window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
@@ -57,7 +74,6 @@ function changeHeaderPositionOnScroll() {
     lastScrollPosition = scrollPosition;
   });
 }
-window.addEventListener('load', changeHeaderPositionOnScroll);
 
 export {
   setupContentsVueApp
