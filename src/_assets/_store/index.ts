@@ -7,7 +7,8 @@ export default createStore({
       isMobile: isMobileDevice(),
       menuOpen: false,
       headerHeight: 0,
-      footerHeight: 0
+      footerHeight: 0,
+      eleventyData: JSON.parse(document.getElementById('eleventy-data')?.textContent || '{}')
     }
   },
   getters: {

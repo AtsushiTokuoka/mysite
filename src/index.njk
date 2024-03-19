@@ -1,22 +1,25 @@
 ---
-layout: base.njk      # ベーステンプレート
-meta:                 # メタ情報
+meta:
   title: Home
   description: Home description
-vendors:              # 使用ライブラリ
-
-style: /assets/pages/index/style.css  # ページ固有のスタイル
-script: /assets/pages/index/index.js  # ページ固有のスクリプト
+styles:
+  - /assets/pages/index/style.css
+scripts:
+  - /assets/pages/index/main.js
 ---
-<div class="Index">
-  <Btn type="button" @click="openModal(1)" class="Mb10">Modal01</Btn>
-  <Btn type="button" @click="openModal(2)" class="Mb10">Modal02</Btn>
-  <Modal v-if="modalOpen" @close="closeModal">
-    <div v-if="modalId === 1" class="Index__modal01">
-      Modal Content01
-    </div>
-    <div v-if="modalId === 2" class="Index__modal02">
-      Modal Content02
-    </div>
-  </Modal>
-</div>
+{% extends "base.njk" %}
+{% block dom %}
+  <div class="Index">
+    <Btn type="link" url="/video" class="Mb10">Video</Btn>
+    <Btn type="button" @click="openModal(1)" class="Mb10">Modal01</Btn>
+    <Btn type="button" @click="openModal(2)" class="Mb10">Modal02</Btn>
+    <Modal v-if="modalOpen" @close="closeModal">
+      <div v-if="modalId === 1" class="Index__modal01">
+        Modal Content01
+      </div>
+      <div v-if="modalId === 2" class="Index__modal02">
+        Modal Content02
+      </div>
+    </Modal>
+  </div>
+{% endblock dom %}

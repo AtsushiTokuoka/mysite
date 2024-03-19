@@ -34,11 +34,8 @@ gulp.task('public-asset', function() {
 
 gulp.task('js-bundle', function() {
   return gulp.src([
-    `${assetsPath}/**/*.js`,
     `${assetsPath}/**/*.ts`,
-    `!${assetsPath}/**/_*/**/*.js`,
     `!${assetsPath}/**/_*/**/*.ts`,
-    `!${assetsPath}/global/**/*.js`,
     `!${assetsPath}/global/**/*.ts`,
   ])
   .pipe(named( (file) => {
@@ -62,24 +59,24 @@ gulp.task('js-bundle', function() {
     },
     module: {
       rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    useBuiltIns: 'usage',
-                    corejs: 3
-                  }
-                ]
-              ]
-            }
-          }
-        },
+        // {
+        //   test: /\.js$/,
+        //   exclude: /node_modules/,
+        //   use: {
+        //     loader: 'babel-loader',
+        //     options: {
+        //       presets: [
+        //         [
+        //           '@babel/preset-env',
+        //           {
+        //             useBuiltIns: 'usage',
+        //             corejs: 3
+        //           }
+        //         ]
+        //       ]
+        //     }
+        //   }
+        // },
         {
           test: /\.vue$/,
           exclude: /node_modules/,
@@ -178,7 +175,7 @@ gulp.task('js-bundle', function() {
 gulp.task('watch', function() {
   gulp.parallel('public-asset', 'scss', 'js-bundle')();
   gulp.watch(`${assetsPath}/**/*.scss`, gulp.series('scss'));
-  gulp.watch([`${assetsPath}/**/*.js`,`${assetsPath}/**/*.ts`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
+  gulp.watch([`${assetsPath}/**/*.ts`,`${assetsPath}/**/*.vue`], gulp.series('js-bundle'));
 });
 
 exports.build = gulp.parallel('public-asset', 'scss', 'js-bundle');

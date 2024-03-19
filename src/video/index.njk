@@ -1,0 +1,23 @@
+---
+meta:
+  title: "Video"
+  description: "Video description"
+styles:
+  - /assets/pages/video/style.css
+scripts:
+  - /assets/pages/video/main.js
+---
+{% extends "base.njk" %}
+
+{% block dom %}
+<div class="Video">
+  <ul>
+    <li v-for="data in eleventyData" class="Mb10">
+      {% raw %}{{ data.title }}{% endraw %}
+    </li>
+  </ul>
+</div>
+{% endblock %}
+{% block data %}
+{{ videos }}
+{% endblock %}

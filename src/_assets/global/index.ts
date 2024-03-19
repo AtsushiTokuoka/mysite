@@ -22,6 +22,7 @@ function initCommonVueApps() {
 function setupContentsVueApp () {
   
   const store = useStore();
+  const eleventyData = computed(() => store.state.eleventyData);
   const headerHeight = computed(() => store.state.headerHeight);
   const footerHeight = computed(() => store.state.footerHeight);
   const contentsMinHeight = ref(0);
@@ -41,7 +42,8 @@ function setupContentsVueApp () {
 
   return {
     headerHeight,
-    contentsMinHeight
+    contentsMinHeight,
+    eleventyData
   }
 }
 

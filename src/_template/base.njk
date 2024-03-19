@@ -8,14 +8,14 @@
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
 
     {% if noIndex %}
-    <meta name="robots" content="noindex" />
+      <meta name="robots" content="noindex" />
     {% endif %} 
 
     {# vendors #}
     <script src="/assets/vendors/vue@3.2.26.js" defer></script>
     <script src="/assets/vendors/vuex@4.1.0.js" defer></script>
     {% for vendor in vendors %}
-    <script src="/assets/vendors/{{ vendor }}.js" defer></script>
+      <script src="/assets/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
     {# global style #}
@@ -23,8 +23,12 @@
     <link rel="stylesheet" href="/assets/global/style.css?{{ lastBuildDate }}"/>
     
     {#page style & script#}
-    <link rel="stylesheet" href="{{ style }}?{{ lastBuildDate }}" />
-    <script src="{{ script }}?{{ lastBuildDate }}" defer></script>
+    {% for style in styles %}
+      <link rel="stylesheet" href="{{ style }}?{{ lastBuildDate }}" />
+    {% endfor %}
+    {% for script in scripts %}
+      <script src="{{ script }}?{{ lastBuildDate }}" defer></script>
+    {% endfor %}
     
   </head>
   <body>
@@ -38,11 +42,16 @@
           'min-height': contentsMinHeight + 'px'
         }"
       >
-        {{ content | safe }}
+        {% block dom %}{% endblock %}
       </main>
     </div>
     <div id="pagetop"></div>
     <footer id="footer"></footer>
     <div id="modal"></div>
+
+    <div id="eleventy-data" style="display: none;">
+      {% block data %}{% endblock %}
+    </div>
+    
   </body>
 </html>
