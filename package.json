@@ -11,6 +11,9 @@
     "styleguide": "vue-styleguidist server",
     "styleguide:build": "vue-styleguidist build"
   },
+  "engines": {
+    "node": "20.11.1"
+  },
   "browserslist": [
     "last 2 versions",
     "not dead",
