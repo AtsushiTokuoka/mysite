@@ -1,10 +1,19 @@
 <template>
   <teleport to="#modal">
-    <div class="Modal" @[touchOrClick]="close">
+    <div
+      class="Modal"
+      @[touchOrClick]="close"
+    >
       <div class="Modal__content">
-        <div class="Modal__slot" @[touchOrClick].stop>
-          <Close class="Modal__close" @[touchOrClick]="close" />
-          <slot></slot>
+        <div
+          class="Modal__slot"
+          @[touchOrClick].stop
+        >
+          <v-close
+            class="Modal__close"
+            @[touchOrClick]="close"
+          />
+          <slot />
         </div>
       </div>
     </div>
@@ -12,11 +21,14 @@
 </template>
 
 <script>
-  import { defineComponent, computed, onMounted, ref } from 'vue';
+  import { defineComponent, computed, onMounted } from 'vue';
   import { useStore } from 'vuex';
-  import Close from '@/_components/icons/Close.vue';
+  import VClose from '@/_components/icons/Close.vue';
   export default defineComponent({
-    name: 'Modal',
+    name: 'VModal',
+    components: {
+      VClose,
+    },
     emits: ['close'],
     setup(props, { emit }) {
       
@@ -44,9 +56,6 @@
         touchOrClick,
         close,
       };
-    },
-    components: {
-      Close,
     },
   });
 </script>

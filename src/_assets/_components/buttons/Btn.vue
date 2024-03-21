@@ -1,12 +1,23 @@
 <template>
-  <button v-if="type === 'button'" :class="['Btn', color]">
-    <slot></slot>
+  <button
+    v-if="mode === 'button'"
+    :class="['Btn', color]"
+  >
+    <slot />
   </button>
-  <a v-else-if="type === 'link'" :class="['Btn', color]" :href="url">
-    <slot></slot>
+  <a
+    v-else-if="mode === 'link'"
+    :class="['Btn', color]"
+    :href="to"
+  >
+    <slot />
   </a>
-  <button v-else-if="type === 'submit'"  :class="['Btn', color]" type="submit">
-    <slot></slot>
+  <button
+    v-else-if="mode === 'submit'"
+    :class="['Btn', color]"
+    type="submit"
+  >
+    <slot />
   </button>
 </template>
 
@@ -14,18 +25,18 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Btn',
+  name: 'VBtn',
   props: {
-    type: {
+    mode: {
       type: String,
-      required: true,
+      default: 'button',
       validator: (value: string) => ['button', 'link', 'submit'].includes(value),
     },
-    url: {
+    path: {
       type: String,
       default: '#',
     },
-    color: {
+    appearance: {
       type: String,
       default: 'main',
       validator: (value: string) => ['main', 'dark', 'light'].includes(value),
@@ -33,9 +44,9 @@ export default defineComponent({
   },
   setup(props) {
     return {
-      type: props.type,
-      color: props.color,
-      url: props.url,
+      action: props.mode,
+      color: props.appearance,
+      to: props.path,
     };
   },
 });

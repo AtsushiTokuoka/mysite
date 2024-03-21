@@ -1,14 +1,19 @@
 <template>
-  <header class="Header" ref="Header">
+  <header
+    ref="Header"
+    class="Header"
+  >
     <div class="Header__inner">
-      <h1 class="Header__logo">{{ message }}</h1>
+      <h1 class="Header__logo">
+        {{ message }}
+      </h1>
     </div>
   </header>
 </template>
 
 <docs>
   ```vue
-  <Header />
+  <v-header />
   ```
 </docs>
 
@@ -16,7 +21,7 @@
 import { defineComponent, ref , onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 export default defineComponent({
-  name: 'Header',
+  name: 'VHeader',
   setup() {
 
     /**

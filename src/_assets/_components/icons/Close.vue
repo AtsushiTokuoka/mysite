@@ -1,8 +1,8 @@
 <template>
   <button class="Close">
     <div class="Close__bars">
-      <span class="Close__bar"></span>
-      <span class="Close__bar"></span>
+      <span class="Close__bar" />
+      <span class="Close__bar" />
     </div>
     <span class="Close__memo">CLOSE</span>
   </button>
@@ -12,7 +12,7 @@
   import { defineComponent } from 'vue';
 
   export default defineComponent({
-    name: 'Close',
+    name: 'VClose',
   });
 </script>
 

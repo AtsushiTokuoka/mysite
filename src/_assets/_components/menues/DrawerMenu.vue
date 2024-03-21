@@ -11,7 +11,7 @@ import { defineComponent, computed, } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
-  name: 'DrawerMenu',
+  name: 'VDrawerMenu',
   setup() {
     const store = useStore();
     const isOpen = computed(() => store.state.menuOpen);

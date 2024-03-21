@@ -1,5 +1,8 @@
 <template>
-  <footer class="Footer" ref="Footer">
+  <footer
+    ref="Footer"
+    class="Footer"
+  >
     <div class="Footer__inner">
       <p>{{ message }}</p>
     </div>
@@ -8,7 +11,7 @@
 
 <docs>
   ```vue
-  <Footer />
+  <v-footer />
   ```
 </docs>
 
@@ -16,7 +19,7 @@
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 export default defineComponent({
-  name: 'Footer',
+  name: 'VFooter',
   setup() {
     /**
      * フッターコンポーネント

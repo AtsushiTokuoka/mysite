@@ -2,20 +2,20 @@ import vueAppFactory from "@/_functions/vueAppFactory";
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useStore } from "vuex";
 
-import Header from "@/_components/common/Header.vue";
-import Footer from "@/_components/common/Footer.vue";
-import Hamburger from "@/_components/icons/Hamburger.vue";
-import PageTop from "@/_components/icons/PageTop.vue";
-import DrawerMenu from "@/_components/menues/DrawerMenu.vue";
+import VHeader from "@/_components/common/Header.vue";
+import VFooter from "@/_components/common/Footer.vue";
+import VHamburger from "@/_components/icons/Hamburger.vue";
+import VPageTop from "@/_components/icons/PageTop.vue";
+import VDrawerMenu from "@/_components/menues/DrawerMenu.vue";
 
 // 共通コンポーネントのインスタンスを生成
 window.addEventListener('DOMContentLoaded', initCommonVueApps);
 function initCommonVueApps() {
-  vueAppFactory(Header, '#header');
-  vueAppFactory(Footer, '#footer');
-  vueAppFactory(Hamburger, '#menu-icon');
-  vueAppFactory(PageTop, '#pagetop');
-  vueAppFactory(DrawerMenu, '#drawer-menu');
+  vueAppFactory(VHeader, '#header');
+  vueAppFactory(VFooter, '#footer');
+  vueAppFactory(VHamburger, '#menu-icon');
+  vueAppFactory(VPageTop, '#pagetop');
+  vueAppFactory(VDrawerMenu, '#drawer-menu');
 }
 
 // コンテンツエリアのvueインスタンスの共通設定

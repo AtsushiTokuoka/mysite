@@ -1,4 +1,4 @@
-import store from "@/_store/index";
+// import store from "@/_store/index";
 
 /**
  * スムーズスクロールを実現する関数です。

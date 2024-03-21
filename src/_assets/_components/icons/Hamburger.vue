@@ -1,11 +1,15 @@
 <template>
-  <button class="Hamberger" :class="{ open: isOpen }" @[touchOrClick]="toggleMenuOpen">
+  <button
+    class="Hamberger"
+    :class="{ open: isOpen }"
+    @[touchOrClick]="toggleMenuOpen"
+  >
     <div class="Hamberger__bars">
-      <span class="Hamberger__bar"></span>
-      <span class="Hamberger__bar"></span>
-      <span class="Hamberger__bar"></span>
+      <span class="Hamberger__bar" />
+      <span class="Hamberger__bar" />
+      <span class="Hamberger__bar" />
     </div>
-    <span class="Hamberger__memo"></span>
+    <span class="Hamberger__memo" />
   </button>
 </template>
 
@@ -20,7 +24,7 @@
   import { useStore } from 'vuex';
 
   export default defineComponent({
-    name: 'Hamburger',
+    name: 'VHamburger',
     setup() {
 
       const store = useStore();

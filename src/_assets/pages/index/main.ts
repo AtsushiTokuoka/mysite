@@ -2,14 +2,14 @@ import vueAppFactory from "@/_functions/vueAppFactory";
 import { defineComponent, ref } from 'vue';
 import { setupContentsVueApp } from "@/global";
 
-import Btn from '@/_components/buttons/Btn.vue';
-import Modal from '@/_components/modals/Modal.vue';
+import VBtn from '@/_components/buttons/Btn.vue';
+import VModal from '@/_components/modals/Modal.vue';
 
 vueAppFactory(defineComponent({
-  name: 'Contents',
+  name: 'VContents',
   components: {
-    Btn,
-    Modal
+    VBtn,
+    VModal
   },
   setup() {
     const contentsAppSetUpData = setupContentsVueApp();
