@@ -15,12 +15,13 @@ const outputPath = './dist/assets';
 gulp.task('scss', function() {
   return gulp.src([
     `${assetsPath}/**/*.scss`,
-    `!${assetsPath}/**/_*/**/*.scss`
+    `!${assetsPath}/**/_*.scss`
   ])
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(postcss([autoprefixer()]))
     .pipe(gulpPurgecss({
       content: ['./src/**/*.njk'],
+      safelist: [/^v-cloak$/]
     }))
     .pipe(gulp.dest(outputPath))
 });

@@ -53,5 +53,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  @use "./Btn.scss";
+  @use "./_Btn.scss";
 </style>
