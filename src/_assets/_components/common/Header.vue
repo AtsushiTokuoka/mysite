@@ -1,8 +1,5 @@
 <template>
-  <header
-    ref="Header"
-    class="Header"
-  >
+  <header ref="Header" class="Header">
     <div class="Header__inner">
       <h1 class="Header__logo">
         {{ message }}
@@ -18,12 +15,11 @@
 </docs>
 
 <script lang="ts">
-import { defineComponent, ref , onMounted, onUnmounted } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
-  name: 'VHeader',
+  name: "VHeader",
   setup() {
-
     /**
      * ヘッダーコンポーネント
      * @module Header
@@ -41,7 +37,7 @@ export default defineComponent({
     let resizeObserver: ResizeObserver;
 
     const setHeaderHeight = () => {
-      store.dispatch('setHeaderHeight', { height: Header.value?.offsetHeight });
+      store.dispatch("setHeaderHeight", { height: Header.value?.offsetHeight });
     };
 
     onMounted(() => {
@@ -55,34 +51,34 @@ export default defineComponent({
       }
     });
 
-    return { 
-      message: 'Header.vue',
+    return {
+      message: "Header.vue",
       Header,
       setHeaderHeight,
     };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
-  .Header {
-    background-color: $colorBaseLight;
-    color: $colorBaseDark;
-    padding: 10px 0;
-    @include mq(tab) {
-      padding: 20px 0;
-    }
-    @include mq(pc) {
-      padding: 30px 0;
-    }
-    &__inner {
-      @include Container() {
-        text-align: center;
-      }
-    }
-    &__logo {
-      display: inline-block;
-      line-height: 1;
+.Header {
+  background-color: $colorBaseLight;
+  color: $colorBaseDark;
+  padding: 10px 0;
+  @include mq(tab) {
+    padding: 20px 0;
+  }
+  @include mq(pc) {
+    padding: 30px 0;
+  }
+  &__inner {
+    @include Container() {
+      text-align: center;
     }
   }
+  &__logo {
+    display: inline-block;
+    line-height: 1;
+  }
+}
 </style>

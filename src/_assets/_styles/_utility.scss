@@ -4,27 +4,39 @@
 // display
 .SpOnly {
   display: none;
-  @include mq(sp) { display: block; }
+  @include mq(sp) {
+    display: block;
+  }
 }
 .TabOnly {
   display: none;
-  @include mq(tab) { display: block; }
+  @include mq(tab) {
+    display: block;
+  }
 }
 .MobileOnly {
   display: none;
-  @include mq(mobile) { display: block; }
+  @include mq(mobile) {
+    display: block;
+  }
 }
 .PcOnly {
   display: none;
-  @include mq(pc) { display: block; }
+  @include mq(pc) {
+    display: block;
+  }
 }
 .LaptopOnly {
   display: none;
-  @include mq(laptop) { display: block; }
+  @include mq(laptop) {
+    display: block;
+  }
 }
 .DesktopOnly {
   display: none;
-  @include mq(desktop) { display: block; }
+  @include mq(desktop) {
+    display: block;
+  }
 }
 
 // margin

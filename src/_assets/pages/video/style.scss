@@ -1,8 +1,12 @@
-@use '../../_styles/variables' as *;
-@use '../../_styles/layout' as *;
+@use "../../_styles/variables" as *;
+@use "../../_styles/layout" as *;
 
 .Video {
   @include Container() {
-    
+    & > * {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+    }
   }
 }

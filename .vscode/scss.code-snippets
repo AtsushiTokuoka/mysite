@@ -106,11 +106,4 @@
 		],
 		"description": "Modal"
 	},
-	"FontSize": {
-		"prefix": "font",
-		"body": [
-			"@include Font($1)"
-		],
-		"description": "Col"
-	},
 }

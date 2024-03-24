@@ -4,24 +4,24 @@ $tab: 1280px - 1;
 $laptop: 1920px - 1;
 $desktop: 1920px;
 $breakpoints: (
-  'sp': 'screen and (max-width: #{$sp})',
-  'tab': 'screen and (min-width: #{$sp + 1}) and (max-width: #{$tab})',
-  'mobile': 'screen and (max-width: #{$tab})',
-  'pc': 'screen and (min-width: #{$tab + 1})',
-  'laptop': 'screen and (min-width: #{$tab + 1}) and (max-width: #{$laptop})',
-  'desktop': 'screen and (min-width: #{$desktop})',
+  "sp": "screen and (max-width: #{$sp})",
+  "tab": "screen and (min-width: #{$sp + 1}) and (max-width: #{$tab})",
+  "mobile": "screen and (max-width: #{$tab})",
+  "pc": "screen and (min-width: #{$tab + 1})",
+  "laptop": "screen and (min-width: #{$tab + 1}) and (max-width: #{$laptop})",
+  "desktop": "screen and (min-width: #{$desktop})",
 );
 
 // color
 // http://colormind.io/bootstrap/
-$colorBaseLight: #EFF5F1;
+$colorBaseLight: #eff5f1;
 $colorBaseDark: #273547;
-$colorLight: #919C72;
-$colorDark: #80706F;
-$colorMain: #4DB6AC;
+$colorLight: #919c72;
+$colorDark: #80706f;
+$colorMain: #4db6ac;
 
 // font
 $baseFontSize: 16;
 $baseFontWeight: 400;
-$baseFontFamily: 'nsjp', sans-serif;
+$baseFontFamily: "nsjp", sans-serif;
 $baseLineHeight: 1.5;

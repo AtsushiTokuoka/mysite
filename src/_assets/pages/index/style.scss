@@ -1,10 +1,9 @@
-@use '../../_styles/variables' as *;
-@use '../../_styles/layout' as *;
+@use "../../_styles/variables" as *;
+@use "../../_styles/layout" as *;
 
 .Index {
   height: 200vh;
   @include Container() {
-    
   }
   &__modal01 {
     @include Modal(300, 300, 10) {

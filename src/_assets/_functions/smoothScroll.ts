@@ -5,8 +5,10 @@
  * @param target - スクロール先の要素のセレクター
  * @param duration - スクロールのアニメーション時間（ミリ秒）。デフォルト値は500です。
  */
-export default function smoothScroll(target: string, duration: number = 500): void {
-  
+export default function smoothScroll(
+  target: string,
+  duration: number = 500
+): void {
   const targetElement = document.querySelector(target);
   if (!targetElement) return;
 
@@ -24,12 +26,11 @@ export default function smoothScroll(target: string, duration: number = 500): vo
   }
 
   function ease(t: number, b: number, c: number, d: number) {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t + b;
-      t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
   }
 
   requestAnimationFrame(animation);
 }
-

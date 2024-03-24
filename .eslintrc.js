@@ -2,21 +2,19 @@ module.exports = {
   root: true,
   env: {
     node: true,
-    browser: true
+    browser: true,
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    parser: "@typescript-eslint/parser",
   },
-  plugins: [
-    '@typescript-eslint',
-    'vue'
-  ],
+  plugins: ["@typescript-eslint", "vue", "prettier"],
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:vue/vue3-recommended'
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
   ],
   rules: {
-
-  }
+    "prettier/prettier": "error",
+  },
 };

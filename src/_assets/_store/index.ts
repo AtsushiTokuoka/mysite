@@ -1,5 +1,5 @@
-import { createStore } from 'vuex'
-import isMobileDevice from '@/_functions/isMobileDevice';
+import { createStore } from "vuex";
+import isMobileDevice from "@/_functions/isMobileDevice";
 
 export default createStore({
   state() {
@@ -8,32 +8,34 @@ export default createStore({
       menuOpen: false,
       headerHeight: 0,
       footerHeight: 0,
-      eleventyData: JSON.parse(document.getElementById('eleventy-data')?.textContent || '{}')
-    }
+      eleventyData: JSON.parse(
+        document.getElementById("eleventy-data")?.textContent || "{}"
+      ),
+    };
   },
   getters: {
-    touchOrClick: state => state.isMobile ? 'touchstart' : 'click',
+    touchOrClick: (state) => (state.isMobile ? "touchstart" : "click"),
   },
   mutations: {
     toggleMenuOpen(state) {
-      state.menuOpen = !state.menuOpen
+      state.menuOpen = !state.menuOpen;
     },
     setHeaderHeight(state, payload) {
-      state.headerHeight = payload.height
+      state.headerHeight = payload.height;
     },
     setFooterHeight(state, payload) {
-      state.footerHeight = payload.height
-    }
+      state.footerHeight = payload.height;
+    },
   },
   actions: {
     toggleMenuOpen(context) {
-      context.commit('toggleMenuOpen')
+      context.commit("toggleMenuOpen");
     },
     setHeaderHeight(context, payload) {
-      context.commit('setHeaderHeight', payload)
+      context.commit("setHeaderHeight", payload);
     },
     setFooterHeight(context, payload) {
-      context.commit('setFooterHeight', payload)
-    }
-  }
-})
+      context.commit("setFooterHeight", payload);
+    },
+  },
+});

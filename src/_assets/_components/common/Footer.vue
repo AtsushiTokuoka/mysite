@@ -1,8 +1,5 @@
 <template>
-  <footer
-    ref="Footer"
-    class="Footer"
-  >
+  <footer ref="Footer" class="Footer">
     <div class="Footer__inner">
       <p>{{ message }}</p>
     </div>
@@ -16,14 +13,14 @@
 </docs>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
-  name: 'VFooter',
+  name: "VFooter",
   setup() {
     /**
      * フッターコンポーネント
-     * 
+     *
      * @module Footer
      * @vue-prop {Object} store - Vuex ストアオブジェクト
      * @vue-ref {HTMLElement} Footer - フッター要素の参照
@@ -40,7 +37,7 @@ export default defineComponent({
     let resizeObserver: ResizeObserver;
 
     const setFooterHeight = () => {
-      store.dispatch('setFooterHeight', { height: Footer.value?.offsetHeight });
+      store.dispatch("setFooterHeight", { height: Footer.value?.offsetHeight });
     };
 
     onMounted(() => {
@@ -57,29 +54,28 @@ export default defineComponent({
     return {
       Footer,
       setFooterHeight,
-      message: 'Footer.vue',
+      message: "Footer.vue",
     };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
-  .Footer {
-    background-color: $colorBaseLight;
-    color: $colorBaseDark;
-    padding: 18px 0;
-    @include mq(tab) {
-      padding: 24px 0;
-    }
-    @include mq(desktop) {
-      padding: 30px 0;
-    
-    }
-    &__inner {
-      @include Container() {
-        text-align: center;
-        line-height: 1;
-      }
+.Footer {
+  background-color: $colorBaseLight;
+  color: $colorBaseDark;
+  padding: 18px 0;
+  @include mq(tab) {
+    padding: 24px 0;
+  }
+  @include mq(desktop) {
+    padding: 30px 0;
+  }
+  &__inner {
+    @include Container() {
+      text-align: center;
+      line-height: 1;
     }
   }
+}
 </style>
