@@ -42,6 +42,7 @@ function setupContentsVueApp() {
 
   return {
     headerHeight,
+    footerHeight,
     contentsMinHeight,
     eleventyData,
   };

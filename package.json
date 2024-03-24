@@ -8,7 +8,6 @@
     "start": "concurrently \"npm run serve\" \"npm run asset\"",
     "serve": "npx @11ty/eleventy --watch",
     "asset": "cross-env MODE=development npx gulp watch",
-    "lint": "eslint --ext .ts,.vue src/_assets --fix",
     "styleguide": "vue-styleguidist server",
     "styleguide:build": "vue-styleguidist build"
   },

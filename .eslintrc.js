@@ -15,6 +15,7 @@ module.exports = {
     "plugin:vue/vue3-recommended",
   ],
   rules: {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error"],
+    "vue/max-attributes-per-line": "off",
   },
 };
