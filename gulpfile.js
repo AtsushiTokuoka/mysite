@@ -22,7 +22,7 @@ gulp.task("scss", function () {
     .pipe(
       gulpIf(
         (file) => {
-          return !file.path.match(/global\\base\.css$/);
+          return !file.path.replace(/\\/g, "/").match(/global\/base\.css$/);
         },
         gulpPurgecss({
           content: ["./src/**/*.njk"],
