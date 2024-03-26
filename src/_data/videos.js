@@ -27,5 +27,5 @@ module.exports = async function () {
       desc: "Video Title 2 hogehoge",
     },
   ];
-  return JSON.stringify(videoData);
+  return videoData;
 };

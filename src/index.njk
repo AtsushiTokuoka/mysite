@@ -8,18 +8,31 @@ scripts:
   - /assets/pages/index/main.js
 ---
 {% extends "base.njk" %}
+
+{% 
+  set pageData = {
+    pages: collections.pages
+  } 
+%}
+{% block data %}
+  {{ pageData | json }}
+{% endblock %}
+
 {% block dom %}
   <div class="Index">
-    <v-btn mode="link" path="/video" class="Mb10">Video</v-btn>
-    <v-btn @click="openModal(1)" class="Mb10">Modal01</v-btn>
-    <v-btn @click="openModal(2)" class="Mb10">Modal02</v-btn>
-    <v-modal v-if="modalOpen" @close="closeModal">
+    {% for page in collections.pages %}
+      <v-btn mode="link" path="{{ page.path }}" class="Mb10">{{ page.meta.title }}</v-btn>
+    {% endfor %}
+    {# <v-btn mode="link" path="/video" class="Mb10">Video</v-btn> #}
+    {# <v-btn @click="openModal(1)" class="Mb10">Modal01</v-btn>
+    <v-btn @click="openModal(2)" class="Mb10">Modal02</v-btn> #}
+    {# <v-modal v-if="modalOpen" @close="closeModal">
       <div v-if="modalId === 1" class="Index__modal01">
         Modal Content01
       </div>
       <div v-if="modalId === 2" class="Index__modal02">
         Modal Content02
       </div>
-    </v-modal>
+    </v-modal> #}
   </div>
 {% endblock dom %}

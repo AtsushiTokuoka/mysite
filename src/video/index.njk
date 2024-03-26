@@ -9,16 +9,20 @@ scripts:
 ---
 {% extends "base.njk" %}
 
-{% block dom %}
-<div class="Video">
-  <video-card></video-card>
-  <video-card></video-card>
-  <video-card></video-card>
-  <video-card></video-card>
-  <video-card></video-card>
-  <video-card></video-card>
-</div>
-{% endblock %}
+{% set pageData = {
+  videos: videos
+} %}
 {% block data %}
-{{ videos }}
+  {{ pageData | json }}
+{% endblock %}
+
+{% block dom %}
+  <div class="Video">
+    <video-card></video-card>
+    <video-card></video-card>
+    <video-card></video-card>
+    <video-card></video-card>
+    <video-card></video-card>
+    <video-card></video-card>
+  </div>
 {% endblock %}

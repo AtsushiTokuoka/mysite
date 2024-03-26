@@ -30,6 +30,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .VideoCard {
   &__link {
+    &:hover {
+      opacity: 0.7;
+      text-decoration: none;
+    }
   }
   &__thumbnail {
     position: relative;

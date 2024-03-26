@@ -11,6 +11,7 @@ export default createStore({
       eleventyData: JSON.parse(
         document.getElementById("eleventy-data")?.textContent || "{}"
       ),
+      currentPage: window.location.pathname,
     };
   },
   getters: {

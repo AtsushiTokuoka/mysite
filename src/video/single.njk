@@ -1,0 +1,26 @@
+---
+pagination:
+  data: videos
+  size: 1
+  alias: video
+permalink: "video/{{ video.title | slug }}.html"
+styles:
+  - /assets/pages/video/single.css
+scripts:
+  - /assets/pages/video/single.js
+---
+{% extends "base.njk" %}
+
+{% block title %}
+  {{ video.title }}
+{% endblock title %}
+{% block description %}
+  Video description
+{% endblock description %}
+
+{% block data %}{% endblock %}
+
+{% block dom %}
+  <p>{{ video.title }}</p>
+  <p>{{ video.thumbnail }}</p>
+{% endblock %}

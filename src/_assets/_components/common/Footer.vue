@@ -1,7 +1,10 @@
 <template>
   <footer ref="Footer" class="Footer">
     <div class="Footer__inner">
-      <p>{{ message }}</p>
+      <small class="Footer__copyright">
+        Copyright &copy; 2023 - {{ thisYear }} T.K Media Create. All Rights
+        Reserved.
+      </small>
     </div>
   </footer>
 </template>
@@ -18,17 +21,7 @@ import { useStore } from "vuex";
 export default defineComponent({
   name: "VFooter",
   setup() {
-    /**
-     * フッターコンポーネント
-     *
-     * @module Footer
-     * @vue-prop {Object} store - Vuex ストアオブジェクト
-     * @vue-ref {HTMLElement} Footer - フッター要素の参照
-     * @vue-data {ResizeObserver} resizeObserver - リサイズ監視オブジェクト
-     * @vue-method setFooterHeight - フッターの高さを設定するメソッド
-     * @vue-lifecycle-hook onMounted - リサイズ監視を開始
-     * @vue-lifecycle-hook onUnmounted - リサイズ監視を止める
-     */
+    const thisYear = new Date().getFullYear();
 
     const store = useStore();
 
@@ -54,7 +47,7 @@ export default defineComponent({
     return {
       Footer,
       setFooterHeight,
-      message: "Footer.vue",
+      thisYear,
     };
   },
 });
@@ -76,6 +69,9 @@ export default defineComponent({
       text-align: center;
       line-height: 1;
     }
+  }
+  &__copyright {
+    font-size: FontSize(10);
   }
 }
 </style>
