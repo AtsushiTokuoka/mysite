@@ -3,7 +3,7 @@ pagination:
   data: videos
   size: 1
   alias: video
-permalink: "video/{{ video.title | slug }}/"
+permalink: "video/{{ video.id | slug }}/"
 styles:
   - /assets/pages/video/single.css
 scripts:
@@ -15,12 +15,14 @@ scripts:
   {{ video.title }}
 {% endblock title %}
 {% block description %}
-  Video description
+  {{ video.description }}
 {% endblock description %}
 
 {% block data %}{% endblock %}
 
 {% block dom %}
+<div class="Video">
+  <video class="Video__video" src="{{video.path}}" autoplay loop></video>
   <p>{{ video.title }}</p>
-  <p>{{ video.thumbnail }}</p>
+</div>
 {% endblock %}

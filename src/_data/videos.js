@@ -14,18 +14,20 @@ module.exports = async function () {
   //     }
   //   }
   // );
-  // const videoData = await videoDataResponse.json();
-  const videoData = [
+  // const videos = await videoDataResponse.json();
+  const videos = [
     {
-      title: "Video Title 1",
-      thumbnail: "https://picsum.photos/seed/picsum/1280/720",
-      desc: "Video Title 1 hogehoge",
+      id: "001",
+      title: "トーストを焼く動画",
+      path: "/assets/video/sample01.mp4",
+      description: "トーストを焼く動画",
     },
     {
-      title: "Video Title 2",
-      thumbnail: "https://picsum.photos/seed/picsum/1280/720",
-      desc: "Video Title 2 hogehoge",
+      id: "002",
+      title: "阪急電車",
+      path: "/assets/video/sample02.mp4",
+      description: "阪急電車",
     },
   ];
-  return videoData;
+  return videos;
 };

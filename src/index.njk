@@ -9,11 +9,9 @@ scripts:
 ---
 {% extends "base.njk" %}
 
-{% 
-  set pageData = {
-    pages: collections.pages
-  } 
-%}
+{% set pageData = {
+  pages: collections.pages
+} %}
 {% block data %}
   {{ pageData | json }}
 {% endblock %}
@@ -21,7 +19,7 @@ scripts:
 {% block dom %}
   <div class="Index">
     {% for page in collections.pages %}
-      <v-btn mode="link" path="{{ page.path }}" class="Mb10">{{ page.meta.title }}</v-btn>
+      <v-btn :hoge="{{ pageData | json }}" mode="link" path="{{ page.path }}" class="Mb10">{{ page.meta.title }}</v-btn>
     {% endfor %}
     {# <v-btn mode="link" path="/video" class="Mb10">Video</v-btn> #}
     {# <v-btn @click="openModal(1)" class="Mb10">Modal01</v-btn>

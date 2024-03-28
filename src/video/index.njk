@@ -18,11 +18,8 @@ scripts:
 
 {% block dom %}
   <div class="Video">
-    <video-card></video-card>
-    <video-card></video-card>
-    <video-card></video-card>
-    <video-card></video-card>
-    <video-card></video-card>
-    <video-card></video-card>
+    <template v-for="video in videos" :key="video.title">
+      <video-card :title=video.title :path=video.path :id=video.id></video-card>
+    </template>
   </div>
 {% endblock %}

@@ -31,6 +31,10 @@ export default defineComponent({
       default: "main",
       validator: (value: string) => ["main", "dark", "light"].includes(value),
     },
+    hoge: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   setup(props) {
     return {

@@ -8,14 +8,14 @@
       <meta name="description" content="{{ meta.description }}"/>
     {% else %}
       {# front matterが使用できないページはblockで対応 #}
-      <meta name="description" content="{% block description %}{% endblock %}">
+      <meta name="description" content="{%- block description -%}{%- endblock -%}">
     {% endif %}
     {% if meta.title %}
       <title>{{ meta.title }} | mysite</title>
     {% else %}
       {# front matterが使用できないページはblockで対応 #}
       <title>
-        {% block title %}{% endblock %} | mysite
+        {%- block title -%}{%- endblock -%} | mysite
       </title>
     {% endif %}
 

@@ -2,7 +2,13 @@
   <header ref="Header" class="Header">
     <div class="Header__inner">
       <h1 class="Header__logo">
-        {{ message }}
+        <a href="/">
+          <img
+            src="/assets/logo/logo_transparent.png"
+            alt="T.K Media"
+            width="200"
+          />
+        </a>
       </h1>
     </div>
   </header>
@@ -52,7 +58,6 @@ export default defineComponent({
     });
 
     return {
-      message: "Header.vue",
       Header,
       setHeaderHeight,
     };
@@ -65,20 +70,16 @@ export default defineComponent({
   background-color: $colorBaseLight;
   color: $colorBaseDark;
   padding: 10px 0;
-  @include mq(tab) {
-    padding: 20px 0;
-  }
-  @include mq(pc) {
-    padding: 30px 0;
-  }
   &__inner {
     @include Container() {
       text-align: center;
+      font-size: 0;
     }
   }
   &__logo {
     display: inline-block;
     line-height: 1;
+    width: 80px;
   }
 }
 </style>

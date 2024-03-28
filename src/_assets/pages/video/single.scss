@@ -1,0 +1,10 @@
+@use "../../_styles/variables" as *;
+@use "../../_styles/layout" as *;
+
+.Video {
+  @include Container() {
+  }
+  &__video {
+    border-radius: 10px;
+  }
+}
