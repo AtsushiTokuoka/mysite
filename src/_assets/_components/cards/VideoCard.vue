@@ -2,7 +2,7 @@
   <div class="VideoCard">
     <a :href="'/video/' + video.id + '/'" class="VideoCard__link">
       <div class="VideoCard__thumbnail">
-        <video :src="video.path" autoplay loop />
+        <video controls :src="video.path" autoplay loop />
       </div>
       <h3 class="VideoCard__title">{{ video.title }}</h3>
     </a>

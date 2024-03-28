@@ -21,8 +21,9 @@ scripts:
 {% block data %}{% endblock %}
 
 {% block dom %}
-<div class="Video">
-  <video class="Video__video" src="{{video.path}}" autoplay loop></video>
-  <p>{{ video.title }}</p>
-</div>
+  <div class="Video">
+    <video id="video" class="Video__video" src="{{video.path}}" controls></video>
+    <p>{{ video.title }}</p>
+    <v-btn @click="playVideo">再生する</v-btn>
+  </div>
 {% endblock %}
