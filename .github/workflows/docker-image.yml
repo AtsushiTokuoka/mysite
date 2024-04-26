@@ -23,5 +23,7 @@ jobs:
 
       - name: Push to DockerHub
         run: |
-          docker push atsushitokuoka/mysite_proxy:latest
-          docker push atsushitokuoka/mysite_front:latest
+          docker tag atsushitokuoka/mysite_proxy atsushitokuoka/mysite_proxy:${{ github.run_id }}
+          docker tag atsushitokuoka/mysite_front atsushitokuoka/mysite_front:${{ github.run_id }}
+          docker push atsushitokuoka/mysite_proxy:${{ github.run_id }}
+          docker push atsushitokuoka/mysite_front:${{ github.run_id }}

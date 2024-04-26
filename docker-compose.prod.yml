@@ -3,7 +3,7 @@ services:
   proxy:
     build:
       context: ./proxy
-    image: atsushitokuoka/mysite_proxy:latest
+    image: atsushitokuoka/mysite_proxy
     container_name: proxy_ct_prod
     restart: always
     ports:
@@ -14,6 +14,6 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile.prod
-    image: atsushitokuoka/mysite_front:latest
+    image: atsushitokuoka/mysite_front
     container_name: front_ct_prod
     restart: always
