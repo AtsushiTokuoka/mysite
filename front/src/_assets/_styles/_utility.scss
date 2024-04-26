@@ -1,0 +1,107 @@
+@use "./variables" as *;
+@use "./layout" as *;
+
+// display
+.SpOnly {
+  display: none;
+  @include mq(sp) {
+    display: block;
+  }
+}
+.TabOnly {
+  display: none;
+  @include mq(tab) {
+    display: block;
+  }
+}
+.MobileOnly {
+  display: none;
+  @include mq(mobile) {
+    display: block;
+  }
+}
+.PcOnly {
+  display: none;
+  @include mq(pc) {
+    display: block;
+  }
+}
+.LaptopOnly {
+  display: none;
+  @include mq(laptop) {
+    display: block;
+  }
+}
+.DesktopOnly {
+  display: none;
+  @include mq(desktop) {
+    display: block;
+  }
+}
+
+// margin
+.MarginAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// spacer
+$spacer: 0;
+$spacer_interval: 1;
+$spacer_max: 100;
+$spacer_directions: (
+  "t": "top",
+  "r": "right",
+  "b": "bottom",
+  "l": "left",
+);
+@while $spacer <= $spacer_max {
+  @each $key, $val in $spacer_directions {
+    .M#{$key}#{$spacer} {
+      margin-#{$val}: $spacer + px;
+    }
+    .P#{$key}#{$spacer} {
+      padding-#{$val}: $spacer + px;
+    }
+  }
+  @each $bp-key, $bp-val in $breakpoints {
+    @media #{$bp-val} {
+      @each $key, $val in $spacer_directions {
+        .M#{$key}#{$spacer}-#{$bp-key} {
+          margin-#{$val}: $spacer + px;
+        }
+        .P#{$key}#{$spacer}-#{$bp-key} {
+          padding-#{$val}: $spacer + px;
+        }
+      }
+    }
+  }
+  $spacer: $spacer + $spacer_interval;
+}
+
+// font-sizeをremに変換して返す
+@function FontSize($px) {
+  @return calc($px / $baseFontSize) + rem;
+}
+
+// position
+.PosRel {
+  position: relative;
+}
+.PosAbs {
+  position: absolute;
+}
+.PosFix {
+  position: fixed;
+}
+
+// z-index
+$zindex: 1;
+$zindex_interval: 1;
+$zindex_max: 10;
+@while $zindex <= $zindex_max {
+  .Zi#{$zindex} {
+    z-index: $zindex;
+  }
+  $zindex: $zindex + $zindex_interval;
+}

@@ -1,0 +1,5 @@
+{
+  "liveServer.settings.root": "/front/dist",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}

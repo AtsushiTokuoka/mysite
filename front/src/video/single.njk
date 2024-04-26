@@ -1,0 +1,41 @@
+---
+pagination:
+  data: videos
+  size: 1
+  alias: video
+permalink: "video/{{ video.id | slug }}/"
+styles:
+  - /assets/pages/video/single.css
+scripts:
+  - /assets/pages/video/single.js
+---
+{% extends "base.njk" %}
+
+{% block title %}
+  {{ video.title }}
+{% endblock title %}
+{% block description %}
+  {{ video.description }}
+{% endblock description %}
+
+{% block data %}{% endblock %}
+
+{% block contents %}
+  <div class="Video">
+    <div class="Video__video">
+      <video ref="Video" src="{{video.path}}" playsinline></video>
+    </div>
+    <div class="Video__desc">
+      <p class="Mb10">{{ video.title }}</p>
+      <div style="display: flex; gap: 10px;">
+        <v-btn @click="playVideo" :is-active="isPlay">
+          {% raw %}
+            {{isPlayText}}
+          {% endraw %}
+        </v-btn>
+        <v-btn @click="playFullScreen">全画面再生</v-btn>
+      </div>
+      <v-btn mode="link" path="/video/" class="Mt10">一覧へ戻る</v-btn>
+    </div>
+  </div>
+{% endblock %}

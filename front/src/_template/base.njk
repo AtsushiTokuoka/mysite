@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    {% if meta.description %}
+      <meta name="description" content="{{ meta.description }}"/>
+    {% else %}
+      {# front matterが使用できないページはblockで対応 #}
+      <meta name="description" content="{%- block description -%}{%- endblock -%}">
+    {% endif %}
+    {% if meta.title %}
+      <title>{{ meta.title }} | mysite</title>
+    {% else %}
+      {# front matterが使用できないページはblockで対応 #}
+      <title>
+        {%- block title -%}{%- endblock -%} | mysite
+      </title>
+    {% endif %}
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
+
+    {% if noIndex %}
+      <meta name="robots" content="noindex"/>
+    {% endif %}
+
+    {# vendors #}
+    <script src="/assets/vendors/vue@3.2.26.js" defer></script>
+    <script src="/assets/vendors/vuex@4.1.0.js" defer></script>
+    {% for vendor in vendors %}
+      <script src="/assets/vendors/{{ vendor }}.js" defer></script>
+    {% endfor %}
+
+    {# global style #}
+    <link rel="stylesheet" href="/assets/global/base.css"/>
+    <link rel="stylesheet" href="/assets/global/style.css?{{ lastBuildDate }}"/>
+
+    {#page style & script#}
+    {% for style in styles %}
+      <link rel="stylesheet" href="{{ style }}?{{ lastBuildDate }}"/>
+    {% endfor %}
+    {% for script in scripts %}
+      <script src="{{ script }}?{{ lastBuildDate }}" defer></script>
+    {% endfor %}
+
+  </head>
+  <body>
+    <div id="drawer-menu"></div>
+    {# <div id="menu-icon"></div> #}
+    <header id="header"></header>
+    <div id="contents">
+      <main v-bind:style="{
+        'margin-top': headerHeight + 'px',
+        'margin-bottom': footerHeight + 'px',
+        'min-height': contentsMinHeight + 'px'
+      }">
+        {% block contents %}{% endblock %}
+      </main>
+    </div>
+    {# <div id="pagetop"></div> #}
+    <footer id="footer"></footer>
+    <div id="modal"></div>
+
+    {% set globalData = {
+      pages: collections.pages
+    } %}
+    <div id="eleventy-global-data" style="display: none;">
+      {{ globalData | json }}
+    </div>
+    <div id="eleventy-local-data" style="display: none;">
+      {% block data %}{% endblock %}
+    </div>
+  </body>
+</html>

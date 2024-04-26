@@ -1,0 +1,19 @@
+version: "3"
+services:
+  proxy:
+    build:
+      context: ./proxy
+    image: atsushitokuoka/mysite_proxy:latest
+    container_name: proxy_ct_prod
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - front
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.prod
+    image: atsushitokuoka/mysite_front:latest
+    container_name: front_ct_prod
+    restart: always

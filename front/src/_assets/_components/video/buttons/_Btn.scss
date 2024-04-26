@@ -1,0 +1,20 @@
+@use "../../../_styles/variables" as *;
+@use "../../../_styles/_utility" as *;
+$self: ".Btn";
+#{$self} {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: $videoDarkColor02;
+  color: $videoLightColor;
+  cursor: pointer;
+  &.active {
+    background-color: $videoLightColor;
+    color: $videoDarkColor01;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}

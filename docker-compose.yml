@@ -1,0 +1,104 @@
+version: "3"
+services:
+  proxy:
+    build:
+      context: ./proxy
+    image: dev/mysite_proxy
+    container_name: proxy_ct
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - auth
+      - front
+      - back
+      - dbgui
+      - authgui
+  auth:
+    build:
+      context: ./auth
+    image: dev/mysite_auth
+    container_name: auth_ct
+    restart: always
+    volumes:
+      - ./auth:/auth
+    environment:
+      AUTH_DB_USER: ${AUTH_DB_USER}
+      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD}
+      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
+      CHOKIDAR_USEPOLLING: true
+    depends_on:
+      - authdb
+  front:
+    build: ./front
+    image: dev/mysite_front
+    container_name: front_ct
+    restart: always
+    volumes:
+      - ./front:/front
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  back:
+    build:
+      context: ./back
+    image: dev/mysite_back
+    container_name: back_ct
+    restart: always
+    volumes:
+      - ./back/var/www/html:/var/www/html
+    environment:
+      DATABASE_HOST: db
+      DATABASE_NAME: ${DB_NAME}
+      DATABASE_USERNAME: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - db
+  db:
+    image: mysql:8.3.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    container_name: db_ct
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+  authdb:
+    image: mongo:7.0.8
+    container_name: authdb_ct
+    restart: always
+    expose:
+      - "27017"
+    volumes:
+      - authdb_data:/data/db
+      - authdb_config_data:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${AUTH_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_DB_PASSWORD}
+  dbgui:
+    image: phpmyadmin:5.2.1
+    container_name: dbgui_ct
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+  authgui:
+    image: mongo-express
+    container_name: authgui_ct
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${AUTH_DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${AUTH_DB_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${AUTH_DB_USER}:${AUTH_DB_PASSWORD}@authdb:27017/
+      ME_CONFIG_SITE_BASEURL: /authdb
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - authdb
+volumes:
+  db_data:
+  authdb_data:
+  authdb_config_data:

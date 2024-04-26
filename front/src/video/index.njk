@@ -1,0 +1,31 @@
+---
+meta:
+  title: "動画一覧"
+  description: "動画一覧ページです。"
+styles:
+  - /assets/pages/video/style.css
+scripts:
+  - /assets/pages/video/main.js
+---
+{% extends "base.njk" %}
+
+{% set pageData = {
+  videos: videos
+} %}
+{% block data %}
+  {{ pageData | json }}
+{% endblock %}
+
+{% block contents %}
+  <category-slide class="Pt10 Pb10"></category-slide>
+  <div class="Video">
+    <template v-for="video in videos" :key="video.title">
+      <video-card 
+        :title=video.title 
+        :path=video.path 
+        :thumbnail=video.thumbnail 
+        :vid=video.id
+      ></video-card>
+    </template>
+  </div>
+{% endblock %}
