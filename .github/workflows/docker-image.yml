@@ -2,17 +2,26 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_EMAIL }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build the Docker image
+        run: docker-compose -f docker-compose.prod.yml build
+
+      - name: Push to DockerHub
+        run: |
+          docker push atsushitokuoka/mysite_proxy:latest
+          docker push atsushitokuoka/mysite_front:latest
