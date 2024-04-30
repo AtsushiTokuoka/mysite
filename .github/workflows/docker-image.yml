@@ -24,4 +24,6 @@ jobs:
       - name: Push to DockerHub
         run: |
           docker push atsushitokuoka/mysite_proxy:latest
+          docker push atsushitokuoka/mysite_auth:latest
           docker push atsushitokuoka/mysite_front:latest
+          docker push atsushitokuoka/mysite_back:latest
