@@ -4,114 +4,16 @@ services:
     build:
       context: ./proxy
     image: atsushitokuoka/mysite_proxy
-    container_name: proxy_ct_prod
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - auth
-      - front
-      - back
-      - dbgui
-      - authgui
-    networks:
-      - prod
   auth:
     build:
       context: ./auth
     image: atsushitokuoka/mysite_auth
-    container_name: auth_ct_prod
-    restart: always
-    environment:
-      AUTH_DB_USER: ${AUTH_DB_USER}
-      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD}
-      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
-    depends_on:
-      - authdb
-    networks:
-      - prod
   front:
     build:
       context: ./front
       dockerfile: Dockerfile.prod
     image: atsushitokuoka/mysite_front
-    container_name: front_ct_prod
-    restart: always
-    networks:
-      - prod
   back:
     build:
       context: ./back
     image: atsushitokuoka/mysite_back
-    container_name: back_ct_prod
-    restart: always
-    environment:
-      DATABASE_HOST: db
-      DATABASE_NAME: ${DB_NAME}
-      DATABASE_USERNAME: ${MYSQL_USER}
-      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-    depends_on:
-      - db
-    networks:
-      - prod
-  db:
-    image: mysql:8.3.0
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-    container_name: db_ct_prod
-    restart: always
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - prod
-  authdb:
-    image: mongo:7.0.8
-    container_name: authdb_ct_prod
-    restart: always
-    expose:
-      - "27017"
-    volumes:
-      - authdb_data:/data/db
-      - authdb_config_data:/data/configdb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${AUTH_DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_DB_PASSWORD}
-    networks:
-      - prod
-  dbgui:
-    image: phpmyadmin:5.2.1
-    container_name: dbgui_ct_prod
-    restart: always
-    environment:
-      PMA_HOST: db
-      PMA_USER: root
-      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    depends_on:
-      - db
-    networks:
-      - prod
-  authgui:
-    image: mongo-express:1.0.2-20-alpine3.19
-    container_name: authgui_ct
-    restart: always
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${AUTH_DB_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${AUTH_DB_PASSWORD}
-      ME_CONFIG_MONGODB_URL: mongodb://${AUTH_DB_USER}:${AUTH_DB_PASSWORD}@authdb:27017/
-      ME_CONFIG_SITE_BASEURL: /authdb
-      ME_CONFIG_BASICAUTH: false
-    depends_on:
-      - authdb
-    networks:
-      - prod
-      
-volumes:
-  db_data:
-  authdb_data:
-  authdb_config_data:
-
-networks:
-  prod:
