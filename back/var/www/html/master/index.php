@@ -6,6 +6,6 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>index.php</h1>
+  <h1>master/index.php</h1>
 </body>
 </html>
