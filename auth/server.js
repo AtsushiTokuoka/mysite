@@ -37,12 +37,18 @@ const User = mongoose.model(
   })
 );
 
-server.get("/", (req, res) => {
+server.get("/", async (req, res) => {
   const auth_token = req.cookies.auth_token;
   if (!auth_token) {
     res.status(401).send();
   } else {
-    res.status(200).send();
+    const verifyToken = JWT.verify(auth_token, process.env.AUTH_SECRET_KEY);
+    const user = await User.findOne({ username: verifyToken.username });
+    if (user && user.password === verifyToken.password) {
+      res.status(200).send();
+    } else {
+      res.status(401).send();
+    }
   }
 });
 
@@ -71,7 +77,7 @@ server.post("/login", async (req, res) => {
         })
         .send("Login successful");
     } else {
-      res.status(401).send("Invalid credentials");
+      res.redirect("/auth/login");
     }
   } else {
     res.status(404).send("User not found");
