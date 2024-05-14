@@ -21,7 +21,7 @@ services:
     restart: always
     volumes:
       - ./auth:/auth
-      - /auth/node_modules
+      - auth_node_modules:/auth/node_modules
     environment:
       AUTH_DB_USER: ${AUTH_DB_USER}
       AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD}
@@ -36,9 +36,10 @@ services:
     restart: always
     volumes:
       - ./front:/front
-      - /front/node_modules
+      - front_node_modules:/front/node_modules
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      CHOKIDAR_USEPOLLING: true
+      CDN_URL: ${CDN_URL}
   back:
     build:
       context: ./back
@@ -101,6 +102,8 @@ services:
       - authdb
 
 volumes:
+  auth_node_modules:
+  front_node_modules:
   db_data:
   authdb_data:
   authdb_config_data:

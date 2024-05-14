@@ -4,6 +4,9 @@ const htmlmin = require("html-minifier");
 const moment = require("moment-timezone");
 
 module.exports = function (eleventyConfig) {
+  // 環境変数CDN_URLをグローバルデータとして追加
+  eleventyConfig.addGlobalData("CDN_URL", process.env.CDN_URL);
+
   // htmlをminify
   eleventyConfig.addTransform("htmlmin", (content, outputPath) => {
     if (outputPath.endsWith(".html")) {
@@ -32,30 +35,32 @@ module.exports = function (eleventyConfig) {
 
   // 全ページを取得
   eleventyConfig.addCollection("pages", (collection) => {
-    return collection
-      .getAll()
-      // 一覧データを元にループ生成したページは除外
-      .filter((item) => {
-        return !item.data.pagination;
-      })
-      .map((item) => {
-        const createdAt = moment(
-          fs.statSync(path.join(__dirname, item.inputPath)).birthtime
-        )
-          .tz("Asia/Tokyo")
-          .format("YYYY-MM-DD-HH:mm:ss");
-        const updatedAt = moment(
-          fs.statSync(path.join(__dirname, item.inputPath)).mtime
-        )
-          .tz("Asia/Tokyo")
-          .format("YYYY-MM-DD-HH:mm:ss");
-        return {
-          meta: item.data.meta,
-          path: item.data.page.url,
-          createdAt,
-          updatedAt,
-        };
-      });
+    return (
+      collection
+        .getAll()
+        // 一覧データを元にループ生成したページは除外
+        .filter((item) => {
+          return !item.data.pagination;
+        })
+        .map((item) => {
+          const createdAt = moment(
+            fs.statSync(path.join(__dirname, item.inputPath)).birthtime
+          )
+            .tz("Asia/Tokyo")
+            .format("YYYY-MM-DD-HH:mm:ss");
+          const updatedAt = moment(
+            fs.statSync(path.join(__dirname, item.inputPath)).mtime
+          )
+            .tz("Asia/Tokyo")
+            .format("YYYY-MM-DD-HH:mm:ss");
+          return {
+            meta: item.data.meta,
+            path: item.data.page.url,
+            createdAt,
+            updatedAt,
+          };
+        })
+    );
   });
 
   // ディレクトリ設定

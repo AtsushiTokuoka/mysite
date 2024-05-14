@@ -1,11 +1,7 @@
 .vscode
 dist
 node_modules
-styleguide
 .dockerignore
-.eslintrc.js
-.prettierrc
 Dockerfile
 Dockerfile.prod
 server.js
-styleguide.config.js

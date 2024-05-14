@@ -3,21 +3,11 @@ meta:
   title: T.Kメディア制作事務所
   description: 兵庫で活動する、フリーランスのwebメディア制作事務所です。
 styles:
-  - /assets/pages/index/style.css
+  - pages/index/style.css
 scripts:
-  - /assets/pages/index/main.js
+  - pages/index/main.js
 ---
 {% extends "base.njk" %}
-
-{% block head %}
-  <title>{{ meta.title }}</title>
-  <meta name="description" content="{{ meta.description }}">
-  <link rel="stylesheet" href="{{ '/assets/pages/index/style.css' | url }}">
-{% endblock %}
-
-{% block scripts %}
-  <script src="{{ '/assets/pages/index/main.js' | url }}" defer></script>
-{% endblock %}
 
 {% set pageData = {
   pages: collections.pages
@@ -30,6 +20,6 @@ scripts:
   <div class="Index">
     {{ wpContents | json }}
     home
-    <p>hoge</p>
+    <p>{{ CDN_URL }}</p>
   </div>
 {% endblock %}
