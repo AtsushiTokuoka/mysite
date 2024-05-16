@@ -35,10 +35,15 @@ jobs:
           node-version: "20"
 
       - name: cdn配信用のファイルをビルド
+        env:
+          CDN_URL: ${{ secrets.CDN_URL }}
         run: |
           cd cdn
           npm install
           npm run build
 
-      - name: distディレクトリの内容を表示
-        run: ls cdn/dist
+      - name: dist内のファイルを公開用リポジトリへプッシュ
+        run: |
+          git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
+          cp -r cdn/dist/* mysite-cdn/
+          ls mysite-cdn
