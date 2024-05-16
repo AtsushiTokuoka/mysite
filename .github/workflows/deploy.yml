@@ -48,14 +48,10 @@ jobs:
           echo "${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: cdnリポジトリへのファイルをプッシュ
         env:
           SSH_PRIVATE_KEY: ${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}
-
-          git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
-          cp -r cdn/dist/* mysite-cdn/
-          ls mysite-cdn
-      
-      - name: cdnリポジトリへのファイルをプッシュ
         run: |
           git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
           ls -la
