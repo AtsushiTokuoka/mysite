@@ -12,7 +12,6 @@ services:
       - front
       - back
       - dbgui
-      - authgui
   auth:
     build:
       context: ./auth
@@ -23,12 +22,10 @@ services:
       - ./auth:/auth
       - auth_node_modules:/auth/node_modules
     environment:
-      AUTH_DB_USER: ${AUTH_DB_USER}
-      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD}
+      AUTH_USER: ${AUTH_USER}
+      AUTH_PASSWORD: ${AUTH_PASSWORD}
       AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
       CHOKIDAR_USEPOLLING: true
-    depends_on:
-      - authdb
   front:
     build: ./front
     image: mysite_front
@@ -66,18 +63,6 @@ services:
     restart: always
     volumes:
       - db_data:/var/lib/mysql
-  authdb:
-    image: mongo:7.0.8
-    container_name: authdb_ct
-    restart: always
-    expose:
-      - "27017"
-    volumes:
-      - authdb_data:/data/db
-      - authdb_config_data:/data/configdb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${AUTH_DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_DB_PASSWORD}
   dbgui:
     image: phpmyadmin:5.2.1
     container_name: dbgui_ct
@@ -88,22 +73,8 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     depends_on:
       - db
-  authgui:
-    image: mongo-express:1.0.2-20-alpine3.19
-    container_name: authgui_ct
-    restart: always
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${AUTH_DB_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${AUTH_DB_PASSWORD}
-      ME_CONFIG_MONGODB_URL: mongodb://${AUTH_DB_USER}:${AUTH_DB_PASSWORD}@authdb:27017/
-      ME_CONFIG_SITE_BASEURL: /authdb
-      ME_CONFIG_BASICAUTH: false
-    depends_on:
-      - authdb
 
 volumes:
   auth_node_modules:
   front_node_modules:
   db_data:
-  authdb_data:
-  authdb_config_data:

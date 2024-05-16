@@ -5,6 +5,8 @@ import { setupContentsVueApp } from "@/global";
 import VBtn from "@/_components/buttons/Btn.vue";
 import VModal from "@/_components/modals/Modal.vue";
 
+console.log(BASE_URL);
+
 vueAppFactory(
   defineComponent({
     name: "VContents",

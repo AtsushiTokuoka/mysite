@@ -157,6 +157,11 @@ gulp.task("js-bundle", function () {
             __VUE_PROD_DEVTOOLS__: JSON.stringify(
               process.env.MODE === "development"
             ),
+            BASE_URL: JSON.stringify(
+              process.env.MODE === "production"
+                ? "https://tk-media-create.com"
+                : "https://dev.tk-media-create.com"
+            ),
           }),
         ],
         optimization: {

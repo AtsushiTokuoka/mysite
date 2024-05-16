@@ -3,11 +3,7 @@
     <div class="Header__inner">
       <h1 class="Header__logo">
         <a href="/">
-          <img
-            src="/assets/logo/logo_transparent.png"
-            alt="T.K Media"
-            width="200"
-          />
+          <img src="/logo/logo_transparent.png" alt="T.K Media" width="200" />
         </a>
       </h1>
     </div>
