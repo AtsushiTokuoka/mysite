@@ -10,15 +10,26 @@ const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
 const named = require("vinyl-named");
 const { VueLoaderPlugin } = require("vue-loader");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const assetsPath = "./src";
 const outputPath = "./dist";
 const htmlTemplatePath = "../front/src/**/*.njk";
+const CDN_URL = process.env.CDN_URL || "";
 
 gulp.task("scss", function () {
   return gulp
     .src([`${assetsPath}/**/*.scss`, `!${assetsPath}/**/_*.scss`])
-    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(
+      sass({
+        outputStyle: "compressed",
+        functions: {
+          "baseUrl()": function () {
+            return new sass.compiler.types.String(CDN_URL);
+          },
+        },
+      }).on("error", sass.logError)
+    )
     .pipe(postcss([autoprefixer()]))
     .pipe(
       gulpIf(
@@ -157,11 +168,7 @@ gulp.task("js-bundle", function () {
             __VUE_PROD_DEVTOOLS__: JSON.stringify(
               process.env.MODE === "development"
             ),
-            BASE_URL: JSON.stringify(
-              process.env.MODE === "production"
-                ? "https://tk-media-create.com"
-                : "https://dev.tk-media-create.com"
-            ),
+            BASE_URL: JSON.stringify(CDN_URL),
           }),
         ],
         optimization: {

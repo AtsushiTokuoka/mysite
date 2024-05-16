@@ -4,6 +4,9 @@ module.exports = {
     node: true,
     browser: true,
   },
+  globals: {
+    BASE_URL: "readonly",
+  },
   parserOptions: {
     parser: "@typescript-eslint/parser",
   },

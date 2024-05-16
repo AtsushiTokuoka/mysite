@@ -3,7 +3,11 @@
     <div class="Header__inner">
       <h1 class="Header__logo">
         <a href="/">
-          <img src="/logo/logo_transparent.png" alt="T.K Media" width="200" />
+          <img
+            :src="baseUrl + '/logo/logo_transparent.png'"
+            alt="T.K Media"
+            width="200"
+          />
         </a>
       </h1>
     </div>
@@ -34,6 +38,8 @@ export default defineComponent({
      */
     const store = useStore();
 
+    const baseUrl = ref(BASE_URL);
+
     const Header = ref<HTMLElement>();
 
     let resizeObserver: ResizeObserver;
@@ -54,6 +60,7 @@ export default defineComponent({
     });
 
     return {
+      baseUrl,
       Header,
       setHeaderHeight,
     };
