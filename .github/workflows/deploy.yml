@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: mysite-deploy
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -27,3 +28,17 @@ jobs:
           docker push atsushitokuoka/mysite_auth:latest
           docker push atsushitokuoka/mysite_front:latest
           docker push atsushitokuoka/mysite_back:latest
+
+      - name: Node.jsのバージョンを設定
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: cdn配信用のファイルをビルド
+        run: |
+          cd cdn
+          npm install
+          npm run build
+
+      - name: distディレクトリの内容を表示
+        run: ls dist
