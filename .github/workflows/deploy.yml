@@ -13,28 +13,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: DockerHubへログイン
+      - name: 1.DockerHubへログイン
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_EMAIL }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Dockerイメージをビルド
+      - name: 2.Dockerイメージをビルド
         run: docker-compose -f docker-compose.prod.yml build
 
-      - name: ビルドしたイメージをDockerHubへプッシュ
+      - name: 3.ビルドしたイメージをDockerHubへプッシュ
         run: |
           docker push atsushitokuoka/mysite_proxy:latest
           docker push atsushitokuoka/mysite_auth:latest
           docker push atsushitokuoka/mysite_front:latest
           docker push atsushitokuoka/mysite_back:latest
 
-      - name: Node.jsのバージョンを設定
+      - name: 4.Node.jsのバージョンを設定
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: cdn配信用のファイルをビルド
+      - name: 5.cdn配信用のファイルをビルド
         env:
           CDN_URL: ${{ secrets.CDN_URL }}
         run: |
@@ -42,17 +42,20 @@ jobs:
           npm install
           npm run build
 
-      - name: cdnリポジトリへのSSH接続設定
+      - name: 6.cdnリポジトリへのSSH接続設定
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: cdnリポジトリへのファイルをプッシュ
+      - name: 7.cdnリポジトリへのファイルをプッシュ
         env:
           SSH_PRIVATE_KEY: ${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}
         run: |
           git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
           rsync -a --delete --exclude='.git' cdn/dist/ mysite-cdn/
-          ls -la mysite-cdn
+          cd mysite-cdn
+          git add .
+          git commit -m "公開用ファイルを更新"
+          git push origin main
