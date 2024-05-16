@@ -54,4 +54,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}
         run: |
           git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
-          ls -la
+          rsync -a --delete --exclude='.git' cdn/dist/ mysite-cdn/
+          ls -la mysite-cdn
