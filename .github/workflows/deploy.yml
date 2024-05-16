@@ -12,16 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Login to DockerHub
+      - name: DockerHubへログイン
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_EMAIL }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build the Docker image
+      - name: Dockerイメージをビルド
         run: docker-compose -f docker-compose.prod.yml build
 
-      - name: Push to DockerHub
+      - name: ビルドしたイメージをDockerHubへプッシュ
         run: |
           docker push atsushitokuoka/mysite_proxy:latest
           docker push atsushitokuoka/mysite_auth:latest
