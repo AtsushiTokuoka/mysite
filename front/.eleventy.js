@@ -4,8 +4,8 @@ const htmlmin = require("html-minifier");
 const moment = require("moment-timezone");
 
 module.exports = function (eleventyConfig) {
-  // 環境変数CDN_URLをグローバルデータとして追加
-  eleventyConfig.addGlobalData("CDN_URL", process.env.CDN_URL);
+  // 環境変数ASSETS_URLをグローバルデータとして追加
+  eleventyConfig.addGlobalData("ASSETS_URL", process.env.ASSETS_URL);
 
   // htmlをminify
   eleventyConfig.addTransform("htmlmin", (content, outputPath) => {

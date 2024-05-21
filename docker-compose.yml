@@ -36,7 +36,7 @@ services:
       - front_node_modules:/front/node_modules
     environment:
       CHOKIDAR_USEPOLLING: true
-      CDN_URL: ${CDN_URL}
+      ASSETS_URL: ${ASSETS_URL}
   back:
     build:
       context: ./back
@@ -47,7 +47,7 @@ services:
       - ./back/var/www/html:/var/www/html
       - back_vendor:/var/www/html/vendor
     environment:
-      CDN_URL: ${CDN_URL}
+      ASSETS_URL: ${ASSETS_URL}
       DATABASE_HOST: db
       DATABASE_NAME: ${DB_NAME}
       DATABASE_USERNAME: ${MYSQL_USER}

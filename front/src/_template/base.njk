@@ -19,29 +19,29 @@
       </title>
     {% endif %}
 
-    <link rel="icon" href="{{ CDN_URL }}/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="{{ ASSETS_URL }}/favicon.svg" type="image/svg+xml" sizes="any">
 
     {% if noIndex %}
       <meta name="robots" content="noindex"/>
     {% endif %}
 
     {# vendors #}
-    <script src="{{ CDN_URL }}/vendors/vue@3.2.26.js" defer></script>
-    <script src="{{ CDN_URL }}/vendors/vuex@4.1.0.js" defer></script>
+    <script src="{{ ASSETS_URL }}/vendors/vue@3.2.26.js" defer></script>
+    <script src="{{ ASSETS_URL }}/vendors/vuex@4.1.0.js" defer></script>
     {% for vendor in vendors %}
-      <script src="{{ CDN_URL }}/vendors/{{ vendor }}.js" defer></script>
+      <script src="{{ ASSETS_URL }}/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
     {# global style #}
-    <link rel="stylesheet" href="{{ CDN_URL }}/global/base.css"/>
-    <link rel="stylesheet" href="{{ CDN_URL }}/global/style.css?{{ lastBuildDate }}"/>
+    <link rel="stylesheet" href="{{ ASSETS_URL }}/global/base.css"/>
+    <link rel="stylesheet" href="{{ ASSETS_URL }}/global/style.css?{{ lastBuildDate }}"/>
 
     {#page style & script#}
     {% for style in styles %}
-      <link rel="stylesheet" href="{{ CDN_URL }}/{{ style }}?{{ lastBuildDate }}"/>
+      <link rel="stylesheet" href="{{ ASSETS_URL }}/{{ style }}?{{ lastBuildDate }}"/>
     {% endfor %}
     {% for script in scripts %}
-      <script src="{{ CDN_URL }}/{{ script }}?{{ lastBuildDate }}" defer></script>
+      <script src="{{ ASSETS_URL }}/{{ script }}?{{ lastBuildDate }}" defer></script>
     {% endfor %}
 
   </head>

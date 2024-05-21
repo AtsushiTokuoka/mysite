@@ -15,7 +15,7 @@ require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const assetsPath = "./src";
 const outputPath = "./dist";
 const htmlTemplatePath = "../front/src/**/*.njk";
-const CDN_URL = process.env.CDN_URL || "";
+const ASSETS_URL = process.env.ASSETS_URL || "";
 
 gulp.task("scss", function () {
   return gulp
@@ -25,7 +25,7 @@ gulp.task("scss", function () {
         outputStyle: "compressed",
         functions: {
           "baseUrl()": function () {
-            return new sass.compiler.types.String(CDN_URL);
+            return new sass.compiler.types.String(ASSETS_URL);
           },
         },
       }).on("error", sass.logError)
@@ -168,7 +168,7 @@ gulp.task("js-bundle", function () {
             __VUE_PROD_DEVTOOLS__: JSON.stringify(
               process.env.MODE === "development"
             ),
-            BASE_URL: JSON.stringify(CDN_URL),
+            BASE_URL: JSON.stringify(ASSETS_URL),
           }),
         ],
         optimization: {

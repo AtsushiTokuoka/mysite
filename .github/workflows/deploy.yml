@@ -34,28 +34,28 @@ jobs:
         with:
           node-version: "20"
 
-      - name: 5.cdn配信用のファイルをビルド
+      - name: 5.assetsをビルド
         env:
-          CDN_URL: ${{ secrets.CDN_URL }}
+          ASSETS_URL: ${{ secrets.ASSETS_URL }}
         run: |
-          cd cdn
+          cd assets
           npm install
           npm run build
 
-      - name: 6.cdnリポジトリへのSSH接続設定
+      - name: 6.assetsリポジトリへのSSH接続設定
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ MYSITE_ASSETS_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: 7.cdnリポジトリへのファイルをプッシュ
+      - name: 7.assetsリポジトリへのファイルをプッシュ
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.MYSITE_CDN_REPOSITORY_SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.MYSITE_ASSETS_REPOSITORY_SSH_PRIVATE_KEY }}
         run: |
-          git clone git@github.com:AtsushiTokuoka/mysite-cdn.git
-          rsync -a --delete --exclude='.git' cdn/dist/ mysite-cdn/
-          cd mysite-cdn
+          git clone git@github.com:AtsushiTokuoka/mysite-assets.git
+          rsync -a --delete --exclude='.git' assets/dist/ mysite-assets/
+          cd mysite-assets
           git config --global user.email "atsushi.tokuoka@gmail.com"
           git config --global user.name "AtsushiTokuoka"
           git diff --quiet || (git add . && git commit -m "公開用ファイルを更新" && git push origin main)
