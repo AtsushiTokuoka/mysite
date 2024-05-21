@@ -58,6 +58,4 @@ jobs:
           cd mysite-cdn
           git config --global user.email "atsushi.tokuoka@gmail.com"
           git config --global user.name "AtsushiTokuoka"
-          git add .
-          git commit -m "公開用ファイルを更新"
-          git push origin main
+          git diff --quiet || (git add . && git commit -m "公開用ファイルを更新" && git push origin main)
