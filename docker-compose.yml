@@ -45,11 +45,16 @@ services:
     restart: always
     volumes:
       - ./back/var/www/html:/var/www/html
+      - back_vendor:/var/www/html/vendor
     environment:
+      CDN_URL: ${CDN_URL}
       DATABASE_HOST: db
       DATABASE_NAME: ${DB_NAME}
       DATABASE_USERNAME: ${MYSQL_USER}
       DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      VIMEO_CLIENT_ID: ${VIMEO_CLIENT_ID}
+      VIMEO_ACCESS_TOKEN: ${VIMEO_ACCESS_TOKEN}
+      VIMEO_CLIENT_SECRET: ${VIMEO_CLIENT_SECRET}
     depends_on:
       - db
   db:
@@ -77,4 +82,5 @@ services:
 volumes:
   auth_node_modules:
   front_node_modules:
+  back_vendor:
   db_data:

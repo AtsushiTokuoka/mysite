@@ -8,6 +8,4 @@ RUN apt-get update \
     && apt-get install -y vim \
     && npm install
 
-EXPOSE 80
-
 CMD [ "npm", "start" ]
