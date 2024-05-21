@@ -45,7 +45,7 @@ jobs:
       - name: 6.assetsリポジトリへのSSH接続設定
         run: |
           mkdir -p ~/.ssh
-          echo "${{ MYSITE_ASSETS_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.MYSITE_ASSETS_REPOSITORY_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
