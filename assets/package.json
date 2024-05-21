@@ -1,7 +1,7 @@
 {
-  "name": "mysite/cdn",
+  "name": "mysite/assets",
   "version": "1.0.0",
-  "description": "cdn配信用の静的ファイルを配信",
+  "description": "",
   "main": "",
   "scripts": {
     "start": "cross-env MODE=development npx gulp watch",
