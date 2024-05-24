@@ -7,7 +7,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Allow composer to run as super user
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-COPY var/www/html /var/www/html
+COPY ./mnt /var/www/html
 
 WORKDIR /var/www/html
 

@@ -9,8 +9,8 @@ services:
       - "3000:80"
     depends_on:
       - auth
-      - front
-      - back
+      - client
+      - server
       - dbgui
   auth:
     build:
@@ -26,26 +26,26 @@ services:
       AUTH_PASSWORD: ${AUTH_PASSWORD}
       AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
       CHOKIDAR_USEPOLLING: true
-  front:
-    build: ./front
-    image: mysite_front
-    container_name: front_ct
+  client:
+    build: ./client
+    image: mysite_client
+    container_name: client_ct
     restart: always
     volumes:
-      - ./front:/front
-      - front_node_modules:/front/node_modules
+      - ./client/mnt:/var/www/html
+      - client_node_modules:/client/node_modules
     environment:
       CHOKIDAR_USEPOLLING: true
       ASSETS_URL: ${ASSETS_URL}
-  back:
+  server:
     build:
-      context: ./back
-    image: mysite_back
-    container_name: back_ct
+      context: ./server
+    image: mysite_server
+    container_name: server_ct
     restart: always
     volumes:
-      - ./back/var/www/html:/var/www/html
-      - back_vendor:/var/www/html/vendor
+      - ./server/mnt:/var/www/html
+      - server_vendor:/var/www/html/vendor
     environment:
       ASSETS_URL: ${ASSETS_URL}
       DATABASE_HOST: db
@@ -81,6 +81,6 @@ services:
 
 volumes:
   auth_node_modules:
-  front_node_modules:
-  back_vendor:
+  client_node_modules:
+  server_vendor:
   db_data:

@@ -26,8 +26,8 @@ jobs:
         run: |
           docker push atsushitokuoka/mysite_proxy:latest
           docker push atsushitokuoka/mysite_auth:latest
-          docker push atsushitokuoka/mysite_front:latest
-          docker push atsushitokuoka/mysite_back:latest
+          docker push atsushitokuoka/mysite_client:latest
+          docker push atsushitokuoka/mysite_server:latest
 
       - name: 4.Node.jsのバージョンを設定
         uses: actions/setup-node@v4
