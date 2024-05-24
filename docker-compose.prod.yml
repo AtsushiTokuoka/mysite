@@ -10,10 +10,10 @@ services:
     image: atsushitokuoka/mysite_auth
   front:
     build:
-      context: ./front
+      context: ./client
       dockerfile: Dockerfile.prod
-    image: atsushitokuoka/mysite_front
+    image: atsushitokuoka/mysite_client
   back:
     build:
-      context: ./back
-    image: atsushitokuoka/mysite_back
+      context: ./server
+    image: atsushitokuoka/mysite_server
