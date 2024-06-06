@@ -33,7 +33,7 @@ services:
     restart: always
     volumes:
       - ./client/mnt:/var/www/html
-      - client_node_modules:/client/node_modules
+      - client_node_modules:/var/www/html/node_modules
     environment:
       CHOKIDAR_USEPOLLING: true
       ASSETS_URL: ${ASSETS_URL}
