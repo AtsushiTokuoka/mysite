@@ -7,7 +7,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Allow composer to run as super user
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# apache2 configuration
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN a2ensite 000-default.conf && a2enmod rewrite && service apache2 restart
 
 COPY ./mnt /var/www/html
 

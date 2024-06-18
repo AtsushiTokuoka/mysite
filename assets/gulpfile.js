@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const gulp = require("gulp");
-const gulpIf = require("gulp-if");
+// const gulpIf = require("gulp-if");
 const sass = require("gulp-sass")(require("sass"));
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
-const gulpPurgecss = require("gulp-purgecss");
+// const gulpPurgecss = require("gulp-purgecss");
 const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
 const named = require("vinyl-named");
@@ -14,34 +14,36 @@ require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const assetsPath = "./src";
 const outputPath = "./dist";
-const htmlTemplatePath = "../front/src/**/*.njk";
+// const htmlTemplatePath = "../front/src/**/*.njk";
 const ASSETS_URL = process.env.ASSETS_URL || "";
 
 gulp.task("scss", function () {
-  return gulp
-    .src([`${assetsPath}/**/*.scss`, `!${assetsPath}/**/_*.scss`])
-    .pipe(
-      sass({
-        outputStyle: "compressed",
-        functions: {
-          "baseUrl()": function () {
-            return new sass.compiler.types.String(ASSETS_URL);
+  return (
+    gulp
+      .src([`${assetsPath}/**/*.scss`, `!${assetsPath}/**/_*.scss`])
+      .pipe(
+        sass({
+          outputStyle: "compressed",
+          functions: {
+            "baseUrl()": function () {
+              return new sass.compiler.types.String(ASSETS_URL);
+            },
           },
-        },
-      }).on("error", sass.logError)
-    )
-    .pipe(postcss([autoprefixer()]))
-    .pipe(
-      gulpIf(
-        (file) => {
-          return !file.path.replace(/\\/g, "/").match(/global\/base\.css$/);
-        },
-        gulpPurgecss({
-          content: [htmlTemplatePath],
-        })
+        }).on("error", sass.logError)
       )
-    )
-    .pipe(gulp.dest(outputPath));
+      .pipe(postcss([autoprefixer()]))
+      // .pipe(
+      //   gulpIf(
+      //     (file) => {
+      //       return !file.path.replace(/\\/g, "/").match(/global\/base\.css$/);
+      //     },
+      //     gulpPurgecss({
+      //       content: [htmlTemplatePath],
+      //     })
+      //   )
+      // )
+      .pipe(gulp.dest(outputPath))
+  );
 });
 
 gulp.task("public-asset", function () {
