@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/auth/bulma.min.css" />
+    <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("#js-loginForm");
+        const redirectPath = location.search
+          .split("?")[1]
+          .split("=")[1]
+          .replace(/%2F/g, "/")
+          .replace(/\/$/, "");
+        const input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "redirectPath");
+        input.setAttribute("value", redirectPath);
+        form.appendChild(input);
+      });
+    </script>
   </head>
   <body>
     <div class="hero is-dark is-fullheight">
@@ -12,7 +27,12 @@
         <div class="container">
           <div class="columns is-centered">
             <div class="column is-8-tablet is-5-desktop">
-              <form action="/auth/login" method="post" class="box is-white">
+              <form
+                action="/auth/login"
+                method="post"
+                class="box is-white"
+                id="js-loginForm"
+              >
                 <div class="field">
                   <label for="" class="label">ユーザー名</label>
                   <div class="control">

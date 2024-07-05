@@ -194,6 +194,12 @@ gulp.task("js-bundle", function () {
                 chunks: "all",
                 enforce: true,
               },
+              router: {
+                test: /[\\/]node_modules[\\/](vue-router)[\\/]/,
+                name: "vendors/vue-router@4.3.3.js",
+                chunks: "all",
+                enforce: true,
+              },
             },
           },
         },

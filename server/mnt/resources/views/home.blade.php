@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="{{ env('ASSETS_URL') }}/master/style.css">
   <!-- script -->
   <script src="{{ env('ASSETS_URL') }}/vendors/vue@3.2.26.js" defer></script>
+  <script src="{{ env('ASSETS_URL') }}/vendors/vue-router@4.3.3.js" defer></script>
   <script src="{{ env('ASSETS_URL') }}/vendors/vuex@4.1.0.js" defer></script>
   <script src="{{ env('ASSETS_URL') }}/master/main.js" defer></script>
 </head>
 <body class="bg-dark text-light">
   <div id="app"></div>
+  <div id="modal"></div>
 </body>
 </html>

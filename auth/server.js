@@ -36,6 +36,7 @@ server.post("/login", async (req, res) => {
     req.body.username === process.env.AUTH_USER &&
     req.body.password === process.env.AUTH_PASSWORD
   ) {
+    const redirectPath = req.body.redirectPath || "/";
     const token = JWT.sign(
       {
         username: process.env.AUTH_USER,
@@ -51,7 +52,7 @@ server.post("/login", async (req, res) => {
         sameSite: "Lax",
         maxAge: 86400000,
       })
-      .send("Login successful");
+      .redirect(redirectPath);
   } else {
     res.redirect("/auth/login");
   }
