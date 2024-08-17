@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: 2.Dockerイメージをビルド
-        run: docker-compose -f docker-compose.prod.yml build
+        run: docker compose -f docker-compose.prod.yml build
 
       - name: 3.ビルドしたイメージをDockerHubへプッシュ
         run: |
