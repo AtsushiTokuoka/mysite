@@ -10,26 +10,34 @@
   </teleport>
 </template>
 
-<script setup lang="ts">
-import { onMounted } from "vue";
+<script lang="ts">
+import { defineComponent, onMounted } from "vue";
 import { useStore } from "@/master/_store/index";
 import { ModalId } from "@/master/_types/index";
 
-const store = useStore();
+export default defineComponent({
+  setup() {
+    const store = useStore();
 
-// closeイベントをemit
-const close = (id: ModalId) => {
-  store.commit("updateModalId", id);
-  scrollStop(false);
-};
+    // closeイベントをemit
+    const close = (id: ModalId) => {
+      store.commit("updateModalId", id);
+      scrollStop(false);
+    };
 
-// 画面スクロールを制御
-const scrollStop = (bool: boolean) => {
-  document.body.style.overflow = bool ? "hidden" : "";
-};
+    // 画面スクロールを制御
+    const scrollStop = (bool: boolean) => {
+      document.body.style.overflow = bool ? "hidden" : "";
+    };
 
-onMounted(() => {
-  scrollStop(true);
+    onMounted(() => {
+      scrollStop(true);
+    });
+
+    return {
+      close,
+    };
+  },
 });
 </script>
 

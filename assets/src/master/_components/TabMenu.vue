@@ -8,7 +8,7 @@
     >
       <span class="nav-link" :class="{ active: key === activeLabel }">
         <svg
-          v-if="key === 'user'"
+          v-if="key === 'users'"
           version="1.1"
           id="_x32_"
           xmlns="http://www.w3.org/2000/svg"
