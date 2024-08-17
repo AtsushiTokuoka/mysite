@@ -57,7 +57,6 @@ services:
       VIMEO_CLIENT_SECRET: ${VIMEO_CLIENT_SECRET}
     depends_on:
       - db
-      - auth
   db:
     image: mysql:8.3.0
     environment:
