@@ -1,9 +1,8 @@
 <template>
   <teleport to="#modal">
-    <div class="Modal" @click="close">
+    <div class="Modal" @click="close('')">
       <div class="Modal__content">
         <div class="Modal__slot" @click.stop>
-          <!-- <v-close class="Modal__close" @click="close" /> -->
           <slot />
         </div>
       </div>
@@ -11,31 +10,26 @@
   </teleport>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from "vue";
-export default defineComponent({
-  name: "VModal",
-  emits: ["close"],
-  setup(props, { emit }) {
-    // closeイベントをemit
-    const close = () => {
-      scrollStop(false);
-      emit("close");
-    };
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { useStore } from "@/master/_store/index";
+import { ModalId } from "@/master/_types/index";
 
-    // 画面スクロールを制御
-    const scrollStop = (bool: boolean) => {
-      document.body.style.overflow = bool ? "hidden" : "";
-    };
+const store = useStore();
 
-    onMounted(() => {
-      scrollStop(true);
-    });
+// closeイベントをemit
+const close = (id: ModalId) => {
+  store.commit("updateModalId", id);
+  scrollStop(false);
+};
 
-    return {
-      close,
-    };
-  },
+// 画面スクロールを制御
+const scrollStop = (bool: boolean) => {
+  document.body.style.overflow = bool ? "hidden" : "";
+};
+
+onMounted(() => {
+  scrollStop(true);
 });
 </script>
 

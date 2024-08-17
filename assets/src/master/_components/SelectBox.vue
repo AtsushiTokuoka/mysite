@@ -12,24 +12,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-export default defineComponent({
-  name: "SelectBox",
-  setup() {
-    const isActive = ref(false);
-    const toggleIsActive = () => {
-      isActive.value = !isActive.value;
-    };
-    return {
-      isActive,
-      toggleIsActive,
-    };
-  },
-});
+<script setup lang="ts">
+import { ref } from "vue";
+
+const isActive = ref(false);
+
+const toggleIsActive = () => {
+  isActive.value = !isActive.value;
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .SelectBox {
   position: relative;
   &__select {

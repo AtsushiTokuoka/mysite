@@ -14,20 +14,25 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, "public")));
 
+const validateToken = (token) => {
+  const verifyToken = JWT.verify(token, process.env.AUTH_SECRET_KEY);
+  if (
+    process.env.AUTH_USER === verifyToken.username &&
+    process.env.AUTH_PASSWORD === verifyToken.password
+  ) {
+    return 200;
+  } else {
+    return 401;
+  }
+};
+
 server.get("/", async (req, res) => {
   const auth_token = req.cookies.auth_token;
   if (!auth_token) {
     res.status(401).send();
   } else {
-    const verifyToken = JWT.verify(auth_token, process.env.AUTH_SECRET_KEY);
-    if (
-      process.env.AUTH_USER === verifyToken.username &&
-      process.env.AUTH_PASSWORD === verifyToken.password
-    ) {
-      res.status(200).send();
-    } else {
-      res.status(401).send();
-    }
+    const status = validateToken(auth_token);
+    res.status(status).send();
   }
 });
 
@@ -60,6 +65,11 @@ server.post("/login", async (req, res) => {
 
 server.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+server.get("/token", (req, res) => {
+  const status = validateToken(req.query.token);
+  res.status(status).send();
 });
 
 server.listen(port, () => {

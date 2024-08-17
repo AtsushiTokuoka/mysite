@@ -20,14 +20,9 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "Pagination",
-});
-</script>
+<script setup lang="ts"></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .Pagination {
   display: flex;
   justify-content: center;

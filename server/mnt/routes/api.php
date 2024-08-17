@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+/*
+|--------------------------------------------------------------------------
+| API Routes(master) 管理画面用のAPIルート
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['check.admin'])->group(function () {
+    Route::resource('users', UserController::class);
 });

@@ -13,34 +13,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import { generateUniqueComponentId } from "@/master/_functions/generateUniqueComponentId";
-export default defineComponent({
-  name: "VSwitch",
-  props: {
-    isChecked: {
-      type: Boolean,
-      required: true,
-    },
-    active: {
-      type: String,
-      required: true,
-    },
-    inactive: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const checked = ref(props.isChecked);
-    const uniqueId = generateUniqueComponentId();
-    return {
-      checked,
-      uniqueId,
-    };
-  },
-});
+
+const props = defineProps<{
+  isChecked: boolean;
+  active: string;
+  inactive: string;
+}>();
+
+const checked = ref(props.isChecked);
+const uniqueId = generateUniqueComponentId();
 </script>
 
 <style lang="scss" scoped>

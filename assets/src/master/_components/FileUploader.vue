@@ -25,45 +25,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import { generateUniqueComponentId } from "@/master/_functions/generateUniqueComponentId";
-export default defineComponent({
-  name: "FileUploader",
-  setup() {
-    const uniqueId = generateUniqueComponentId();
-    const fileName = ref("ファイルが選択されていません");
-    const isUploaded = ref(false);
-    const uploadedUrl = ref("https://developer.vimeo.com/api/guides/start");
-    const handleInput = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      const file = target.files?.[0];
-      if (file) {
-        fileName.value = file.name;
-      }
-    };
-    return {
-      uniqueId,
-      fileName,
-      isUploaded,
-      uploadedUrl,
-      handleInput,
-    };
-  },
-});
+
+const uniqueId = generateUniqueComponentId();
+const fileName = ref("ファイルが選択されていません");
+const isUploaded = ref(false);
+const uploadedUrl = ref("https://developer.vimeo.com/api/guides/start");
+
+const handleInput = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const file = target.files?.[0];
+  if (file) {
+    fileName.value = file.name;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .FileUploader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   &__input {
     position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 60%;
     input[type="file"] {
       display: none;
     }
@@ -72,7 +58,7 @@ export default defineComponent({
     flex-basis: 70%;
   }
   &__progress {
-    width: 40%;
+    margin-top: 10px;
     height: 30px;
   }
 }
