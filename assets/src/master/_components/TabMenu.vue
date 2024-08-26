@@ -1,10 +1,31 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/master/_store/index";
+import { ResourceKeys } from "@/master/_types/index";
+
+const store = useStore();
+const activeLabel = computed(() => store.state.currentResourceName);
+
+const dispLabels: Record<ResourceKeys, string> = {
+  users: "ユーザー",
+  videos: "動画",
+  photos: "写真",
+  articles: "記事",
+};
+
+const changeCurrentResourceName = (resourceName: ResourceKeys) => {
+  if (resourceName === activeLabel.value) return;
+  store.commit("setCurrentResourceName", resourceName);
+};
+</script>
+
 <template>
   <ul class="nav nav-tabs TabMenu">
     <li
       v-for="(label, key) in dispLabels"
       :key="key"
       class="nav-item"
-      @click="changeCurrentResourceType(key)"
+      @click="changeCurrentResourceName(key)"
     >
       <span class="nav-link" :class="{ active: key === activeLabel }">
         <svg
@@ -62,27 +83,6 @@
     </li> -->
   </ul>
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "@/master/_store/index";
-import { ResourceTypes } from "@/master/_types/index";
-
-const store = useStore();
-const activeLabel = computed(() => store.state.currentResourceType);
-
-const dispLabels: Record<ResourceTypes, string> = {
-  users: "ユーザー",
-  videos: "動画",
-  photos: "写真",
-  articles: "記事",
-};
-
-const changeCurrentResourceType = (resourceType: ResourceTypes) => {
-  if (resourceType === activeLabel.value) return;
-  store.commit("setCurrentResourceType", resourceType);
-};
-</script>
 
 <style lang="scss" scoped>
 .TabMenu {

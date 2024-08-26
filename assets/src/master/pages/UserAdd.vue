@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { useStore } from "@/master/_store/index";
+import { ModalId } from "@/master/_types/index";
+
+const store = useStore();
+
+const cancel = (id: ModalId) => {
+  store.commit("updateModalId", id);
+};
+</script>
+
 <template>
   <div class="mb-4">
     <label for="video-title" class="form-label">ユーザー名</label>
@@ -21,16 +32,5 @@
     </button>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useStore } from "@/master/_store/index";
-import { ModalId } from "@/master/_types/index";
-
-const store = useStore();
-
-const cancel = (id: ModalId) => {
-  store.commit("updateModalId", id);
-};
-</script>
 
 <style lang="scss" scoped></style>

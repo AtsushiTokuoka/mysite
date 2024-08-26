@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <nav class="Pagination" aria-label="Page navigation">
     <ul class="Pagination__items">
@@ -19,8 +21,6 @@
     </ul>
   </nav>
 </template>
-
-<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 .Pagination {

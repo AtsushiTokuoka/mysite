@@ -14,8 +14,9 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            ['id' => 1, 'name' => 'Alice', 'email' => 'alice@example.com'],
-            ['id' => 2, 'name' => 'Bob', 'email' => 'bob@example.com'],
+            ['id' => 1, 'name' => 'Public', 'displayName' => '一般公開'],
+            ['id' => 2, 'name' => 'tokuoka-atsushi', 'displayName' => '徳岡　敦（とくおか　あつし）'],
+            ['id' => 3, 'name' => 'tokuoka-yukiko', 'displayName' => '徳岡　由希子（とくおか　ゆきこ）'],
         ];
 
         return response()->json($data);

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/master/_store/index";
+import { ModalId } from "@/master/_types/index";
+import { useResource } from "@/master/_functions/useResource";
+
+import VModal from "@/master/_components/VModal.vue";
+import UserAdd from "@/master/pages/UserAdd.vue";
+import Pagination from "@/master/_components/Pagination.vue";
+
+const store = useStore();
+const { resources } = useResource();
+
+const modalId = computed(() => store.state.modalId);
+const handleModal = (id: ModalId) => {
+  store.commit("updateModalId", id);
+};
+</script>
+
 <template>
   <div class="d-flex justify-content-between align-items-end mb-3">
     <div class="d-flex column-gap-2 w-50">
@@ -31,11 +50,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="user in resourceData.users" :key="user.id">
+      <tr v-for="user in resources.users" :key="user.id">
         <td scope="row" class="align-middle">
           <input class="form-check-input" type="checkbox" value="" />
         </td>
-        <td class="align-middle">{{ user.name }}</td>
+        <td class="align-middle">{{ user.displayName }}</td>
         <td class="align-middle">
           <div class="d-flex column-gap-2">
             <button type="button" class="btn btn-primary w-50">編集</button>
@@ -47,26 +66,5 @@
   </table>
   <Pagination />
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "@/master/_store/index";
-import { useResource } from "@/master/_functions/useResource";
-import { ModalId } from "@/master/_types/index";
-
-import VModal from "@/master/_components/VModal.vue";
-import UserAdd from "@/master/pages/UserAdd.vue";
-import Pagination from "@/master/_components/Pagination.vue";
-
-const store = useStore();
-
-const { resourceData, getResource } = useResource();
-getResource("users");
-
-const modalId = computed(() => store.state.modalId);
-const handleModal = (id: ModalId) => {
-  store.commit("updateModalId", id);
-};
-</script>
 
 <style lang="scss" scoped></style>

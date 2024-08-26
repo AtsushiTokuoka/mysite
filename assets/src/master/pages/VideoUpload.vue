@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { useStore } from "@/master/_store/index";
+import { ModalId } from "@/master/_types/index";
+import FileUploader from "@/master/_components/FileUploader.vue";
+import VSwitch from "@/master/_components/VSwitch.vue";
+import SelectBox from "@/master/_components/SelectBox.vue";
+
+const store = useStore();
+
+const uploadVideo = () => {
+  console.log("動画を登録しました");
+};
+const cancelUpload = (id: ModalId) => {
+  store.commit("updateModalId", id);
+};
+</script>
+
 <template>
   <div class="d-flex mb-4">
     <div class="w-50">
@@ -70,22 +87,5 @@
     </button>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useStore } from "@/master/_store/index";
-import { ModalId } from "@/master/_types/index";
-import FileUploader from "@/master/_components/FileUploader.vue";
-import VSwitch from "@/master/_components/VSwitch.vue";
-import SelectBox from "@/master/_components/SelectBox.vue";
-
-const store = useStore();
-
-const uploadVideo = () => {
-  console.log("動画を登録しました");
-};
-const cancelUpload = (id: ModalId) => {
-  store.commit("updateModalId", id);
-};
-</script>
 
 <style lang="scss" scoped></style>

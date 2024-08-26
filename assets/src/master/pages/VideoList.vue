@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/master/_store/index";
+import { ModalId } from "@/master/_types/index";
+
+import SelectBox from "@/master/_components/SelectBox.vue";
+import VSwitch from "@/master/_components/VSwitch.vue";
+import VModal from "@/master/_components/VModal.vue";
+import VideoUpload from "@/master/pages/VideoUpload.vue";
+import Pagination from "@/master/_components/Pagination.vue";
+
+const store = useStore();
+const modalId = computed(() => store.state.modalId);
+
+const handleModal = (id: ModalId) => {
+  store.commit("updateModalId", id);
+};
+</script>
+
 <template>
   <div class="d-flex justify-content-between align-items-end mb-3">
     <div class="w-50">
@@ -110,25 +129,6 @@
   </table>
   <Pagination />
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "@/master/_store/index";
-import { ModalId } from "@/master/_types/index";
-
-import SelectBox from "@/master/_components/SelectBox.vue";
-import VSwitch from "@/master/_components/VSwitch.vue";
-import VModal from "@/master/_components/VModal.vue";
-import VideoUpload from "@/master/pages/VideoUpload.vue";
-import Pagination from "@/master/_components/Pagination.vue";
-
-const store = useStore();
-const modalId = computed(() => store.state.modalId);
-
-const handleModal = (id: ModalId) => {
-  store.commit("updateModalId", id);
-};
-</script>
 
 <style lang="scss" scoped>
 .VideoInfo {

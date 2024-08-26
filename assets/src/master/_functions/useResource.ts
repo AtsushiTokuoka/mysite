@@ -1,26 +1,38 @@
 import { computed } from "vue";
 import { useStore } from "@/master/_store/index";
-import { ResourceTypes } from "@/master/_types/index";
+import { ResourceKeys, Request } from "@/master/_types/index";
+
+// GETリクエストの場合はbodyを省略可能にする
+type Params<M extends Request["method"]> = M extends "GET"
+  ?
+      | { method: M; path: string; body?: never }
+      | { method: M; path?: never; body: object }
+  : { method: M; path?: string; body: object };
 
 export function useResource() {
   const store = useStore();
 
-  const resourceData = computed(() => store.state.resourceData);
+  const resources = computed(() => store.state.resources);
 
-  const getResource = async (resourceType: ResourceTypes, body?: object) => {
-    const request = {
-      endpoint: resourceType,
-      method: "GET",
+  const fetchResource = async (
+    resourceKey: ResourceKeys,
+    params: Params<Request["method"]>
+  ) => {
+    const { method, path, body } = params;
+    const request: Request = {
+      resourceKey,
+      method,
       headers: {
         "Content-Type": "application/json",
       },
+      path,
       body,
     };
     await store.dispatch("fetchResource", request);
   };
 
   return {
-    resourceData,
-    getResource,
+    resources,
+    fetchResource,
   };
 }

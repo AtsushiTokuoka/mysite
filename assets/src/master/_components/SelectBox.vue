@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+const isActive = ref(false);
+
+const toggleIsActive = () => {
+  isActive.value = !isActive.value;
+};
+</script>
+
 <template>
   <div class="SelectBox" :class="{ active: isActive }">
     <select
@@ -11,16 +21,6 @@
     </select>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from "vue";
-
-const isActive = ref(false);
-
-const toggleIsActive = () => {
-  isActive.value = !isActive.value;
-};
-</script>
 
 <style lang="scss" scoped>
 .SelectBox {

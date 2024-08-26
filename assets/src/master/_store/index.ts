@@ -1,13 +1,20 @@
 import { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
 
-import { ModalId, ResourceTypes, ResourceModels } from "@/master/_types/index";
+import {
+  ModalId,
+  ResourceKeys,
+  ResourceModels,
+  ResourceGuard,
+  Request,
+  Response,
+} from "@/master/_types/index";
 
 // ストアのステートに対して型を定義します
 export interface State {
   currentUserId: number;
-  currentResourceType: ResourceTypes;
-  resourceData: ResourceModels;
+  currentResourceName: ResourceKeys;
+  resources: ResourceModels;
   modalId: ModalId;
 }
 
@@ -15,9 +22,9 @@ export interface State {
 export const key: InjectionKey<Store<State>> = Symbol();
 
 const state: State = {
-  currentUserId: 0,
-  currentResourceType: "users",
-  resourceData: {
+  currentUserId: 1,
+  currentResourceName: "users",
+  resources: {
     users: [],
     videos: [],
     photos: [],
@@ -33,46 +40,52 @@ export const store = createStore<State>({
     updateModalId(state, modalId: ModalId) {
       state.modalId = modalId;
     },
-    setCurrentResourceType(state, resourceType: ResourceTypes) {
-      state.currentResourceType = resourceType;
+    setCurrentResourceName(state, resourceKey: ResourceKeys) {
+      state.currentResourceName = resourceKey;
     },
-    setResourceData(
+    setResources(
       state,
-      { resourceType, payload }: { resourceType: ResourceTypes; payload: [] }
+      { resourceKey, payload }: { resourceKey: ResourceKeys; payload: [] }
     ) {
-      state.resourceData[resourceType] = payload;
+      state.resources[resourceKey] = payload;
     },
   },
   actions: {
-    async fetchResource({ commit }, req) {
+    async fetchResource({ commit }, req: Request) {
+      const { resourceKey, body } = req;
+
       try {
-        const resourceType = req.endpoint;
-        let responce;
+        // リクエストを送信
+        let res;
         if (req.method === "GET") {
-          const paramString = new URLSearchParams(req.body).toString();
-          const body = paramString ? `?${paramString}` : "";
-          responce = await fetch(`/master/api/${req.endpoint}${body}`, {
+          const params = new URLSearchParams(
+            req.body as Record<string, string>
+          ).toString();
+
+          const queryText = params ? `?${params}` : "";
+          res = await fetch(`/master/api/${resourceKey}${queryText}`, {
             headers: req.headers,
           });
         } else {
-          responce = await fetch(`/master/api/${req.endpoint}`, {
+          res = await fetch(`/master/api/${resourceKey}`, {
             method: req.method,
             headers: req.headers,
-            body: JSON.stringify(req.body),
+            body: JSON.stringify(body),
           });
         }
+        let result = await res.json();
 
-        // const res = await responce.json();
-        // console.log(res);
+        // レスポンスをランタイムで検証
+        const guard = ResourceGuard(resourceKey);
+        if (!guard(result)) {
+          result = [];
+          throw new Error(`${resourceKey}: APIからのresponseの型が不正です`);
+        }
 
-        const payload = [
-          { id: 1, name: "Alice", password: "password" },
-          { id: 2, name: "Bob", password: "password 2" },
-        ];
-
-        commit("setResourceData", { resourceType, payload });
+        const payload: Response<typeof resourceKey> = result;
+        commit("setResources", { resourceKey, payload });
       } catch (error) {
-        console.error("Error fetching resource:", error);
+        console.error(error);
       }
     },
   },

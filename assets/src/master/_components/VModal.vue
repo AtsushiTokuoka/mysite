@@ -1,15 +1,3 @@
-<template>
-  <teleport to="#modal">
-    <div class="Modal" @click="close('')">
-      <div class="Modal__content">
-        <div class="Modal__slot" @click.stop>
-          <slot />
-        </div>
-      </div>
-    </div>
-  </teleport>
-</template>
-
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import { useStore } from "@/master/_store/index";
@@ -40,6 +28,18 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <teleport to="#modal">
+    <div class="Modal" @click="close('')">
+      <div class="Modal__content">
+        <div class="Modal__slot" @click.stop>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </teleport>
+</template>
 
 <style lang="scss" scoped>
 .Modal {

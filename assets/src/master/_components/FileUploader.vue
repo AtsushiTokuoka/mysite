@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { generateUniqueComponentId } from "@/master/_functions/generateUniqueComponentId";
+
+const uniqueId = generateUniqueComponentId();
+const fileName = ref("ファイルが選択されていません");
+const isUploaded = ref(false);
+const uploadedUrl = ref("https://developer.vimeo.com/api/guides/start");
+
+const handleInput = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const file = target.files?.[0];
+  if (file) {
+    fileName.value = file.name;
+  }
+};
+</script>
+
 <template>
   <div class="FileUploader">
     <div class="FileUploader__input">
@@ -24,24 +42,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from "vue";
-import { generateUniqueComponentId } from "@/master/_functions/generateUniqueComponentId";
-
-const uniqueId = generateUniqueComponentId();
-const fileName = ref("ファイルが選択されていません");
-const isUploaded = ref(false);
-const uploadedUrl = ref("https://developer.vimeo.com/api/guides/start");
-
-const handleInput = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const file = target.files?.[0];
-  if (file) {
-    fileName.value = file.name;
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .FileUploader {
