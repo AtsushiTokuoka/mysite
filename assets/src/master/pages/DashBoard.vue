@@ -16,15 +16,21 @@ const store = useStore();
 const query = route.query;
 const { resources, fetchResource } = useResource();
 
-const fetchCurrentUser = async () => {
-  await fetchResource("users", {
-    method: "GET",
-    body: {
-      name: query.name ? query.name : "public",
-    },
-  });
+const init = async () => {
+  // ユーザー一覧を取得
+  await fetchResource("users", { method: "GET" });
+  // 選択中のユーザーをstateにセット
+  setCurrentUser();
 };
-fetchCurrentUser();
+init();
+
+const setCurrentUser = () => {
+  const currentUser = resources.value.users.find((user) => {
+    if (!query.name) return user.name === "public";
+    return user.name === query.name;
+  });
+  if (currentUser) store.commit("updateCurrentUser", currentUser);
+};
 
 const componentId = computed(() => {
   switch (store.state.currentResourceName) {
@@ -44,9 +50,9 @@ const componentId = computed(() => {
 
 <template>
   <div class="container-xxl pt-5">
-    <p>query: {{ query }}</p>
-    <p>resouces: {{ resources }}</p>
-    <p class="fs-3 mb-4">選択中のユーザー： public</p>
+    <p class="fs-3 mb-4">
+      選択中のユーザー： {{ store.state.currentUser?.displayName }}
+    </p>
     <TabMenu class="mb-4" />
     <keep-alive>
       <component :is="componentId" />

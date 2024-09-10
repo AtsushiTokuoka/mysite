@@ -9,10 +9,11 @@ import {
   Request,
   Response,
 } from "@/master/_types/index";
+import { User } from "@/master/_types/models/User";
 
 // ストアのステートに対して型を定義します
 export interface State {
-  currentUserId: number;
+  currentUser: User | null;
   currentResourceName: ResourceKeys;
   resources: ResourceModels;
   modalId: ModalId;
@@ -22,7 +23,7 @@ export interface State {
 export const key: InjectionKey<Store<State>> = Symbol();
 
 const state: State = {
-  currentUserId: 1,
+  currentUser: null,
   currentResourceName: "users",
   resources: {
     users: [],
@@ -43,6 +44,9 @@ export const store = createStore<State>({
     setCurrentResourceName(state, resourceKey: ResourceKeys) {
       state.currentResourceName = resourceKey;
     },
+    updateCurrentUser(state, user: User) {
+      state.currentUser = user;
+    },
     setResources(
       state,
       { resourceKey, payload }: { resourceKey: ResourceKeys; payload: [] }
@@ -52,27 +56,22 @@ export const store = createStore<State>({
   },
   actions: {
     async fetchResource({ commit }, req: Request) {
-      const { resourceKey, body } = req;
+      const { resourceKey, path, body } = req;
 
       try {
         // リクエストを送信
-        let res;
-        if (req.method === "GET") {
-          const params = new URLSearchParams(
-            req.body as Record<string, string>
-          ).toString();
 
-          const queryText = params ? `?${params}` : "";
-          res = await fetch(`/master/api/${resourceKey}${queryText}`, {
-            headers: req.headers,
-          });
-        } else {
-          res = await fetch(`/master/api/${resourceKey}`, {
-            method: req.method,
-            headers: req.headers,
-            body: JSON.stringify(body),
-          });
+        let url = `/master/api/${resourceKey}`;
+        if (path) {
+          url += `/${path}`;
         }
+
+        const res = await fetch(url, {
+          method: req.method,
+          headers: req.headers,
+          body: JSON.stringify(body),
+        });
+
         let result = await res.json();
 
         // レスポンスをランタイムで検証

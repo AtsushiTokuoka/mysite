@@ -41,7 +41,8 @@ const handleModal = (id: ModalId) => {
       </button>
     </div>
   </div>
-  <table class="table table-dark table-hover">
+  <p v-if="resources.users.length === 0">ユーザー情報はありません</p>
+  <table v-else class="table table-dark table-hover">
     <thead class="table-light">
       <tr>
         <th scope="col" class="col-1"></th>
@@ -64,7 +65,7 @@ const handleModal = (id: ModalId) => {
       </tr>
     </tbody>
   </table>
-  <Pagination />
+  <Pagination v-if="resources.users.length !== 0" />
 </template>
 
 <style lang="scss" scoped></style>

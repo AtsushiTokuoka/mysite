@@ -24,12 +24,23 @@ function ResourceGuard(resourceKey: ResourceKeys) {
 }
 
 // request
+type RequestParams =
+  | {
+      method: "GET" | "HEAD";
+      path?: string;
+      body?: never;
+    }
+  | {
+      method: "POST" | "PUT" | "DELETE" | "PATCH" | "OPTIONS";
+      path?: string;
+      body?: object;
+    };
 interface Request {
-  resourceKey: ResourceKeys;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS";
   headers: {
     "Content-Type": "application/json";
   };
+  resourceKey: ResourceKeys;
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS";
   path?: string;
   body?: object;
 }
@@ -43,6 +54,7 @@ type ModalId = "user-add" | "video-upload" | "video-edit" | "";
 export {
   ResourceModels,
   ResourceKeys,
+  RequestParams,
   Request,
   Response,
   ModalId,

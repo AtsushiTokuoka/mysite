@@ -40,6 +40,10 @@ services:
   server:
     build:
       context: ./server
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - USERNAME=${USERNAME}
     image: mysite_server
     container_name: server_ct
     restart: always

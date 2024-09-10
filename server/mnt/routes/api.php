@@ -26,4 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 Route::middleware(['check.admin'])->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('videos', VideoController::class);
 });
