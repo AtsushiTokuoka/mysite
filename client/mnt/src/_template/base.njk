@@ -19,7 +19,7 @@
       </title>
     {% endif %}
 
-    <link rel="icon" href="{{ ASSETS_URL }}/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="{{ ASSETS_URL }}/client/favicon.svg" type="image/svg+xml" sizes="any">
 
     {% if noIndex %}
       <meta name="robots" content="noindex"/>
@@ -32,21 +32,20 @@
       <script src="{{ ASSETS_URL }}/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
-    {# global style #}
-    <link rel="stylesheet" href="{{ ASSETS_URL }}/global/base.css"/>
-    <link rel="stylesheet" href="{{ ASSETS_URL }}/global/style.css?{{ lastBuildDate }}"/>
+    {# global style & script #}
+    <link rel="stylesheet" href="{{ ASSETS_URL }}/client/global/global.css?{{ lastBuildDate }}"/>
+    <script src="{{ ASSETS_URL }}/client/global/global.js?{{ lastBuildDate }}" defer></script>
 
     {#page style & script#}
     {% for style in styles %}
-      <link rel="stylesheet" href="{{ ASSETS_URL }}/{{ style }}?{{ lastBuildDate }}"/>
+      <link rel="stylesheet" href="{{ ASSETS_URL }}/client/{{ style }}?{{ lastBuildDate }}"/>
     {% endfor %}
     {% for script in scripts %}
-      <script src="{{ ASSETS_URL }}/{{ script }}?{{ lastBuildDate }}" defer></script>
+      <script src="{{ ASSETS_URL }}/client/{{ script }}?{{ lastBuildDate }}" defer></script>
     {% endfor %}
   </head>
   <body>
     <div id="drawer-menu"></div>
-    {# <div id="menu-icon"></div> #}
     <header id="header"></header>
     <div id="contents">
       <main v-bind:style="{
@@ -57,8 +56,11 @@
         {% block contents %}{% endblock %}
       </main>
     </div>
-    {# <div id="pagetop"></div> #}
+
+    <div id="bottom-icons"></div>
+
     <footer id="footer"></footer>
+    
     <div id="modal"></div>
 
     {% set globalData = {
