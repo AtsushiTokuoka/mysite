@@ -13,7 +13,7 @@
 
 <script>
 import { defineComponent, computed, onMounted } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 import VClose from "@/client/_components/icons/Close.vue";
 export default defineComponent({
   name: "VModal",

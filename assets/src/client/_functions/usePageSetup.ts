@@ -1,27 +1,29 @@
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 
-// コンテンツエリアのvueインスタンスの共通設定
-function setupContentsVueApp() {
+export default function usePageSetup() {
   const store = useStore();
   const eleventyGlobalData = computed(() => store.state.eleventyGlobalData);
   const headerHeight = computed(() => store.state.headerHeight);
   const footerHeight = computed(() => store.state.footerHeight);
   const contentsMinHeight = ref(0);
 
+  // コンテンツエリアのvueインスタンスの共通設定
+  // ヘッダー・フッターの高さを取得し、コンテンツエリアの最小高さを設定する
   const updateContentsMinHeight = () => {
     contentsMinHeight.value =
       window.innerHeight - (headerHeight.value + footerHeight.value);
   };
+  watch([headerHeight, footerHeight], updateContentsMinHeight);
 
+  // bottom-iconsのvueインスタンスの共通設定
+  // フッターの高さを取得し、bottom-iconsの位置を調整する
   const updateBottomIconsPosition = () => {
     const bottomIcons = document.querySelector("#bottom-icons") as HTMLElement;
     if (bottomIcons) {
       bottomIcons.style.bottom = `${footerHeight.value}px`;
     }
   };
-
-  watch([headerHeight, footerHeight], updateContentsMinHeight);
   watch([footerHeight], updateBottomIconsPosition);
 
   onMounted(() => {
@@ -40,35 +42,3 @@ function setupContentsVueApp() {
     eleventyGlobalData,
   };
 }
-
-// 画面スクロール時のヘッダーの挙動
-window.addEventListener("load", changeHeaderPositionOnScroll);
-function changeHeaderPositionOnScroll() {
-  const header = document.querySelector("#header") as HTMLElement;
-  let headerHeight = header.offsetHeight;
-  let lastScrollPosition = 0;
-
-  // ヘッダーのリサイズを監視
-  const observer = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.target === header) {
-        headerHeight = header.offsetHeight;
-      }
-    }
-  });
-  observer.observe(header);
-
-  window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY;
-    if (scrollPosition < lastScrollPosition) {
-      header.style.top = "0";
-    } else if (scrollPosition > headerHeight) {
-      header.style.top = `-${headerHeight}px`;
-    } else {
-      header.style.top = "0";
-    }
-    lastScrollPosition = scrollPosition;
-  });
-}
-
-export { setupContentsVueApp };

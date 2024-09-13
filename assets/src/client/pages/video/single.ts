@@ -1,6 +1,6 @@
-import vueAppFactory from "@/client/_functions/vueAppFactory";
+import createAppFactory from "@/client/_functions/createAppFactory";
 import { defineComponent, ref, watch, computed, onMounted } from "vue";
-import { setupContentsVueApp } from "@/client/global";
+import usePageSetup from "@/client/_functions/usePageSetup";
 
 import VFooter from "@/client/_components/video/Footer.vue";
 import VHeader from "@/client/_components/video/Header.vue";
@@ -8,18 +8,18 @@ import VHeader from "@/client/_components/video/Header.vue";
 import VBtn from "@/client/_components/video/buttons/Btn.vue";
 
 window.addEventListener("DOMContentLoaded", () => {
-  vueAppFactory(VHeader, "#header");
-  vueAppFactory(VFooter, "#footer");
+  createAppFactory(VHeader, "#header");
+  createAppFactory(VFooter, "#footer");
 });
 
-vueAppFactory(
+createAppFactory(
   defineComponent({
     name: "VContents",
     components: {
       VBtn,
     },
     setup() {
-      const contentsAppSetUpData = setupContentsVueApp();
+      const pageSetupData = usePageSetup();
 
       const Video = ref<HTMLVideoElement>();
 
@@ -53,7 +53,7 @@ vueAppFactory(
       });
 
       return {
-        ...contentsAppSetUpData,
+        ...pageSetupData,
         Video,
         isPlay,
         isPlayText,

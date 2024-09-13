@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 import Close from "@/client/_components/icons/Close.vue";
 
 export default defineComponent({

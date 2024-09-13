@@ -1,20 +1,20 @@
-import vueAppFactory from "@/client/_functions/vueAppFactory";
+import createAppFactory from "@/client/_functions/createAppFactory";
 import { defineComponent } from "vue";
-import { setupContentsVueApp } from "@/client/global";
-import { useStore } from "vuex";
+import usePageSetup from "@/client/_functions/usePageSetup";
+import { useStore } from "@/client/_store";
 
 import VFooter from "@/client/_components/video/Footer.vue";
 import VHeader from "@/client/_components/video/Header.vue";
+import DrawerMenu from "@/client/_components/menues/DrawerMenu.vue";
 
 import VideoCard from "@/client/_components/video/cards/VideoCard.vue";
 import CategorySlide from "@/client/_components/video/menues/CategorySlide.vue";
 
-window.addEventListener("DOMContentLoaded", () => {
-  vueAppFactory(VHeader, "#header");
-  vueAppFactory(VFooter, "#footer");
-});
+createAppFactory(VHeader, "#header");
+createAppFactory(VFooter, "#footer");
+createAppFactory(DrawerMenu, "#drawer-menu");
 
-vueAppFactory(
+createAppFactory(
   defineComponent({
     name: "VContents",
     components: {
@@ -22,11 +22,13 @@ vueAppFactory(
       CategorySlide,
     },
     setup() {
-      const contentsAppSetUpData = setupContentsVueApp();
+      const pageSetupData = usePageSetup();
+
       const store = useStore();
+
       const videos = store.state.eleventyLocalData.videos;
       return {
-        ...contentsAppSetUpData,
+        ...pageSetupData,
         videos,
       };
     },

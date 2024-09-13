@@ -1,5 +1,5 @@
 <template>
-  <header ref="Header" class="Header">
+  <div ref="Header" class="Header">
     <div class="Header__inner">
       <h1 class="Header__logo">
         <a href="/">
@@ -11,7 +11,7 @@
         </a>
       </h1>
     </div>
-  </header>
+  </div>
 </template>
 
 <docs>
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 export default defineComponent({
   name: "VHeader",
   setup() {

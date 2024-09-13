@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 import smoothScroll from "@/client/_functions/smoothScroll";
 export default defineComponent({
   name: "VPageTop",

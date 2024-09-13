@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/client/_store/index";
 
 export default defineComponent({
   name: "VHamburger",

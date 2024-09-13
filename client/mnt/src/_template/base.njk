@@ -32,8 +32,9 @@
       <script src="{{ ASSETS_URL }}/vendors/{{ vendor }}.js" defer></script>
     {% endfor %}
 
-    {# global style #}
-    <link rel="stylesheet" href="{{ ASSETS_URL }}/client/global/style.css?{{ lastBuildDate }}"/>
+    {# global style & script #}
+    <link rel="stylesheet" href="{{ ASSETS_URL }}/client/global/global.css?{{ lastBuildDate }}"/>
+    <script src="{{ ASSETS_URL }}/client/global/global.js?{{ lastBuildDate }}" defer></script>
 
     {#page style & script#}
     {% for style in styles %}
@@ -54,9 +55,12 @@
       }">
         {% block contents %}{% endblock %}
       </main>
-      <div id="bottom-icons"></div>
     </div>
+
+    <div id="bottom-icons"></div>
+
     <footer id="footer"></footer>
+    
     <div id="modal"></div>
 
     {% set globalData = {
