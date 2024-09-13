@@ -144,10 +144,10 @@ gulp.task("js-bundle", function () {
                   options: {
                     implementation: require("sass"),
                     additionalData: `
-                  @use '@/_styles/_variables.scss' as *;
-                  @use '@/_styles/_utility.scss' as *;
-                  @use '@/_styles/_layout.scss' as *;
-                `,
+                      @use '@/client/_styles/_variables.scss' as *;
+                      @use '@/client/_styles/_utility.scss' as *;
+                      @use '@/client/_styles/_layout.scss' as *;
+                    `,
                   },
                 },
               ],
