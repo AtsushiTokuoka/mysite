@@ -19,8 +19,8 @@ services:
     container_name: auth_ct
     restart: always
     volumes:
-      - ./auth:/auth
-      - auth_node_modules:/auth/node_modules
+      - ./auth/mount:/auth
+      - ./auth/volume/node_modules:/auth/node_modules
     environment:
       AUTH_USER: ${AUTH_USER}
       AUTH_PASSWORD: ${AUTH_PASSWORD}
@@ -32,8 +32,8 @@ services:
     container_name: client_ct
     restart: always
     volumes:
-      - ./client/mnt:/var/www/html
-      - client_node_modules:/var/www/html/node_modules
+      - ./client/mount:/var/www/html
+      - ./client/volume/node_modules:/var/www/html/node_modules
     environment:
       CHOKIDAR_USEPOLLING: true
       ASSETS_URL: ${ASSETS_URL}
@@ -48,8 +48,8 @@ services:
     container_name: server_ct
     restart: always
     volumes:
-      - ./server/mnt:/var/www/html
-      - server_vendor:/var/www/html/vendor
+      - ./server/mount:/var/www/html
+      - ./server/volume/vendor:/var/www/html/vendor
     environment:
       ASSETS_URL: ${ASSETS_URL}
       DB_HOST: ${DB_HOST}
@@ -72,7 +72,7 @@ services:
     container_name: db_ct
     restart: always
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db/volume/mysql:/var/lib/mysql
   dbgui:
     image: phpmyadmin:5.2.1
     container_name: dbgui_ct
@@ -83,9 +83,3 @@ services:
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     depends_on:
       - db
-
-volumes:
-  auth_node_modules:
-  client_node_modules:
-  server_vendor:
-  db_data:
