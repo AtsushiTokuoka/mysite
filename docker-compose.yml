@@ -51,6 +51,7 @@ services:
       - ./server/mount:/var/www/html
       - ./server/volume/vendor:/var/www/html/vendor
     environment:
+      SITE_DOMAIN: ${SITE_DOMAIN}
       ASSETS_URL: ${ASSETS_URL}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
