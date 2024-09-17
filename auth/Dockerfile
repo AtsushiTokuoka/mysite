@@ -2,7 +2,7 @@ FROM node:20
 
 WORKDIR /auth
 
-COPY . /auth/
+COPY ./mount /auth
 
 RUN apt-get update \
     && apt-get install -y vim \

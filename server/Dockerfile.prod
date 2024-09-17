@@ -12,7 +12,7 @@ COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2ensite 000-default.conf && a2enmod rewrite && service apache2 restart
 
 # ホスト側のファイルをコンテナにマウント
-COPY ./mnt /var/www/html
+COPY ./mount /var/www/html
 
 # 作業ディレクトリの設定
 WORKDIR /var/www/html

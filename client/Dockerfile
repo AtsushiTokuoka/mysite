@@ -1,6 +1,6 @@
 FROM node:20
 
-COPY ./mnt /var/www/html
+COPY ./mount /var/www/html
 
 WORKDIR /var/www/html
 
