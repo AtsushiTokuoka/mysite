@@ -9,6 +9,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # apache設定ファイルを反映
+COPY ./apache2.conf /etc/apache2/apache2.conf
 COPY ./000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2ensite 000-default.conf && a2enmod rewrite && service apache2 restart
 
