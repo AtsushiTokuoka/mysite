@@ -51,6 +51,7 @@ services:
     restart: always
     volumes:
       - ./server/mount:/var/www/html
+      - ./server/volume/storage:/var/www/html/storage
       - ./server/volume/vendor:/var/www/html/vendor
     depends_on:
       - db
