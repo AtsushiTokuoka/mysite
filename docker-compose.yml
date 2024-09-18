@@ -44,22 +44,14 @@ services:
         - UID=${UID}
         - GID=${GID}
         - USERNAME=${USERNAME}
+    env_file:
+      - .env
     image: mysite_server
     container_name: server_ct
     restart: always
     volumes:
       - ./server/mount:/var/www/html
       - ./server/volume/vendor:/var/www/html/vendor
-    environment:
-      ASSETS_URL: ${ASSETS_URL}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      VIMEO_CLIENT_ID: ${VIMEO_CLIENT_ID}
-      VIMEO_ACCESS_TOKEN: ${VIMEO_ACCESS_TOKEN}
-      VIMEO_CLIENT_SECRET: ${VIMEO_CLIENT_SECRET}
     depends_on:
       - db
   db:
