@@ -21,10 +21,9 @@ services:
     volumes:
       - ./auth/mount:/auth
       - ./auth/volume/node_modules:/auth/node_modules
+    env_file:
+      - .env
     environment:
-      AUTH_USER: ${AUTH_USER}
-      AUTH_PASSWORD: ${AUTH_PASSWORD}
-      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
       CHOKIDAR_USEPOLLING: true
   client:
     build: ./client
@@ -34,9 +33,10 @@ services:
     volumes:
       - ./client/mount:/var/www/html
       - ./client/volume/node_modules:/var/www/html/node_modules
+    env_file:
+      - .env
     environment:
       CHOKIDAR_USEPOLLING: true
-      ASSETS_URL: ${ASSETS_URL}
   server:
     build:
       context: ./server
