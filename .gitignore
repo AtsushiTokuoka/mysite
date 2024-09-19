@@ -4,3 +4,4 @@ dist
 sftp.json
 memo.md
 volume
+RestApi.http
