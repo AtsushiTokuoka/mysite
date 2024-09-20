@@ -14,30 +14,22 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, "public")));
 
-const validateToken = (req) => {
+const validate = (access_key, token) => {
   // 開発環境用のアクセス制御
   if (process.env.APP_ENV === "local") {
-    const access_key = req.headers["x-auth-access-key"];
     if (access_key === process.env.AUTH_DEV_ACCESS_KEY) {
       return 200;
     } else {
-      // tokenによる認証
-      const token = req.cookies.auth_token;
-      const verifyToken = JWT.verify(token, process.env.AUTH_SECRET_KEY);
-      if (
-        process.env.AUTH_USER === verifyToken.username &&
-        process.env.AUTH_PASSWORD === verifyToken.password
-      ) {
-        return 200;
-      } else {
-        return 401;
-      }
+      return checkToken(token);
     }
   }
   // 本番環境用のアクセス制御
   if (process.env.APP_ENV === "production") {
-    // tokenによる認証
-    const token = req.cookies.auth_token;
+    return checkToken(token);
+  }
+  // tokenによる認証
+  function checkToken(token) {
+    if (token === undefined) return 401;
     const verifyToken = JWT.verify(token, process.env.AUTH_SECRET_KEY);
     if (
       process.env.AUTH_USER === verifyToken.username &&
@@ -45,19 +37,23 @@ const validateToken = (req) => {
     ) {
       return 200;
     } else {
-      console.log("token error");
+      console.log("token Unauthorized");
       return 401;
     }
   }
 };
 
 server.get("/", async (req, res) => {
-  const status = validateToken(req);
+  const access_key = req.headers["x-auth-access-key"];
+  const token = req.cookies.auth_token;
+  const status = validate(access_key, token);
   res.status(status).send();
 });
 
 server.get("/token", (req, res) => {
-  const status = validateToken(req);
+  const access_key = req.headers["x-auth-access-key"];
+  const token = req.query.token;
+  const status = validate(access_key, token);
   res.status(status).send();
 });
 
