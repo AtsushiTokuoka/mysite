@@ -14,7 +14,6 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, "public")));
 
-console.log(process.env.APP_ENV);
 const validateToken = (req) => {
   // 開発環境用のアクセス制御
   if (process.env.APP_ENV === "local") {
@@ -46,6 +45,7 @@ const validateToken = (req) => {
     ) {
       return 200;
     } else {
+      console.log("token error");
       return 401;
     }
   }
