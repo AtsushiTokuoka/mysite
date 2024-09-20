@@ -14,14 +14,30 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, "public")));
 
+console.log(process.env.APP_ENV);
 const validateToken = (req) => {
-  // 開発環境用のアクセスキー
-  const access_key = req.headers["x-auth-access-key"];
-  if (access_key === process.env.AUTH_DEV_ACCESS_KEY) {
-    return 200;
+  // 開発環境用のアクセス制御
+  if (process.env.APP_ENV === "local") {
+    const access_key = req.headers["x-auth-access-key"];
+    if (access_key === process.env.AUTH_DEV_ACCESS_KEY) {
+      return 200;
+    } else {
+      // tokenによる認証
+      const token = req.cookies.auth_token;
+      const verifyToken = JWT.verify(token, process.env.AUTH_SECRET_KEY);
+      if (
+        process.env.AUTH_USER === verifyToken.username &&
+        process.env.AUTH_PASSWORD === verifyToken.password
+      ) {
+        return 200;
+      } else {
+        return 401;
+      }
+    }
   }
-  // tokenによる認証
-  else {
+  // 本番環境用のアクセス制御
+  if (process.env.APP_ENV === "production") {
+    // tokenによる認証
     const token = req.cookies.auth_token;
     const verifyToken = JWT.verify(token, process.env.AUTH_SECRET_KEY);
     if (
