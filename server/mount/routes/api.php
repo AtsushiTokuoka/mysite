@@ -25,6 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['check.admin'])->group(function () {
-    Route::resource('users', UserController::class);
+    // users
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{id}', [UserController::class, 'show']);
+    Route::post('users', [UserController::class, 'store']);
+
+    // videos
     Route::resource('videos', VideoController::class);
 });

@@ -22,9 +22,14 @@ class CheckAdmin
         $authToken = $request->cookie('auth_token');
         
         // authコンテナへリクエストを送信
-        $isAdmin = Http::withHeaders([
-            'x-auth-access-key' => env('AUTH_DEV_ACCESS_KEY'),
-        ])->get('http://auth/token?token=' . $authToken);
+        if( env('APP_ENV') === 'local' ) {
+            $isAdmin = Http::withHeaders([
+                'x-auth-access-key' => env('AUTH_DEV_ACCESS_KEY'),
+            ])->get('http://auth/token?token=' . $authToken);
+        }
+        else if( env('APP_ENV') === 'production' ) {
+            $isAdmin = Http::get('http://auth/token?token=' . $authToken);
+        }
 
         if( $isAdmin->successful() ) {
             return $next($request);
