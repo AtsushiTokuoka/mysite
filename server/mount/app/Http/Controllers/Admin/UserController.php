@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,7 +15,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        // 
+        // ユーザー一覧を返す
+        $data = [
+            ['id' => 1, 'name' => 'public', 'displayName' => '公開コンテンツ'],
+            ['id' => 2, 'name' => 'tokuoka-atsushi', 'displayName' => '徳岡　敦（とくおか　あつし）'],
+            ['id' => 3, 'name' => 'tokuoka-yukiko', 'displayName' => '徳岡　由希子（とくおか　ゆきこ）'],
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -34,7 +43,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ユーザーを追加する
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
     }
 
     /**
