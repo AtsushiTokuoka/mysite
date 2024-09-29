@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -43,19 +45,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // ユーザーを追加する
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'display_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        // バリデーション
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|string|max:255',
+        //     'display_name' => 'required|string|max:255',
+        //     'email' => 'string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:8',
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json($validator->errors(), 422);
+        // }
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // ユーザーを追加する
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'display_name' => $request->display_name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'user' => $request->all(),
+        ], 201);
     }
 
     /**
