@@ -24,10 +24,10 @@ jobs:
 
       - name: 3.ビルドしたイメージをDockerHubへプッシュ
         run: |
-          docker push atsushitokuoka/mysite_proxy:latest
-          docker push atsushitokuoka/mysite_auth:latest
-          docker push atsushitokuoka/mysite_client:latest
-          docker push atsushitokuoka/mysite_server:latest
+          docker push atsushitokuoka/mysite_nginx:latest
+          docker push atsushitokuoka/mysite_express:latest
+          docker push atsushitokuoka/mysite_eleventy:latest
+          docker push atsushitokuoka/mysite_laravel:latest
 
       - name: 4.Node.jsのバージョンを設定
         uses: actions/setup-node@v4
