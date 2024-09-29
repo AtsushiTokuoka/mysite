@@ -1,7 +1,5 @@
 .env
 node_modules
 dist
-sftp.json
-memo.md
 volume
 RestApi.http

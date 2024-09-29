@@ -1,78 +1,78 @@
 services:
-  proxy:
+  nginx: # リバースプロキシ
     build:
-      context: ./proxy
-    image: mysite_proxy
-    container_name: proxy_ct
+      context: ./nginx
+    image: mysite_nginx
+    container_name: nginx_ct
     restart: always
     ports:
       - "3000:80"
     depends_on:
-      - auth
-      - client
-      - server
-      - dbgui
-  auth:
+      - express
+      - eleventy
+      - laravel
+      - phpmyadmin
+  express: # 管理ユーザー認証
     build:
-      context: ./auth
-    image: mysite_auth
-    container_name: auth_ct
+      context: ./express
+    image: mysite_express
+    container_name: express_ct
     restart: always
     volumes:
-      - ./auth/mount:/auth
-      - ./auth/volume/node_modules:/auth/node_modules
+      - ./express/mount:/express
+      - ./express/volume/node_modules:/express/node_modules
     env_file:
       - .env
     environment:
       CHOKIDAR_USEPOLLING: true
-  client:
-    build: ./client
-    image: mysite_client
-    container_name: client_ct
+  eleventy: # 静的サイト
+    build: ./eleventy
+    image: mysite_eleventy
+    container_name: eleventy_ct
     restart: always
     volumes:
-      - ./client/mount:/var/www/html
-      - ./client/volume/node_modules:/var/www/html/node_modules
+      - ./eleventy/mount:/var/www/html
+      - ./eleventy/volume/node_modules:/var/www/html/node_modules
     env_file:
       - .env
     environment:
       CHOKIDAR_USEPOLLING: true
-  server:
+  laravel: # api
     build:
-      context: ./server
+      context: ./laravel
       args:
         - UID=${UID}
         - GID=${GID}
         - USERNAME=${USERNAME}
     env_file:
       - .env
-    image: mysite_server
-    container_name: server_ct
+    image: mysite_laravel
+    container_name: laravel_ct
     restart: always
     volumes:
-      - ./server/mount:/var/www/html
-      - ./server/volume/storage:/var/www/html/storage
-      - ./server/volume/vendor:/var/www/html/vendor
+      - ./laravel/mount:/var/www/html
+      - ./laravel/volume/storage:/var/www/html/storage
+      - ./laravel/volume/vendor:/var/www/html/vendor
     depends_on:
-      - db
-  db:
+      - mysql
+  mysql: # データベース
     image: mysql:8.3.0
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
-    container_name: db_ct
+    container_name: mysql_ct
     restart: always
     volumes:
-      - ./db/volume/mysql:/var/lib/mysql
-  dbgui:
+      - ./mysql/volume/mysql:/var/lib/mysql
+  phpmyadmin: # データベースGUI
     image: phpmyadmin:5.2.1
-    container_name: dbgui_ct
+    container_name: phpmyadmin_ct
     restart: always
     environment:
-      PMA_HOST: db
+      PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     depends_on:
-      - db
+      - mysql

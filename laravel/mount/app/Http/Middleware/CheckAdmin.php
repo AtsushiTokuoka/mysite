@@ -25,10 +25,10 @@ class CheckAdmin
         if( env('APP_ENV') === 'local' ) {
             $isAdmin = Http::withHeaders([
                 'x-auth-access-key' => env('AUTH_DEV_ACCESS_KEY'),
-            ])->get('http://auth/token?token=' . $authToken);
+            ])->get('http://express/token?token=' . $authToken);
         }
         else if( env('APP_ENV') === 'production' ) {
-            $isAdmin = Http::get('http://auth/token?token=' . $authToken);
+            $isAdmin = Http::get('http://express/token?token=' . $authToken);
         }
 
         if( $isAdmin->successful() ) {
