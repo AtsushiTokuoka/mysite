@@ -2,7 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+// client
 use App\Http\Controllers\UserController;
+
+// admin
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +19,15 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+|--------------------------------------------------------------------------
+| API Routes(client) フロント画面用のAPIルート
+|--------------------------------------------------------------------------
+*/
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::get('user', function (Request $request) {
+        return $request->user();
+    });
 });
 
 /*
@@ -26,10 +37,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 Route::middleware(['check.admin'])->group(function () {
     // users
-    Route::get('users', [UserController::class, 'index']);
-    Route::get('users/{id}', [UserController::class, 'show']);
-    Route::post('users', [UserController::class, 'store']);
+    Route::get('users', [AdminUserController::class, 'index']);
+    Route::get('users/{id}', [AdminUserController::class, 'show']);
+    Route::post('users', [AdminUserController::class, 'store']);
 
     // videos
-    Route::resource('videos', VideoController::class);
+    // Route::resource('videos', VideoController::class);
 });

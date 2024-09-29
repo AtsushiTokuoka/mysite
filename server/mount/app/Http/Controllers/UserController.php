@@ -13,13 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = [
-            ['id' => 1, 'name' => 'public', 'displayName' => '公開コンテンツ'],
-            ['id' => 2, 'name' => 'tokuoka-atsushi', 'displayName' => '徳岡　敦（とくおか　あつし）'],
-            ['id' => 3, 'name' => 'tokuoka-yukiko', 'displayName' => '徳岡　由希子（とくおか　ゆきこ）'],
-        ];
-
-        return response()->json($data);
+        // 
     }
 
     /**

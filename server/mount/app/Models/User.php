@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // テーブル名を指定
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'display_name',
         'email',
         'password',
     ];
@@ -41,4 +45,46 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAllUsers() {
+        return User::all();
+    }
+
+    public function getUserById($id) {
+        return User::find($id);
+    }
+
+    public function createUser($data){
+        $user = new User();
+
+        $user->name = $data->name;
+        $user->display_name = $data->display_name;
+        $user->email = $data->email;
+        $user->password = $data->password;
+
+        $user->save();
+
+        return $user;
+    }
+
+    public function updateUser($id,$data){
+        $user = User::find($id);
+
+        $user->name = $data->name;
+        $user->display_name = $data->display_name;
+        $user->email = $data->email;
+        $user->password = $data->password;
+
+        $user->save();
+
+        return $user;
+    }
+
+    public function deleteUser($id){
+        $user = User::find($id);
+
+        $user->delete();
+
+        return $user;
+    }
 }
