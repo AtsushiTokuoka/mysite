@@ -1,0 +1,19 @@
+services:
+  nginx: # リバースプロキシ
+    build:
+      context: ./nginx
+    image: atsushitokuoka/mysite_nginx
+  express: # 管理ユーザー認証
+    build:
+      context: ./express
+    image: atsushitokuoka/mysite_express
+  eleventy: # 静的サイト
+    build:
+      context: ./eleventy
+      dockerfile: Dockerfile.prod
+    image: atsushitokuoka/mysite_eleventy
+  laravel: # api
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile.prod
+    image: atsushitokuoka/mysite_laravel

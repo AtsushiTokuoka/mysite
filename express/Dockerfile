@@ -1,8 +1,8 @@
 FROM node:20
 
-WORKDIR /auth
+WORKDIR /express
 
-COPY ./mount /auth
+COPY ./mount /express
 
 RUN apt-get update \
     && apt-get install -y vim \
