@@ -1,15 +1,14 @@
 const path = require("path");
 const express = require("express");
+const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const mongoose = require("mongoose");
-const CryptoJS = require("crypto-js");
 const JWT = require("jsonwebtoken");
 
 const server = express();
 const port = 80;
 
-server.use(bodyParser.json());
+server.use(morgan("combined"));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, "public")));
@@ -43,7 +42,7 @@ const validate = (access_key, token) => {
   }
 };
 
-server.get("/", async (req, res) => {
+server.get("/", (req, res) => {
   const access_key = req.headers["x-auth-access-key"];
   const token = req.cookies.auth_token;
   const status = validate(access_key, token);
@@ -57,7 +56,7 @@ server.get("/token", (req, res) => {
   res.status(status).send();
 });
 
-server.post("/login", async (req, res) => {
+server.post("/login", (req, res) => {
   if (
     req.body.username === process.env.AUTH_USER &&
     req.body.password === process.env.AUTH_PASSWORD
