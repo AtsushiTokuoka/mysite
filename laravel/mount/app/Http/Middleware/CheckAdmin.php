@@ -24,7 +24,7 @@ class CheckAdmin
         // authコンテナへリクエストを送信
         if( env('APP_ENV') === 'local' ) {
             $isAdmin = Http::withHeaders([
-                'x-auth-access-key' => env('ADMIN_DEV_ACCESS_KEY'),
+                'x-admin-access-key' => env('ADMIN_DEV_ACCESS_KEY'),
             ])->get('http://express/token?token=' . $authToken);
         }
         else if( env('APP_ENV') === 'production' ) {
