@@ -10,6 +10,7 @@ services:
     depends_on:
       - express
       - eleventy
+      - react
       - laravel
       - phpmyadmin
   express: # 管理ユーザー認証
@@ -37,6 +38,17 @@ services:
       - .env
     environment:
       CHOKIDAR_USEPOLLING: true
+  react: # frontend app
+    build:
+      context: ./react
+    image: mysite_react
+    container_name: react_ct
+    restart: always
+    volumes:
+      - ./react/mount:/var/www/html
+      - ./react/volume/node_modules:/var/www/html/node_modules
+    env_file:
+      - .env
   laravel: # api
     build:
       context: ./laravel
