@@ -2,7 +2,6 @@ const express = require("express");
 const { exec } = require("child_process");
 
 const server = express();
-const port = 80;
 
 // cmsのコンテンツを取得し、サイトを再ビルド
 server.get("/contents", (req, res) => {
@@ -24,6 +23,6 @@ server.get("/contents", (req, res) => {
 // 静的ファイルの配信
 server.use(express.static("dist"));
 
-server.listen(port, () => {
+server.listen(80, () => {
   console.log(`Server is running`);
 });

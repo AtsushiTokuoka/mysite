@@ -3,14 +3,14 @@
 
 @font-face {
   font-family: "nsjp";
-  src: url(baseUrl() + "/fonts/subset/NotoSansJP-Regular.woff") format("woff");
+  src: url(assetsUrl() + "/fonts/subset/NotoSansJP-Regular.woff") format("woff");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "nsjp";
-  src: url(baseUrl() + "/fonts/subset/NotoSansJP-Bold.woff") format("woff");
+  src: url(assetsUrl() + "/fonts/subset/NotoSansJP-Bold.woff") format("woff");
   font-style: normal;
   font-weight: 700;
   font-display: swap;

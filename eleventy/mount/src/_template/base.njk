@@ -10,16 +10,17 @@
       {# front matterが使用できないページはblockで対応 #}
       <meta name="description" content="{%- block description -%}{%- endblock -%}">
     {% endif %}
+
     {% if meta.title %}
-      <title>{{ meta.title }} | mysite</title>
+      <title>{{ meta.title }}</title>
     {% else %}
       {# front matterが使用できないページはblockで対応 #}
       <title>
-        {%- block title -%}{%- endblock -%} | mysite
+        {%- block title -%}{%- endblock -%}
       </title>
     {% endif %}
 
-    <link rel="icon" href="{{ ASSETS_URL }}/client/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="{{ ASSETS_URL }}/favicon.svg" type="image/svg+xml" sizes="any">
 
     {% if noIndex %}
       <meta name="robots" content="noindex"/>
@@ -43,6 +44,7 @@
     {% for script in scripts %}
       <script src="{{ ASSETS_URL }}/client/{{ script }}?{{ lastBuildDate }}" defer></script>
     {% endfor %}
+    
   </head>
   <body>
     <div id="drawer-menu"></div>
