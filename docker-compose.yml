@@ -9,6 +9,7 @@ services:
       - "3000:80"
     depends_on:
       - express
+      - astro
       - eleventy
       - react
       - laravel
@@ -34,6 +35,20 @@ services:
     volumes:
       - ./eleventy/mount:/var/www/html
       - ./eleventy/volume/node_modules:/var/www/html/node_modules
+    env_file:
+      - .env
+    environment:
+      CHOKIDAR_USEPOLLING: true
+  astro:
+    build: ./astro
+    image: mysite_astro
+    container_name: astro_ct
+    restart: always
+    expose:
+      - "4321"
+    volumes:
+      - ./astro/mount:/var/www/html
+      - ./astro/volume/node_modules:/var/www/html/node_modules
     env_file:
       - .env
     environment:
