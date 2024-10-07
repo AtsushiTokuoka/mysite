@@ -1,3 +1,31 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+import { useStore } from "@/client/_store/index";
+
+const store = useStore();
+
+const baseUrl = ref(BASE_URL);
+
+const Header = ref<HTMLElement>();
+
+let resizeObserver: ResizeObserver | null = null;
+
+const setHeaderHeight = () => {
+  store.dispatch("setHeaderHeight", { height: Header.value?.offsetHeight });
+};
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver(() => setHeaderHeight());
+  resizeObserver.observe(Header.value!);
+});
+
+onUnmounted(() => {
+  if (resizeObserver && Header.value) {
+    resizeObserver.unobserve(Header.value);
+  }
+});
+</script>
+
 <template>
   <div ref="Header" class="Header">
     <div class="Header__inner">
@@ -13,60 +41,6 @@
     </div>
   </div>
 </template>
-
-<docs>
-  ```vue
-  <v-header />
-  ```
-</docs>
-
-<script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
-import { useStore } from "@/client/_store/index";
-export default defineComponent({
-  name: "VHeader",
-  setup() {
-    /**
-     * ヘッダーコンポーネント
-     * @module Header
-     * @vue-prop {Object} store - Vuex ストアオブジェクト
-     * @vue-ref {HTMLElement} Header - ヘッダー要素の参照
-     * @vue-data {ResizeObserver} resizeObserver - リサイズ監視オブジェクト
-     * @vue-method setHeaderHeight - ヘッダーの高さを設定するメソッド
-     * @vue-lifecycle-hook onMounted - リサイズ監視を開始
-     * @vue-lifecycle-hook onUnmounted -  リサイズ監視を止める
-     */
-    const store = useStore();
-
-    const baseUrl = ref(BASE_URL);
-
-    const Header = ref<HTMLElement>();
-
-    let resizeObserver: ResizeObserver;
-
-    const setHeaderHeight = () => {
-      store.dispatch("setHeaderHeight", { height: Header.value?.offsetHeight });
-    };
-
-    onMounted(() => {
-      resizeObserver = new ResizeObserver(() => setHeaderHeight());
-      resizeObserver.observe(Header.value!);
-    });
-
-    onUnmounted(() => {
-      if (resizeObserver && Header.value) {
-        resizeObserver.unobserve(Header.value);
-      }
-    });
-
-    return {
-      baseUrl,
-      Header,
-      setHeaderHeight,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .Header {

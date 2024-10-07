@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/client/_store/index";
+import smoothScroll from "@/client/_functions/smoothScroll";
+
+const store = useStore();
+
+const touchOrClick = computed(() => store.getters.touchOrClick);
+
+const onClick = () => {
+  smoothScroll("body");
+};
+</script>
+
 <template>
   <button class="PageTop" @[touchOrClick]="onClick">
     <svg
@@ -20,29 +34,6 @@
     <span class="PageTop__memo">TOP</span>
   </button>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "@/client/_store/index";
-import smoothScroll from "@/client/_functions/smoothScroll";
-export default defineComponent({
-  name: "VPageTop",
-  setup() {
-    const store = useStore();
-
-    const touchOrClick = computed(() => store.getters.touchOrClick);
-
-    const onClick = () => {
-      smoothScroll("body");
-    };
-
-    return {
-      onClick,
-      touchOrClick,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 $self: ".PageTop";

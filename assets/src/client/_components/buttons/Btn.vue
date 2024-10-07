@@ -1,3 +1,24 @@
+<script setup lang="ts">
+type Mode = "button" | "link" | "submit";
+type Appearance = "main" | "dark" | "light";
+
+const props = withDefaults(
+  defineProps<{
+    mode: Mode;
+    appearance: Appearance;
+    path: string;
+  }>(),
+  {
+    mode: "button",
+    appearance: "main",
+  }
+);
+
+const mode: Mode = props.mode;
+const color: Appearance = props.appearance;
+const to: string = "#";
+</script>
+
 <template>
   <button v-if="mode === 'button'" :class="['Btn', color]">
     <slot />
@@ -9,44 +30,6 @@
     <slot />
   </button>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-type Mode = "button" | "link" | "submit";
-type Appearance = "main" | "dark" | "light";
-
-export default defineComponent({
-  name: "VBtn",
-  props: {
-    mode: {
-      type: String as () => Mode,
-      default: "button",
-      validator: (value: Mode) => ["button", "link", "submit"].includes(value),
-    },
-    path: {
-      type: String,
-      default: "#",
-    },
-    appearance: {
-      type: String as () => Appearance,
-      default: "main",
-      validator: (value: string) => ["main", "dark", "light"].includes(value),
-    },
-    hoge: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  setup(props) {
-    return {
-      action: props.mode,
-      color: props.appearance,
-      to: props.path,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 @use "./_Btn.scss";

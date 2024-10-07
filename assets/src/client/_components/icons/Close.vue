@@ -1,3 +1,17 @@
+<script setup lang="ts">
+type Appearance = "light" | "dark";
+
+const props = withDefaults(
+  defineProps<{
+    appearance: Appearance;
+  }>(),
+  {
+    appearance: "light",
+  }
+);
+const color: Appearance = props.appearance;
+</script>
+
 <template>
   <button class="Close">
     <div :class="['Close__bars', color]">
@@ -7,28 +21,6 @@
     <span class="Close__memo">CLOSE</span>
   </button>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-
-type Appearance = "light" | "dark";
-
-export default defineComponent({
-  name: "VClose",
-  props: {
-    appearance: {
-      type: String as () => Appearance,
-      default: "light",
-      validator: (value: string) => ["light", "dark"].includes(value),
-    },
-  },
-  setup(props) {
-    return {
-      color: props.appearance,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 $self: ".Close";

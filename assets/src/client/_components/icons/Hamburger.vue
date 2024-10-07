@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/client/_store/index";
+
+const store = useStore();
+
+// vuexよりtouchOrClickを取得
+const touchOrClick = computed(() => store.getters.touchOrClick);
+
+// vuexよりmenuOpenを取得
+const isOpen = computed(() => store.state.menuOpen);
+
+// vuexのmenuOpenをtoggle
+const toggleMenuOpen = () => store.dispatch("toggleMenuOpen");
+</script>
+
 <template>
   <button
     class="Hamberger"
@@ -12,33 +28,6 @@
     <span class="Hamberger__memo" />
   </button>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "@/client/_store/index";
-
-export default defineComponent({
-  name: "VHamburger",
-  setup() {
-    const store = useStore();
-
-    // vuexよりtouchOrClickを取得
-    const touchOrClick = computed(() => store.getters.touchOrClick);
-
-    // vuexよりmenuOpenを取得
-    const isOpen = computed(() => store.state.menuOpen);
-
-    // vuexのmenuOpenをtoggle
-    const toggleMenuOpen = () => store.dispatch("toggleMenuOpen");
-
-    return {
-      isOpen,
-      touchOrClick,
-      toggleMenuOpen,
-    };
-  },
-});
-</script>
 
 <style scoped lang="scss">
 $self: ".Hamberger";

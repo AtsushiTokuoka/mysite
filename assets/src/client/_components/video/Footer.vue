@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useStore } from "@/client/_store/index";
+
+const store = useStore();
+
+// vuexよりtouchOrClickを取得
+const touchOrClick = computed(() => store.getters.touchOrClick);
+
+// vuexのmenuOpenをtoggle
+const toggleMenuOpen = () => store.dispatch("toggleMenuOpen");
+
+const Footer = ref<HTMLElement>();
+
+const setFooterHeight = () => {
+  store.dispatch("setFooterHeight", { height: Footer.value?.offsetHeight });
+};
+
+let resizeObserver: ResizeObserver | null = null;
+onMounted(() => {
+  resizeObserver = new ResizeObserver(() => setFooterHeight());
+  resizeObserver.observe(Footer.value!);
+});
+onUnmounted(() => {
+  if (resizeObserver && Footer.value) {
+    resizeObserver.unobserve(Footer.value);
+  }
+});
+</script>
+
 <template>
   <ul ref="Footer" class="Footer" role="tablist">
     <li class="Footer__item" role="tab">
@@ -129,53 +159,6 @@
     </li>
   </ul>
 </template>
-
-<docs>
-  ```vue
-  <v-footer />
-  ```
-</docs>
-
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted, onUnmounted } from "vue";
-import { useStore } from "@/client/_store/index";
-export default defineComponent({
-  name: "VFooter",
-  setup() {
-    const store = useStore();
-
-    // vuexよりtouchOrClickを取得
-    const touchOrClick = computed(() => store.getters.touchOrClick);
-
-    // vuexのmenuOpenをtoggle
-    const toggleMenuOpen = () => store.dispatch("toggleMenuOpen");
-
-    const Footer = ref<HTMLElement>();
-
-    const setFooterHeight = () => {
-      store.dispatch("setFooterHeight", { height: Footer.value?.offsetHeight });
-    };
-
-    let resizeObserver: ResizeObserver;
-    onMounted(() => {
-      resizeObserver = new ResizeObserver(() => setFooterHeight());
-      resizeObserver.observe(Footer.value!);
-    });
-    onUnmounted(() => {
-      if (resizeObserver && Footer.value) {
-        resizeObserver.unobserve(Footer.value);
-      }
-    });
-
-    return {
-      Footer,
-      setFooterHeight,
-      touchOrClick,
-      toggleMenuOpen,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .Footer {

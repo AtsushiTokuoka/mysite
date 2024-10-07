@@ -1,3 +1,29 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
+import { useStore } from "@/client/_store/index";
+
+const store = useStore();
+const thisYear = new Date().getFullYear();
+const Footer = ref<HTMLElement>();
+
+let resizeObserver: ResizeObserver | null = null;
+
+const setFooterHeight = () => {
+  store.dispatch("setFooterHeight", { height: Footer.value?.offsetHeight });
+};
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver(() => setFooterHeight());
+  resizeObserver.observe(Footer.value!);
+});
+
+onUnmounted(() => {
+  if (resizeObserver && Footer.value) {
+    resizeObserver.unobserve(Footer.value);
+  }
+});
+</script>
+
 <template>
   <footer ref="Footer" class="Footer">
     <div class="Footer__inner">
@@ -8,50 +34,6 @@
     </div>
   </footer>
 </template>
-
-<docs>
-  ```vue
-  <v-footer />
-  ```
-</docs>
-
-<script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
-import { useStore } from "@/client/_store/index";
-export default defineComponent({
-  name: "VFooter",
-  setup() {
-    const thisYear = new Date().getFullYear();
-
-    const store = useStore();
-
-    const Footer = ref<HTMLElement>();
-
-    let resizeObserver: ResizeObserver;
-
-    const setFooterHeight = () => {
-      store.dispatch("setFooterHeight", { height: Footer.value?.offsetHeight });
-    };
-
-    onMounted(() => {
-      resizeObserver = new ResizeObserver(() => setFooterHeight());
-      resizeObserver.observe(Footer.value!);
-    });
-
-    onUnmounted(() => {
-      if (resizeObserver && Footer.value) {
-        resizeObserver.unobserve(Footer.value);
-      }
-    });
-
-    return {
-      Footer,
-      setFooterHeight,
-      thisYear,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 .Footer {

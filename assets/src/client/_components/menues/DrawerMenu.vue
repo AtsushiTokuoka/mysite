@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { computed } from "vue";
+import { useStore } from "@/client/_store/index";
+import Close from "@/client/_components/icons/Close.vue";
+
+const store = useStore();
+const isOpen = computed(() => store.state.menuOpen);
+
+const touchOrClick = computed(() => store.getters.touchOrClick);
+const closeMenu = () => store.dispatch("toggleMenuOpen");
+
+const pages = computed(() => store.state.eleventyGlobalData.pages);
+</script>
+
 <template>
   <div :class="['DrawerMenu', { open: isOpen }]">
     <div class="DrawerMenu__inner">
@@ -20,35 +34,6 @@
     />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "@/client/_store/index";
-import Close from "@/client/_components/icons/Close.vue";
-
-export default defineComponent({
-  name: "VDrawerMenu",
-  components: {
-    Close,
-  },
-  setup() {
-    const store = useStore();
-    const isOpen = computed(() => store.state.menuOpen);
-
-    const touchOrClick = computed(() => store.getters.touchOrClick);
-    const closeMenu = () => store.dispatch("toggleMenuOpen");
-
-    const pages = computed(() => store.state.eleventyGlobalData.pages);
-
-    return {
-      isOpen,
-      pages,
-      touchOrClick,
-      closeMenu,
-    };
-  },
-});
-</script>
 
 <style lang="scss" scoped>
 $self: ".DrawerMenu";
