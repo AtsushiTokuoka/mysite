@@ -1,0 +1,64 @@
+---
+// global styles
+import "../../styles/global.scss";
+
+// components
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import DrawerMenu from "@/components/DrawerMenu.vue";
+import PageTop from "@/components/PageTop.vue";
+import Hamburger from "@/components/Hamburger.vue";
+
+// props
+interface Props {
+	metaData: {
+		title: string;
+		description: string;
+	};
+	noIndex?: boolean;
+}
+const { metaData, noIndex = false } = Astro.props;
+---
+
+<html lang="ja">
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content={metaData.description} />
+		{noIndex && <meta name="robots" content="noindex" />}
+		<title>{metaData.title}</title>
+	</head>
+	<body>
+		<slot name="header">
+			<Header client:load />
+		</slot>
+
+		<main class="Contents">
+			<slot name="contents"></slot>
+		</main>
+
+		<slot name="footer">
+			<Footer client:load />
+		</slot>
+
+		<slot name="page-top">
+			<PageTop client:load />
+		</slot>
+
+		<slot name="hamburger">
+			<Hamburger class="Hamburger" client:load />
+		</slot>
+
+		<slot name="drawer">
+			<DrawerMenu client:load>
+		</slot>
+
+		<!-- The target of the teleport in Modal.vue start -->
+		<dialog id="modal"></dialog>
+		<!-- The target of the teleport in Modal.vue end -->
+
+		<script>
+		</script>
+	</body>
+</html>

@@ -1,1 +1,8 @@
 @use "../../node_modules/destyle.css/destyle.min.css";
+@use "./base";
+
+.Hamburger {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+}

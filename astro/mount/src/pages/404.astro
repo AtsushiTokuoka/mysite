@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/pages/_layouts/BaseLayout.astro";
+const metaData = {
+	title: "404 Not Found",
+	description: "404 Not Found page description",
+};
+---
+
+<BaseLayout metaData={metaData}>
+	<Fragment slot="contents">
+		<h1>{metaData.title}</h1>
+	</Fragment>
+</BaseLayout>

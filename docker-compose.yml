@@ -11,7 +11,7 @@ services:
       - express
       - astro
       - eleventy
-      - react
+      - nuxt
       - laravel
       - phpmyadmin
   express: # 管理ユーザー認証
@@ -39,13 +39,13 @@ services:
       - .env
     environment:
       CHOKIDAR_USEPOLLING: true
-  astro:
+  astro: # 静的サイト
     build: ./astro
     image: mysite_astro
     container_name: astro_ct
     restart: always
-    expose:
-      - "4321"
+    ports:
+      - "4322:4322" # npn run preview 確認用
     volumes:
       - ./astro/mount:/var/www/html
       - ./astro/volume/node_modules:/var/www/html/node_modules
@@ -53,15 +53,15 @@ services:
       - .env
     environment:
       CHOKIDAR_USEPOLLING: true
-  react: # frontend app
+  nuxt: # frontend app
     build:
-      context: ./react
-    image: mysite_react
-    container_name: react_ct
+      context: ./nuxt
+    image: mysite_nuxt
+    container_name: nuxt_ct
     restart: always
     volumes:
-      - ./react/mount:/var/www/html
-      - ./react/volume/node_modules:/var/www/html/node_modules
+      - ./nuxt/mount:/var/www/html
+      - ./nuxt/volume/node_modules:/var/www/html/node_modules
     env_file:
       - .env
   laravel: # api

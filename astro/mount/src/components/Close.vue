@@ -1,0 +1,62 @@
+<script setup lang="ts">
+type Appearance = "light" | "dark";
+
+const props = withDefaults(
+  defineProps<{
+    appearance?: Appearance;
+  }>(),
+  {
+    appearance: "light",
+  }
+);
+const color: Appearance = props.appearance;
+</script>
+
+<template>
+  <button class="Close">
+    <div :class="['Close__bars', color]">
+      <span class="Close__bar" />
+      <span class="Close__bar" />
+    </div>
+  </button>
+</template>
+
+<style lang="scss" scoped>
+@use "@/styles/variables" as variables;
+$self: ".Close";
+#{$self} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__bars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    margin-bottom: 5px;
+    &.light {
+      #{$self}__bar {
+        background-color: variables.$colorBaseLight;
+      }
+    }
+    &.dark {
+      #{$self}__bar {
+        background-color: variables.$colorBaseDark;
+      }
+    }
+  }
+  &__bar {
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    &:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 7px);
+    }
+    &:nth-child(2) {
+      transform: rotate(-45deg) translate(4px, -5px);
+    }
+  }
+}
+</style>

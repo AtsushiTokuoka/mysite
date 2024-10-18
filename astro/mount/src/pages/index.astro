@@ -1,7 +1,47 @@
 ---
-import Template from "./templates/_base.astro";
+import BaseLayout from "@/pages/_layouts/BaseLayout.astro";
+const metaData = {
+	title: "Home",
+	description: "Home page description",
+};
+
+import Btn from "@/components/Btn.vue";
+import Modal from "@/components/Modal.vue";
 ---
 
-<Template>
-	<h1>index.astro</h1>
-</Template>
+<BaseLayout metaData={metaData}>
+	<Fragment slot="contents">
+		<div class="Home">
+			<h1 class="Mb10"><span>{metaData.title}</span></h1>
+			<Btn data-modal-id="modal01" class="Mb10" client:load>modal01</Btn>
+			<Btn data-modal-id="modal02" client:load>modal02</Btn>
+			<Modal id="modal01" client:load>
+				<p>modal01</p>
+			</Modal>
+			<Modal id="modal02" client:load>
+				<p>modal02</p>
+			</Modal>
+		</div>
+	</Fragment>
+</BaseLayout>
+
+<style lang="scss">
+	@use "@/styles/variables" as variables;
+	@use "@/styles/layout" as layout;
+	.Home {
+		@include layout.Container {
+			height: 2000px;
+		}
+	}
+	h1 {
+		span {
+			color: variables.$colorBaseLight;
+		}
+	}
+</style>
+
+<script>
+	import { setupModalTriggers } from "@/scripts/utils.ts";
+	setupModalTriggers();
+
+</script>
