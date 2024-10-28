@@ -1,54 +1,81 @@
 <script setup lang="ts">
-import { smoothScroll } from "@/scripts/utils.ts";
+import { ref, onMounted } from "vue";
+import smoothScroll from "@/scripts/utils/smoothScroll";
 
-const onClick = () => {
+const SCROLL_THRESHOLD = 100;
+const isShow = ref(false);
+onMounted(() => {
+  window.addEventListener("scroll", () => {
+    isShow.value = window.scrollY > SCROLL_THRESHOLD;
+  });
+});
+
+const handleClick = () => {
   smoothScroll("body");
 };
 </script>
 
 <template>
-  <button class="PageTop" @click="onClick">
-    <svg
-      class="PageTop__svg icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"
-      xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="3"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 5l0 14" />
-      <path d="M18 11l-6 -6" />
-      <path d="M6 11l6 -6" />
-    </svg>
-    <span class="PageTop__memo">TOP</span>
+  <button :class="['PageTop', { 'is-show': isShow }]" @click="handleClick">
+    <span class="PageTop__inner">
+      <span class="PageTop__arrow"></span>
+      <span class="PageTop__memo">TOP</span>
+    </span>
   </button>
 </template>
 
 <style lang="scss" scoped>
-@use "@/styles/variables" as variables;
+@use "@/styles/variables" as *;
+@use "@/styles/utility" as *;
 $self: ".PageTop";
 #{$self} {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: variables.$colorBaseLight;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 60px;
-  &__svg {
-    width: 30px;
-    height: 30px;
-    margin-bottom: -3px;
+  bottom: 66px;
+  opacity: 0;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease-in-out;
+  &.is-show {
+    opacity: 1;
+    transform: translateY(-10px) translateX(-50%);
+  }
+  &::after {
+    content: "";
+    display: block;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    background-color: $colorBaseLight;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  &__inner {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__arrow {
+    width: 15px;
+    height: 15px;
+    border-top: 4px solid $colorBaseDark;
+    border-right: 4px solid $colorBaseDark;
+    transform: rotate(-45deg);
+    border-radius: 3px;
   }
   &__memo {
+    color: $colorBaseDark;
     font-size: FontSize(12);
-    font-weight: bold;
+    margin-top: -5px;
   }
 }
 </style>

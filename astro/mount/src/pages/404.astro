@@ -7,7 +7,12 @@ const metaData = {
 ---
 
 <BaseLayout metaData={metaData}>
-	<Fragment slot="contents">
-		<h1>{metaData.title}</h1>
-	</Fragment>
+	<h1>{metaData.title}</h1>
 </BaseLayout>
+
+
+<style lang="scss">
+	h1 {
+		color: red;
+	}
+</style>

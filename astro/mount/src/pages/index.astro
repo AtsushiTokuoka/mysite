@@ -1,47 +1,69 @@
 ---
-import BaseLayout from "@/pages/_layouts/BaseLayout.astro";
+import Blog from "@/pages/_layouts/Blog.astro";
 const metaData = {
-	title: "Home",
+	title: "Blog Article",
 	description: "Home page description",
 };
 
 import Btn from "@/components/Btn.vue";
-import Modal from "@/components/Modal.vue";
+// import Modal from "@/components/Modal.vue";
+// import ModalContent01 from "@/components/content/modal/ModalContent01.vue";
 ---
 
-<BaseLayout metaData={metaData}>
+<Blog metaData={metaData}>
 	<Fragment slot="contents">
-		<div class="Home">
-			<h1 class="Mb10"><span>{metaData.title}</span></h1>
-			<Btn data-modal-id="modal01" class="Mb10" client:load>modal01</Btn>
-			<Btn data-modal-id="modal02" client:load>modal02</Btn>
-			<Modal id="modal01" client:load>
-				<p>modal01</p>
-			</Modal>
-			<Modal id="modal02" client:load>
-				<p>modal02</p>
-			</Modal>
-		</div>
+		<h2>TitleH2-1</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae error consequatur rerum odit numquam iusto delectus ratione alias? Delectus non fuga, inventore laudantium odio repellat asperiores repellendus libero natus et.</p>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum a porro assumenda soluta in velit repellendus cum quo optio necessitatibus numquam culpa omnis deleniti temporibus, ratione aliquam. Quidem, consequuntur laborum?</p>
+		<h3>TitleH3-1</h3>
+		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat natus maiores nisi incidunt, nihil eius nam earum perspiciatis est delectus hic rerum ad nostrum laborum perferendis? Aut beatae quos tempore.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis nemo culpa expedita nisi eos explicabo quas dicta tempora amet soluta, accusamus aliquid quaerat corporis error sed atque fuga voluptas saepe?</p>
+		<h4>TitleH4-1</h4>
+		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione sit perferendis rerum accusantium laborum magnam, unde officiis nulla ipsum. Officiis nam corporis dolorem accusantium, eos provident consequuntur ratione facere sed.</p>
+		<h4>TitleH4-2</h4>
+		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione sit perferendis rerum accusantium laborum magnam, unde officiis nulla ipsum. Officiis nam corporis dolorem accusantium, eos provident consequuntur ratione facere sed.</p>
+		<h3>TitleH3-2</h3>
+		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat natus maiores nisi incidunt, nihil eius nam earum perspiciatis est delectus hic rerum ad nostrum laborum perferendis? Aut beatae quos tempore.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis nemo culpa expedita nisi eos explicabo quas dicta tempora amet soluta, accusamus aliquid quaerat corporis error sed atque fuga voluptas saepe?</p>
+		<h2>TitleH2-2</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae error consequatur rerum odit numquam iusto delectus ratione alias? Delectus non fuga, inventore laudantium odio repellat asperiores repellendus libero natus et.</p>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum a porro assumenda soluta in velit repellendus cum quo optio necessitatibus numquam culpa omnis deleniti temporibus, ratione aliquam. Quidem, consequuntur laborum?</p>
+		<h3>TitleH3-3</h3>
+		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat natus maiores nisi incidunt, nihil eius nam earum perspiciatis est delectus hic rerum ad nostrum laborum perferendis? Aut beatae quos tempore.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis nemo culpa expedita nisi eos explicabo quas dicta tempora amet soluta, accusamus aliquid quaerat corporis error sed atque fuga voluptas saepe?</p>
+		<h4>TitleH4-3</h4>
+		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione sit perferendis rerum accusantium laborum magnam, unde officiis nulla ipsum. Officiis nam corporis dolorem accusantium, eos provident consequuntur ratione facere sed.</p>
+		<h4>TitleH4-4</h4>
+		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione sit perferendis rerum accusantium laborum magnam, unde officiis nulla ipsum. Officiis nam corporis dolorem accusantium, eos provident consequuntur ratione facere sed.</p>
+		<h3>TitleH3-4</h3>
+		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat natus maiores nisi incidunt, nihil eius nam earum perspiciatis est delectus hic rerum ad nostrum laborum perferendis? Aut beatae quos tempore.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis nemo culpa expedita nisi eos explicabo quas dicta tempora amet soluta, accusamus aliquid quaerat corporis error sed atque fuga voluptas saepe?</p>
+		<!-- <Btn data-modal-id="modal01" class="Mb10" client:load>modal01</Btn>
+		<Modal id="modal01" client:only>
+			<ModalContent01 client:load/>
+		</Modal>
+		<Btn data-modal-id="modal02" client:load>modal02</Btn>
+		<Modal id="modal02" client:only>
+			<p>modal02</p>
+		</Modal> -->
 	</Fragment>
-</BaseLayout>
+</Blog>
 
 <style lang="scss">
-	@use "@/styles/variables" as variables;
-	@use "@/styles/layout" as layout;
+	@use "@/styles/variables" as var;
+	@use "@/styles/layout" as ly;
 	.Home {
-		@include layout.Container {
+		@include ly.Container {
 			height: 2000px;
 		}
 	}
 	h1 {
 		span {
-			color: variables.$colorBaseLight;
+			color: var.$colorBaseLight;
 		}
 	}
 </style>
 
 <script>
-	import { setupModalTriggers } from "@/scripts/utils.ts";
-	setupModalTriggers();
-
+	import "@/scripts/utils/setupModalTriggers";
 </script>

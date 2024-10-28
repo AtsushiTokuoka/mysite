@@ -1,46 +1,51 @@
 <script setup lang="ts">
-import { isDrawerOpen } from "@/store";
+import { isTocOpen } from "@/store/blog";
 import { useStore } from "@nanostores/vue";
-import { watchEffect } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 
-const $isDrawerOpen = useStore(isDrawerOpen);
-
+const $isTocOpen = useStore(isTocOpen);
 watchEffect(() => {
-  if ($isDrawerOpen.value) {
+  if ($isTocOpen.value) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
   }
 });
 
+const headings = ref([]);
+onMounted(() => {
+  const $article = document.querySelector(".Article") as HTMLElement;
+  const $headings = $article.querySelectorAll("h1,h2,h3,h4,h5,h6");
+});
+
 const handleClick = () => {
-  isDrawerOpen.set(!isDrawerOpen.get());
+  isTocOpen.set(!isTocOpen.get());
 };
 </script>
 
 <template>
-  <nav :class="['DrawerMenu', { open: $isDrawerOpen }]" @click="handleClick">
-    <div class="DrawerMenu__inner" @click.stop>
+  <aside :class="['TOC', { open: $isTocOpen }]" @click="handleClick">
+    <div class="TOC__inner" @click.stop>
       <button
-        :class="['DrawerMenu__toggle', { open: $isDrawerOpen }]"
+        :class="['TOC__toggle', { open: $isTocOpen }]"
         @click="handleClick"
       >
-        <div class="DrawerMenu__bars">
-          <span class="DrawerMenu__bar" />
-          <span class="DrawerMenu__bar" />
-          <span class="DrawerMenu__bar" />
+        <div class="TOC__bars">
+          <span class="TOC__bar" />
+          <span class="TOC__bar" />
+          <span class="TOC__bar" />
         </div>
-        <span class="DrawerMenu__memo" />
+        <span class="TOC__memo" />
       </button>
       <slot />
     </div>
-  </nav>
+  </aside>
 </template>
 
 <style lang="scss" scoped>
 @use "@/styles/variables" as *;
 @use "@/styles/utility" as *;
-$self: ".DrawerMenu";
+$self: ".TOC";
 #{$self} {
   position: fixed;
   top: 0;
@@ -71,7 +76,7 @@ $self: ".DrawerMenu";
   &__toggle {
     position: absolute;
     left: -80px;
-    bottom: 70px;
+    bottom: 200px;
     width: 80px;
     padding: 8px 0 8px 5px;
     background-color: $colorBaseLight;
@@ -118,7 +123,7 @@ $self: ".DrawerMenu";
     color: $colorBaseDark;
     line-height: 1;
     &::before {
-      content: "MENU";
+      content: "目次";
     }
     font-size: FontSize(12);
   }

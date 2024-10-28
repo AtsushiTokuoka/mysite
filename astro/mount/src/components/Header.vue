@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { setContentLayout } from "@/scripts/utils.ts";
+import setupContentLayout from "@/scripts/utils/setupContentMinHeight";
 
 const Header = ref<HTMLElement>();
 
@@ -40,7 +40,7 @@ onMounted(() => {
 
   // リサイズ時にコンテンツエリアのレイアウトを再調整
   new ResizeObserver(() => {
-    setContentLayout();
+    setupContentLayout();
   }).observe(Header.value!);
 });
 </script>

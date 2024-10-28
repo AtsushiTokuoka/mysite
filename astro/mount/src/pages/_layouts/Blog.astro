@@ -1,0 +1,101 @@
+---
+import BaseLayout from "@/pages/_layouts/BaseLayout.astro";
+import type Props from "@/pages/_layouts/Props";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import DrawerMenu from "@/components/DrawerMenu.vue";
+import PageTop from "@/components/PageTop.vue";
+import Navi from "@/components/content/navigation/Navi.vue";
+import TOC from "@/components/TOC.vue";
+
+const { metaData, noIndex = false } = Astro.props;
+---
+<BaseLayout metaData={metaData} noIndex={noIndex}>
+  <Header client:load />
+
+  <main class="Contents">
+    <article class="Article">
+      <h1>{metaData.title}</h1>
+      <slot name="contents"></slot>
+    </article>
+    <TOC client:only/>
+  </main>
+
+  <Footer client:load />
+
+  <PageTop client:load />
+
+  <DrawerMenu client:only>
+    <Navi client:load />
+  </DrawerMenu>
+</BaseLayout>
+
+<style lang="scss" is:global>
+@use "@/styles/variables" as *;
+@use "@/styles/utility" as *;
+@use "@/styles/layout" as *;
+
+@font-face {
+  font-family: "nsjp";
+  src: url("/fonts/subset/NotoSansJP-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "nsjp";
+  src: url("/fonts/subset/NotoSansJP-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+// base
+body {
+  background-color: $colorBaseDark;
+  color: $colorBaseLight;
+  font-size: FontSize(16);
+  font-family: "nsjp", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+a {
+  color: $colorMain;
+  word-wrap: break-word;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// layout
+.Article {
+  @include Container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  h1 {
+    font-size: FontSize(32);
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: FontSize(24);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid $colorBaseLight;
+  }
+  h3 {
+    font-size: FontSize(20);
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-left: 5px solid $colorBaseLight;
+    padding-left: 10px;
+  }
+  h4 {
+    font-size: FontSize(18);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-bottom: 1px solid $colorBaseLight;
+  }
+}
+</style>

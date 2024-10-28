@@ -1,8 +1,26 @@
 @use "../../node_modules/destyle.css/destyle.min.css";
-@use "./base";
-
-.Hamburger {
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
+@use "./utility";
+html {
+  font-size: FontSize(16);
+}
+img,
+video {
+  width: 100%;
+  height: auto;
+}
+li {
+  list-style: none;
+}
+[v-cloak] {
+  display: none;
+}
+dialog {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  position: static;
+  width: auto;
+  height: auto;
+  background-color: transparent;
 }
